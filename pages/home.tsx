@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { HeroSection } from "../components/LandingPage";
-const Landing: NextPage = () => {
+const Home: NextPage = () => {
   return (
     <>
       <Head>
@@ -12,4 +12,4 @@ const Landing: NextPage = () => {
   );
 };
 
-export default Landing;
+export default Home;
