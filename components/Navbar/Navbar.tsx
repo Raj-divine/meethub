@@ -2,40 +2,26 @@ import styles from "./Navbar.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../assets/images/logo.png";
-import { useRouter } from "next/router";
-import { ReactNode } from "react";
-
-type NavLinkProps = {
-  href: string;
-  exact?: boolean;
-  children: ReactNode;
-};
-
-function NavLink({ href, exact, children }: NavLinkProps) {
-  const { pathname } = useRouter();
-  const isActive = pathname === href;
-
-  return (
-    <li className={`${styles["nav-link"]} `}>
-      <Link href={href}>
-        <a className={isActive ? "active" : ""}>{children}</a>
-      </Link>
-    </li>
-  );
-}
 
 const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>
-        <Link href="/" passHref>
-          <Image src={logo} layout="intrinsic" alt="logo" objectFit="contain" />
+        <Link href="/">
+          <a>
+            <Image
+              src={logo}
+              layout="intrinsic"
+              alt="logo"
+              objectFit="contain"
+            />
+          </a>
         </Link>
       </div>
       <div>
         {/* <ul className={styles["nav-links"]}>
           <li className={styles["nav-link"]}>
-            <Link href="/">
+            <Link href="/home">
               <a>Home</a>
             </Link>
           </li>
