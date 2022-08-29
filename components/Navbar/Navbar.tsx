@@ -31,7 +31,9 @@ const Navbar = () => {
         </Link>
       </div>
       <div>
-        {/* <ul className={styles["nav-links"]}>
+        {/* will be shown when the user is logged in and the screen size is greater than 450px */}
+
+        <ul className={styles["nav-links"]}>
           <li className={styles["nav-link"]}>
             <Link href="/home">
               <a>Home</a>
@@ -52,24 +54,24 @@ const Navbar = () => {
               <a>Home</a>
             </Link>
           </li>
-        </ul> */}
+        </ul>
 
         {/* will be shown when the user is not logged in */}
 
-        <div className={styles["nav-actions"]}>
+        {/* <div className={styles["nav-actions"]}>
           <button className={styles["sign-up-btn"]}>Sign up</button>
 
           <button className={styles["login-btn"]}>Log in</button>
-        </div>
+        </div> */}
 
         {/* will be shown when the user is logged in and the screen size is less than 450px */}
 
-        {/* <Burger
+        <Burger
           className={styles.hamburger}
           opened={isOpen}
           onClick={() => dispatch(toggleNavbar())}
           title={title}
-        /> */}
+        />
       </div>
     </nav>
   );
