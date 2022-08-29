@@ -70,5 +70,8 @@
 }
 
 .hamburger {
-  display: hidden;
+  display: none;
+  @include xs {
+    display: block;
+  }
 }
