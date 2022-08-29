@@ -18,6 +18,9 @@
 .nav-links {
   display: flex;
   align-items: center;
+  @include xs {
+    display: none;
+  }
 }
 
 .nav-link {
@@ -64,4 +67,8 @@
   &:hover {
     background-color: lighten($color: $color-primary, $amount: 40%);
   }
+}
+
+.hamburger {
+  display: hidden;
 }
