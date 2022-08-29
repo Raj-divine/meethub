@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Burger } from "@mantine/core";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleNavbar } from "../../context/navbarSlice";
+import { useEffect } from "react";
 interface NavbarState {
   navbar: {
     isOpen: boolean;
@@ -15,12 +16,15 @@ const SideNavbar = () => {
   const dispatch = useDispatch();
   const title = isOpen ? "Close navigation" : "Open navigation";
 
-  document.body.style.overflow = isOpen ? "hidden" : "auto";
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
+  }, [isOpen]);
 
   return (
     <nav
-      className={styles["side-nav"]}
-      style={isOpen ? { transform: "translateX(0)" } : {}}
+      className={`${styles["side-nav"]} ${
+        isOpen ? styles["animate-side-nav"] : ""
+      }`}
     >
       <div className={styles["nav-head"]}>
         <div className={styles.logo}>

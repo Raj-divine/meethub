@@ -1,15 +1,18 @@
 @import "../../styles/variables";
 .side-nav {
   z-index: 4;
-  position: absolute;
+  position: fixed;
   background-color: $color-white;
   padding: 1rem 2rem;
   top: 0;
-  bottom: 0;
   left: 0;
+  height: 100%;
   width: 30rem;
   transition: transform 0.4s;
   transform: translateX(-100%);
+}
+.animate-side-nav {
+  transform: translateX(0);
 }
 .nav-head {
   display: flex;
