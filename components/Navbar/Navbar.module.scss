@@ -4,11 +4,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 2rem;
+  padding: 1rem 2rem;
   z-index: 3;
   // background-color: $color-white;
   position: fixed;
   top: 0;
+  transition: 0.4s all;
   width: 100%;
 }
 
@@ -68,9 +69,10 @@
   cursor: pointer;
   transition: all 0.2s;
   margin-left: 1rem;
+  color: $color-white;
   border-radius: 3px;
   &:hover {
-    background-color: lighten($color: $color-primary, $amount: 40%);
+    border: 1px solid lighten($color: $color-primary, $amount: 10%);
   }
 }
 
@@ -78,5 +80,16 @@
   display: none;
   @include xs {
     display: block;
+  }
+}
+
+.add-background {
+  background-color: $color-white;
+}
+
+.color-black {
+  color: $color-black;
+  &:hover {
+    background-color: lighten($color: $color-primary, $amount: 40%);
   }
 }

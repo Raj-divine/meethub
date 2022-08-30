@@ -5,7 +5,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Meethub</title>
+        <title>home</title>
       </Head>
       <HeroSection />
     </>

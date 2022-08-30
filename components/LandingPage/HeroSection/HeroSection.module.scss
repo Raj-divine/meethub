@@ -1,3 +1,53 @@
+@import "../../../styles//variables";
 .header {
-  background-color: red;
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  background-image: linear-gradient(
+      to bottom right,
+      rgba($color-black, 0.7),
+      rgba($color-black, 0.7)
+    ),
+    url(../../../assets//images/header-image.jpg);
+  background-size: cover;
+  background-position: center;
+  .heading-container {
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    color: $color-grey-light;
+    width: 40%;
+    .primary-heading {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 4rem;
+      letter-spacing: 2px;
+      line-height: 4.5rem;
+      animation: move-up 1s ease-out backwards;
+    }
+    .secondary-heading {
+      font-weight: 300;
+      animation: move-up 1s ease-out 0.4s backwards;
+
+      font-size: 2rem;
+      margin-top: 1rem;
+      letter-spacing: 1px;
+    }
+    .btn-primary {
+      margin-top: 2rem;
+      animation: move-up 1s ease-out 0.6s backwards;
+    }
+  }
+}
+
+@keyframes move-up {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
 }
