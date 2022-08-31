@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { HeroSection } from "../components/LandingPage";
+import { HeroSection, InfoSection } from "../components/LandingPage";
 const Landing: NextPage = () => {
   return (
     <>
@@ -8,6 +8,7 @@ const Landing: NextPage = () => {
         <title>Meethub</title>
       </Head>
       <HeroSection />
+      <InfoSection />
     </>
   );
 };
