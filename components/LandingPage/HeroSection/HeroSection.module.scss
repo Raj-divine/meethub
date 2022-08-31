@@ -1,4 +1,5 @@
 @import "../../../styles//variables";
+@import "../../../styles/breakpoints";
 .header {
   height: 80vh;
   align-items: center;
@@ -16,14 +17,36 @@
     text-align: center;
     font-family: "Montserrat", sans-serif;
     color: $color-grey-light;
-    width: 40%;
+    @include xxl {
+      width: 40%;
+    }
+    @include xl {
+      width: 50%;
+    }
+    @include lg {
+      width: 60%;
+    }
+    @include md {
+      width: 80%;
+    }
+    @include xs {
+      width: 100%;
+    }
+
     .primary-heading {
       font-weight: 700;
       text-transform: uppercase;
-      font-size: 4rem;
+      font-size: 4.5rem;
       letter-spacing: 2px;
       line-height: 4.5rem;
       animation: move-up 1s ease-out backwards;
+      @include sm {
+        font-size: 3rem;
+      }
+      @include xs {
+        font-size: 2.4rem;
+        line-height: 3.5rem;
+      }
     }
     .secondary-heading {
       font-weight: 300;
@@ -32,6 +55,12 @@
       font-size: 2rem;
       margin-top: 1rem;
       letter-spacing: 1px;
+      @include sm {
+        font-size: 1.6rem;
+      }
+      @include xs {
+        font-size: 1.4rem;
+      }
     }
     .btn-primary {
       margin-top: 2rem;

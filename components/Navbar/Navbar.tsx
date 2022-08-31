@@ -18,12 +18,14 @@ const Navbar = () => {
   const { isOpen } = useSelector((state: NavbarState) => state.navbar);
   const title = isOpen ? "Close navigation" : "Open navigation";
   const [addClass, setAddClass] = useState(false);
+
   useEffect(() => {
     document.addEventListener("scroll", (e) => {
       if (window.scrollY > 60) setAddClass(true);
       else setAddClass(false);
     });
-  }, [window.scrollY]);
+  }, []);
+
   return (
     <nav
       className={`${styles.navbar} ${addClass ? styles["add-background"] : ""}`}
