@@ -6,7 +6,7 @@
   align-items: center;
   padding: 1rem 2rem;
   z-index: 3;
-  // background-color: $color-white;
+
   position: fixed;
   top: 0;
   transition: 0.4s all;
@@ -86,6 +86,7 @@
 
 .add-background {
   background-color: $color-white;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .color-black {

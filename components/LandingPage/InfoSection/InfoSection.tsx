@@ -1,5 +1,5 @@
 import styles from "./InfoSection.module.scss";
-import { SimpleGrid } from "@mantine/core";
+import { SimpleGrid, Text } from "@mantine/core";
 import InfoCard from "./InfoCard/InfoCard";
 import handshake from "../.././../assets/images/handshake.jpg";
 import handWithPen from "../../../assets/images/hand-with-pen.jpg";
@@ -36,10 +36,20 @@ const cardData = [
 const InfoSection = () => {
   return (
     <section className={styles["section-info"]}>
+      <Text color="dimmed" component="h3" className={styles["section-heading"]}>
+        Why meethub?
+      </Text>
       <div>
-        <SimpleGrid cols={4} spacing="lg">
-          {cardData.map((data) => {
-            return <InfoCard {...data} />;
+        <SimpleGrid
+          cols={4}
+          spacing="lg"
+          breakpoints={[
+            { maxWidth: 1280, cols: 2, spacing: "xl" },
+            { maxWidth: 640, cols: 1, spacing: "xl" },
+          ]}
+        >
+          {cardData.map((data, i) => {
+            return <InfoCard key={data.alt + i} {...data} />;
           })}
         </SimpleGrid>
       </div>

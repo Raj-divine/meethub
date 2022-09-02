@@ -1,4 +1,6 @@
 @import "../../../../styles//variables";
+@import "../../../../styles/breakpoints";
+
 .card {
   border-radius: 2px;
   background-color: $color-white;
@@ -6,6 +8,17 @@
   transition: transform 0.2s;
   cursor: default;
   height: 30rem;
+
+  @include md {
+    height: 30rem;
+  }
+
+  @include sm {
+    height: 25rem;
+  }
+  @include xs {
+    height: 30rem;
+  }
   &:hover {
     transform: translateY(-20px);
   }
