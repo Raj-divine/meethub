@@ -6,6 +6,8 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import avatar1 from "../../../assets/images/avatar-1.jpg";
 import avatar2 from "../../../assets/images/avatar-2.jpg";
 import avatar3 from "../../../assets/images/avatar-3.jpg";
+import { useIntersection } from "@mantine/hooks";
+import { useEffect, useState } from "react";
 
 const testimonialData = [
   {
@@ -32,13 +34,28 @@ const testimonialData = [
 ];
 
 const TestimonialSection = () => {
+  const { ref: testimonialRef, entry } = useIntersection({
+    threshold: 0.2,
+  });
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  useEffect(() => {
+    if (entry?.isIntersecting && !isIntersecting) {
+      setIsIntersecting(true);
+    }
+  }, [entry?.isIntersecting]);
+
   return (
     <section className="section-prefix">
       <Text color="dimmed" component="h3" className="section-heading">
         Some happy users
       </Text>
       <Center>
-        <div className={styles["carousel-container"]}>
+        <div
+          ref={testimonialRef}
+          className={`${styles["carousel-container"]} ${
+            isIntersecting ? styles.animate : ""
+          }`}
+        >
           <Carousel
             controlSize={60}
             nextControlIcon={<AiOutlineArrowRight size={16} />}
