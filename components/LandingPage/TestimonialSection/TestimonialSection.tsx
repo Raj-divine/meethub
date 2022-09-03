@@ -65,7 +65,7 @@ const TestimonialSection = () => {
           >
             {testimonialData.map((data, i) => {
               return (
-                <Carousel.Slide>
+                <Carousel.Slide key={data.name + i}>
                   <Testimonial {...data} />
                 </Carousel.Slide>
               );
