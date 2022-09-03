@@ -1,7 +1,7 @@
 import styles from "./InfoCard.module.scss";
 import Image, { StaticImageData } from "next/image";
-import handshake from "../../../../assets/images/handshake.jpg";
-
+import { useIntersection } from "@mantine/hooks";
+import { useEffect, useState } from "react";
 type InfoCardProps = {
   image: StaticImageData;
   body: string;
@@ -10,8 +10,21 @@ type InfoCardProps = {
 };
 
 const InfoCard = ({ image, body, title, alt }: InfoCardProps) => {
+  const { ref: cardRef, entry } = useIntersection({
+    threshold: 0.3,
+  });
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  useEffect(() => {
+    if (entry?.isIntersecting && !isIntersecting) {
+      setIsIntersecting(true);
+    }
+  }, [entry?.isIntersecting]);
+
   return (
-    <div className={styles.card}>
+    <div
+      ref={cardRef}
+      className={`${styles.card} ${isIntersecting ? styles.animate : ""}`}
+    >
       <div className={styles["card-header"]}>
         <div className={styles["header-image"]}>
           <Image
