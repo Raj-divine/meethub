@@ -17,4 +17,12 @@
 .section-prefix {
   width: 80%;
   margin: 9rem auto;
+
+  @include xl {
+    width: 90%;
+  }
+
+  @include lg {
+    margin: 5rem auto;
+  }
 }

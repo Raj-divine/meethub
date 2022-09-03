@@ -1,4 +1,5 @@
 @import "../../../../styles/variables";
+@import "../../../../styles//breakpoints";
 .slide {
   width: 80%;
   margin: 0 auto;
@@ -8,6 +9,9 @@
     font-size: 2.4rem;
     color: $color-grey-dark;
     margin-bottom: 1rem;
+    @include xs {
+      font-size: 2rem;
+    }
   }
   .body {
     font-family: "Inter", sans-serif;
@@ -15,6 +19,17 @@
     line-height: 3rem;
     font-weight: 400;
     font-size: 1.8rem;
+    overflow: hidden;
+    @include sm {
+      max-height: 17rem;
+      font-size: 1.6rem;
+      line-height: 2.2rem;
+    }
+    @include xs {
+      font-size: 1.4rem;
+      line-height: 2rem;
+      max-height: 12rem;
+    }
   }
   .footer {
     margin-top: 3rem;

@@ -1,7 +1,6 @@
 import styles from "./Testimonial.module.scss";
 import { Text, Blockquote } from "@mantine/core";
 import Image, { StaticImageData } from "next/image";
-import avatar1 from "../../../../assets/images/avatar-1.jpg";
 
 type TestimonialProps = {
   title: string;
@@ -21,6 +20,7 @@ const Testimonial = ({
   return (
     <div className={styles.slide}>
       <h4>{title}</h4>
+
       <Blockquote className={styles.body}>{body}</Blockquote>
       <div className={styles.footer}>
         <div className={styles["avatar-container"]}>

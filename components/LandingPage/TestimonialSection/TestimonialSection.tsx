@@ -57,7 +57,7 @@ const TestimonialSection = () => {
           }`}
         >
           <Carousel
-            controlSize={60}
+            controlSize={40}
             nextControlIcon={<AiOutlineArrowRight size={16} />}
             previousControlIcon={<AiOutlineArrowLeft size={16} />}
             slideSize="100%"
