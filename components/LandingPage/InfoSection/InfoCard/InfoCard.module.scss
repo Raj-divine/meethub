@@ -4,7 +4,7 @@
 .card {
   border-radius: 2px;
   background-color: $color-white;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: $shadow-primary;
   cursor: default;
   transform: translateY(100px);
   height: 30rem;
@@ -40,6 +40,7 @@
     .card-title {
       font-family: "Montserrat", sans-serif;
       font-weight: 600;
+      color: $color-grey-dark;
     }
   }
   .card-body {

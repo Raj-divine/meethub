@@ -1,6 +1,10 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { HeroSection, InfoSection } from "../components/LandingPage";
+import {
+  HeroSection,
+  InfoSection,
+  TestimonialSection,
+} from "../components/LandingPage";
 const Landing: NextPage = () => {
   return (
     <>
@@ -9,6 +13,7 @@ const Landing: NextPage = () => {
       </Head>
       <HeroSection />
       <InfoSection />
+      <TestimonialSection />
     </>
   );
 };

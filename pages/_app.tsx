@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/global.scss";
 import type { AppProps } from "next/app";
 import { MantineProvider } from "@mantine/core";
 import Navbar from "../components/Navbar/Navbar";

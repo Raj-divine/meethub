@@ -1,4 +1,3 @@
-import styles from "./InfoSection.module.scss";
 import { SimpleGrid, Text } from "@mantine/core";
 import InfoCard from "./InfoCard/InfoCard";
 import handshake from "../.././../assets/images/handshake.jpg";
@@ -35,8 +34,8 @@ const cardData = [
 
 const InfoSection = () => {
   return (
-    <section className={styles["section-info"]}>
-      <Text color="dimmed" component="h3" className={styles["section-heading"]}>
+    <section className="section-prefix">
+      <Text color="dimmed" component="h3" className="section-heading">
         Why meethub?
       </Text>
       <div>
