@@ -21,7 +21,12 @@ const Testimonial = ({
     <div className={styles.slide}>
       <h4>{title}</h4>
 
-      <Blockquote className={styles.body}>{body}</Blockquote>
+      <Blockquote
+        classNames={{ icon: styles["blockquote-icon"] }}
+        className={styles.body}
+      >
+        {body}
+      </Blockquote>
       <div className={styles.footer}>
         <div className={styles["avatar-container"]}>
           <div className={styles.avatar}>
