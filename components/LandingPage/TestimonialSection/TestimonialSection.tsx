@@ -9,6 +9,7 @@ import avatar3 from "../../../assets/images/avatar-3.jpg";
 import { useIntersection } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import BigTestimonial from "./BigTestimonial/BigTestimonial";
+import { useScrollAnimation } from "../../../hooks";
 
 const testimonialData = [
   {
@@ -35,15 +36,9 @@ const testimonialData = [
 ];
 
 const TestimonialSection = () => {
-  const { ref: testimonialRef, entry } = useIntersection({
+  const { ref: testimonialRef, isIntersecting } = useScrollAnimation({
     threshold: 0.2,
   });
-  const [isIntersecting, setIsIntersecting] = useState(false);
-  useEffect(() => {
-    if (entry?.isIntersecting && !isIntersecting) {
-      setIsIntersecting(true);
-    }
-  }, [entry?.isIntersecting]);
 
   return (
     <section className="section-prefix">

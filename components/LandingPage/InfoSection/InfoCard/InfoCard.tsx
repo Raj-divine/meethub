@@ -1,7 +1,7 @@
 import styles from "./InfoCard.module.scss";
 import Image, { StaticImageData } from "next/image";
-import { useIntersection } from "@mantine/hooks";
-import { useEffect, useState } from "react";
+
+import { useScrollAnimation } from "../../../../hooks";
 type InfoCardProps = {
   image: StaticImageData;
   body: string;
@@ -10,15 +10,9 @@ type InfoCardProps = {
 };
 
 const InfoCard = ({ image, body, title, alt }: InfoCardProps) => {
-  const { ref: cardRef, entry } = useIntersection({
+  const { ref: cardRef, isIntersecting } = useScrollAnimation({
     threshold: 0.3,
   });
-  const [isIntersecting, setIsIntersecting] = useState(false);
-  useEffect(() => {
-    if (entry?.isIntersecting && !isIntersecting) {
-      setIsIntersecting(true);
-    }
-  }, [entry?.isIntersecting]);
 
   return (
     <div
