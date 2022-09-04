@@ -1,17 +1,18 @@
 import styles from "./TestimonialSection.module.scss";
-import { Text, Center } from "@mantine/core";
+import { Text, Center, Divider } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
-import Testimonial from "./Testimonial/Testimonial";
+import Testimonial from "./Slides/Slides";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import avatar1 from "../../../assets/images/avatar-1.jpg";
 import avatar2 from "../../../assets/images/avatar-2.jpg";
 import avatar3 from "../../../assets/images/avatar-3.jpg";
 import { useIntersection } from "@mantine/hooks";
 import { useEffect, useState } from "react";
+import BigTestimonial from "./BigTestimonial/BigTestimonial";
 
 const testimonialData = [
   {
-    title: "Best place to find meetups",
+    title: "Best place to find meetups.",
     body: "Meethub is by far the best place to find meetups near me. It is super easy to use has a very minimal user interface and checks all the boxes for me. I can't stop recommending it to others since it is such a nice platform thankyou all the folks at meethub for making this platform.",
     name: "Ann S. Kinchen",
     location: "San Francisco, USA",
@@ -47,7 +48,7 @@ const TestimonialSection = () => {
   return (
     <section className="section-prefix">
       <Text color="dimmed" component="h3" className="section-heading">
-        Some happy users
+        Our happy users
       </Text>
       <Center>
         <div
@@ -72,6 +73,10 @@ const TestimonialSection = () => {
             })}
           </Carousel>
         </div>
+      </Center>
+      <Divider className={styles.divider} />
+      <Center>
+        <BigTestimonial />
       </Center>
     </section>
   );

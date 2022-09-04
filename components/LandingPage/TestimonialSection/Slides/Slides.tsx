@@ -1,4 +1,4 @@
-import styles from "./Testimonial.module.scss";
+import styles from "./Slides.module.scss";
 import { Text, Blockquote } from "@mantine/core";
 import Image, { StaticImageData } from "next/image";
 

@@ -1,0 +1,33 @@
+@import "../../../../../styles/variables";
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #ebebeb;
+  }
+
+  cursor: pointer;
+  border-radius: 1rem;
+  padding: 1.6rem 3rem;
+
+  .image-container {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 2rem;
+  }
+}
+
+.name {
+  font-weight: 600;
+}
+.location {
+  font-size: 1.4rem;
+}
+.active {
+  box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.1);
+}
