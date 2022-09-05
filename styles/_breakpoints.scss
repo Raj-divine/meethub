@@ -39,3 +39,9 @@ $breakpoints: (
     @content;
   }
 }
+
+@mixin breakpoint($breakpoint) {
+  @media screen and (max-width: $breakpoint) {
+    @content;
+  }
+}

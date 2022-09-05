@@ -18,14 +18,14 @@
   font-size: 1.8rem;
   overflow: hidden;
   @include sm {
-    max-height: 17rem;
+    max-height: 30rem;
     font-size: 1.6rem;
     line-height: 2.2rem;
   }
   @include xs {
     font-size: 1.4rem;
     line-height: 2rem;
-    max-height: 12rem;
+    max-height: 35rem;
   }
 }
 

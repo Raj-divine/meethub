@@ -16,7 +16,7 @@ const avatarData = [
   },
   {
     avatar: avatar5,
-    name: "Mann Hoffmann",
+    name: "Mann Hoff",
     location: "Berlin, Germany",
     uid: "K_0Z7nILmp",
   },
