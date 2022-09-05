@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar/Navbar";
 import store from "../context/store";
 import { Provider } from "react-redux";
 import SideNavbar from "../components/SideNavbar/SideNavbar";
+import Footer from "../components/Footer/Footer";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <MantineProvider
@@ -19,8 +20,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Provider store={store}>
         <SideNavbar />
         <Navbar />
-
         <Component {...pageProps} />
+        <Footer />
       </Provider>
     </MantineProvider>
   );
