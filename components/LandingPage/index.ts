@@ -1,4 +1,5 @@
 import HeroSection from "./HeroSection/HeroSection";
 import InfoSection from "./InfoSection/InfoSection";
 import TestimonialSection from "./TestimonialSection/TestimonialSection";
-export { HeroSection, InfoSection, TestimonialSection };
+import SectionSignUp from "./SectionSignUp/SectionSignUp";
+export { HeroSection, InfoSection, TestimonialSection, SectionSignUp };

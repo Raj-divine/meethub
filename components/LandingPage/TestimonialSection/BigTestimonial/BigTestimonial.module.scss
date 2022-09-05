@@ -4,7 +4,7 @@
   display: flex;
   width: 80%;
   justify-content: space-between;
-  height: 32rem;
+  min-height: 32rem;
   transition: all 1s;
   transform: translateY(100px);
   opacity: 0;
@@ -44,6 +44,9 @@
   @include lg {
     width: 80%;
     margin: 0 auto;
+  }
+  @include sm {
+    width: 100%;
   }
 }
 
