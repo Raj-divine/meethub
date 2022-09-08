@@ -1,7 +1,7 @@
 import { AnyAction } from "@reduxjs/toolkit";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 import { closeModal } from "../../../../../context/modalSlice";
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 type SubmitHandlerParameter = {
   fullName: string;
   email: string;
@@ -9,7 +9,7 @@ type SubmitHandlerParameter = {
   confirmPassword: string;
 };
 
-const submitHandler = (
+const submitHandler = async (
   event: FormEvent,
   errors: SubmitHandlerParameter,
   userData: SubmitHandlerParameter,
@@ -19,7 +19,7 @@ const submitHandler = (
 ) => {
   event.preventDefault();
   const { fullName, email, password, confirmPassword } = userData;
-
+  const auth = getAuth();
   const initialErrorState = {
     fullName: "",
     email: "",
@@ -47,20 +47,20 @@ const submitHandler = (
     setErrors({ ...initialErrorState, email: "Please enter a valid Email" });
   else if (password.trim().length < 1)
     setErrors({ ...initialErrorState, password: "Password is required" });
-  else if (password.trim().length < 4)
+  else if (password.trim().length < 5)
     setErrors({
       ...initialErrorState,
-      password: "Password must be at least 5 characters long",
+      password: "Password must be at least 6 characters long",
     });
   else if (confirmPassword.trim().length < 1)
     setErrors({
       ...initialErrorState,
       confirmPassword: "Confirm password is required",
     });
-  else if (confirmPassword.trim().length < 4)
+  else if (confirmPassword.trim().length < 5)
     setErrors({
       ...initialErrorState,
-      confirmPassword: "Password must be at least 5 characters long",
+      confirmPassword: "Password must be at least 6 characters long",
     });
   else if (confirmPassword !== password)
     setErrors({
@@ -70,6 +70,25 @@ const submitHandler = (
   else {
     setErrors(initialErrorState);
     dispatch(closeModal());
+
+    if (
+      !errors.fullName &&
+      !errors.email &&
+      !errors.password &&
+      !errors.confirmPassword
+    ) {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        //accessing the user's uid
+        console.log(userCredential.user.uid);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 };
 

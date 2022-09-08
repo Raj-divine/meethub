@@ -1,7 +1,7 @@
 import styles from "./SignUpModal.module.scss";
 import { Modal } from "@mantine/core";
 import { useDispatch } from "react-redux";
-import { closeModal, toggleLogIn } from "../../../context/modalSlice";
+import { closeModal } from "../../../context/modalSlice";
 import SignUpComp from "./SignUpComp/SignUpComp";
 import LogInComp from "./LogInComp/LogInComp";
 
