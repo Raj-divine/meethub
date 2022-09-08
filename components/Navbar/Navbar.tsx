@@ -28,8 +28,6 @@ const Navbar = () => {
   }, []);
 
   const openModalHandler = (loggingIn: boolean) => {
-    console.log(loggingIn);
-
     dispatch(openModal({ loggingIn }));
   };
 

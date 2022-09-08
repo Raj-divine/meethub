@@ -1,0 +1,17 @@
+@import "../../../../styles/variables";
+.cta {
+  display: flex;
+  margin-top: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  p {
+    width: 50%;
+    color: $color-grey;
+    font-size: 1.2rem;
+    span {
+      cursor: pointer;
+      color: $color-primary;
+      font-weight: 700;
+    }
+  }
+}

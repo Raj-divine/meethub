@@ -1,7 +1,10 @@
 import styles from "./SignUpModal.module.scss";
 import { Modal } from "@mantine/core";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../../context/modalSlice";
+import { closeModal, toggleLogIn } from "../../../context/modalSlice";
+import SignUpComp from "./SignUpComp/SignUpComp";
+import LogInComp from "./LogInComp/LogInComp";
+
 type SignUpModalProps = {
   isOpen: boolean;
   loggingIn: boolean;
@@ -15,9 +18,14 @@ const SignUpModal = ({ isOpen, loggingIn }: SignUpModalProps) => {
   };
 
   return (
-    <Modal title="hello" onClose={modalCloseHandler} opened={isOpen}>
-      {!loggingIn && <div>this is the signUp Modal</div>}
-      {loggingIn && <div>this is the login Modal</div>}
+    <Modal
+      overlayBlur={1.5}
+      title={loggingIn ? "Welcome Back" : "Sign Up!"}
+      onClose={modalCloseHandler}
+      opened={isOpen}
+    >
+      {loggingIn && <LogInComp />}
+      {!loggingIn && <SignUpComp />}
     </Modal>
   );
 };

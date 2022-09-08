@@ -4,13 +4,15 @@ type ButtonProps = {
   children: string;
   className?: string;
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
 };
 
-const Button = ({ children, className, onClick }: ButtonProps) => {
+const Button = ({ children, className, type, onClick }: ButtonProps) => {
   return (
     <button
       onClick={onClick}
       className={`${styles["btn-primary"]} ${className}`}
+      type={type ? type : "button"}
     >
       {children}
     </button>

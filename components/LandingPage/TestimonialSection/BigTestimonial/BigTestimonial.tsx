@@ -58,7 +58,7 @@ const BigTestimonial = () => {
   const [testimonialData, setTestimonialData] = useState<TestimonialDataType>();
 
   const { ref: bigTestimonialRef, isIntersecting } = useScrollAnimation({
-    threshold: 0.2,
+    threshold: 0.3,
   });
 
   const onClickHandler = (uid: string) => {

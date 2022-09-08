@@ -1,0 +1,4 @@
+@import "../SignUpComp/SignUpComp.module.scss";
+.cta {
+  composes: cta;
+}

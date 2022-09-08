@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { stat } from "fs";
 
 const initialState = {
   isOpen: false,
@@ -16,8 +17,11 @@ const modalSlice = createSlice({
       state.isOpen = true;
       state.loggingIn = action.payload.loggingIn;
     },
+    toggleLogIn(state) {
+      state.loggingIn = !state.loggingIn;
+    },
   },
 });
 
 export default modalSlice.reducer;
-export const { closeModal, openModal } = modalSlice.actions;
+export const { closeModal, openModal, toggleLogIn } = modalSlice.actions;
