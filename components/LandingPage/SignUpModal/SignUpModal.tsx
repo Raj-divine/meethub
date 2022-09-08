@@ -20,9 +20,13 @@ const SignUpModal = ({ isOpen, loggingIn }: SignUpModalProps) => {
   return (
     <Modal
       overlayBlur={1.5}
-      title={loggingIn ? "Welcome Back" : "Sign Up!"}
+      title={loggingIn ? "Welcome Back!" : "Sign Up!"}
       onClose={modalCloseHandler}
       opened={isOpen}
+      classNames={{
+        title: styles.title,
+        root: styles.modal,
+      }}
     >
       {loggingIn && <LogInComp />}
       {!loggingIn && <SignUpComp />}
