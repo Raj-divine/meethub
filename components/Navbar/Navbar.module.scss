@@ -44,22 +44,6 @@
   }
 }
 
-.sign-up-btn {
-  background-color: $color-primary;
-  border: 1px solid $color-primary;
-  font-size: 1.3rem;
-  padding: 1rem 2rem;
-  color: $color-white;
-  cursor: pointer;
-  letter-spacing: 1px;
-  font-weight: 600;
-  font-family: "Inter", sans-serif;
-  transition: all 0.2s;
-  border-radius: 3px;
-  &:hover {
-    background-color: darken($color: $color-primary, $amount: 5%);
-  }
-}
 .login-btn {
   border: 1px solid $color-primary;
   padding: 1rem 2rem;

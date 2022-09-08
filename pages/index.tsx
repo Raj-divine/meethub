@@ -4,9 +4,21 @@ import {
   HeroSection,
   InfoSection,
   SectionSignUp,
+  SignUpModal,
   TestimonialSection,
 } from "../components/LandingPage";
+import { useSelector } from "react-redux";
+
+interface ModalState {
+  modal: {
+    isOpen: boolean;
+    loggingIn: boolean;
+  };
+}
+
 const Landing: NextPage = () => {
+  const { isOpen, loggingIn } = useSelector((state: ModalState) => state.modal);
+
   return (
     <>
       <Head>
@@ -20,6 +32,7 @@ const Landing: NextPage = () => {
       <InfoSection />
       <TestimonialSection />
       <SectionSignUp />
+      <SignUpModal loggingIn={loggingIn} isOpen={isOpen} />
     </>
   );
 };

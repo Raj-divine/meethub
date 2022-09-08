@@ -5,6 +5,7 @@ import logo from "../../assets/images/logo.png";
 import { Burger } from "@mantine/core";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleNavbar } from "../../context/navbarSlice";
+import { openModal } from "../../context/modalSlice";
 import { Button } from "../Utilities";
 import { useEffect, useState } from "react";
 interface NavbarState {
@@ -20,11 +21,17 @@ const Navbar = () => {
   const [addClass, setAddClass] = useState(false);
 
   useEffect(() => {
-    document.addEventListener("scroll", (e) => {
+    document.addEventListener("scroll", () => {
       if (window.scrollY > 60) setAddClass(true);
       else setAddClass(false);
     });
   }, []);
+
+  const openModalHandler = (loggingIn: boolean) => {
+    console.log(loggingIn);
+
+    dispatch(openModal({ loggingIn }));
+  };
 
   return (
     <nav
@@ -71,9 +78,10 @@ const Navbar = () => {
         {/* will be shown when the user is not logged in */}
 
         <div className={styles["nav-actions"]}>
-          <Button>Sign up</Button>
+          <Button onClick={openModalHandler.bind(this, false)}>Sign up</Button>
 
           <button
+            onClick={openModalHandler.bind(this, true)}
             className={`${styles["login-btn"]} ${
               addClass ? styles["color-black"] : ""
             }`}

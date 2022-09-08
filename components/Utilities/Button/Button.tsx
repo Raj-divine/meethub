@@ -3,11 +3,15 @@ import styles from "./Button.module.scss";
 type ButtonProps = {
   children: string;
   className?: string;
+  onClick?: () => void;
 };
 
-const Button = ({ children, className }: ButtonProps) => {
+const Button = ({ children, className, onClick }: ButtonProps) => {
   return (
-    <button className={`${styles["btn-primary"]} ${className}`}>
+    <button
+      onClick={onClick}
+      className={`${styles["btn-primary"]} ${className}`}
+    >
       {children}
     </button>
   );
