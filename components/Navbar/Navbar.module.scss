@@ -32,7 +32,7 @@
   margin-left: 4rem;
 
   a {
-    color: $color-grey;
+    color: $color-white;
     cursor: pointer;
     font-size: 1.3rem;
     font-weight: 700;
@@ -40,7 +40,7 @@
     font-family: "Inter", sans-serif;
   }
   a:hover {
-    color: $color-black;
+    color: $color-grey-light;
   }
 }
 
@@ -77,5 +77,13 @@
   color: $color-black;
   &:hover {
     background-color: lighten($color: $color-primary, $amount: 40%);
+  }
+}
+.black-link {
+  a {
+    color: $color-grey;
+    &:hover {
+      color: $color-black;
+    }
   }
 }

@@ -8,6 +8,7 @@ import { toggleNavbar } from "../../context/navbarSlice";
 import { openModal } from "../../context/modalSlice";
 import { Button } from "../Utilities";
 import { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 interface NavbarState {
   navbar: {
     isOpen: boolean;
@@ -15,10 +16,25 @@ interface NavbarState {
 }
 
 const Navbar = () => {
+  const auth = getAuth();
   const dispatch = useDispatch();
   const { isOpen } = useSelector((state: NavbarState) => state.navbar);
   const title = isOpen ? "Close navigation" : "Open navigation";
   const [addClass, setAddClass] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [isUserLoaded, setIsUserLoaded] = useState(false);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setIsUserLoaded(false);
+      if (user) {
+        setCurrentUser(user);
+      }
+      setIsUserLoaded(true);
+    });
+  }, []);
+
+  console.log(currentUser);
 
   useEffect(() => {
     document.addEventListener("scroll", () => {
@@ -50,52 +66,75 @@ const Navbar = () => {
       <div>
         {/* will be shown when the user is logged in and the screen size is greater than 450px */}
 
-        {/* <ul className={styles["nav-links"]}>
-          <li className={styles["nav-link"]}>
-            <Link href="/home">
-              <a>Home</a>
-            </Link>
-          </li>
-          <li className={styles["nav-link"]}>
-            <Link href="/">
-              <a>Home</a>
-            </Link>
-          </li>
-          <li className={styles["nav-link"]}>
-            <Link href="/">
-              <a>Home</a>
-            </Link>
-          </li>
-          <li className={styles["nav-link"]}>
-            <Link href="/">
-              <a>Home</a>
-            </Link>
-          </li>
-        </ul> */}
+        {currentUser && isUserLoaded && (
+          <ul className={styles["nav-links"]}>
+            <li
+              className={`${styles["nav-link"]} ${
+                addClass ? styles["black-link"] : ""
+              }`}
+            >
+              <Link href="/home">
+                <a>Home</a>
+              </Link>
+            </li>
+            <li
+              className={`${styles["nav-link"]} ${
+                addClass ? styles["black-link"] : ""
+              }`}
+            >
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+            </li>
+            <li
+              className={`${styles["nav-link"]} ${
+                addClass ? styles["black-link"] : ""
+              }`}
+            >
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+            </li>
+            <li
+              className={`${styles["nav-link"]} ${
+                addClass ? styles["black-link"] : ""
+              }`}
+            >
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+            </li>
+          </ul>
+        )}
 
         {/* will be shown when the user is not logged in */}
 
-        <div className={styles["nav-actions"]}>
-          <Button onClick={openModalHandler.bind(this, false)}>Sign up</Button>
+        {!currentUser && isUserLoaded && (
+          <div className={styles["nav-actions"]}>
+            <Button onClick={openModalHandler.bind(this, false)}>
+              Sign up
+            </Button>
 
-          <button
-            onClick={openModalHandler.bind(this, true)}
-            className={`${styles["login-btn"]} ${
-              addClass ? styles["color-black"] : ""
-            }`}
-          >
-            Log in
-          </button>
-        </div>
+            <button
+              onClick={openModalHandler.bind(this, true)}
+              className={`${styles["login-btn"]} ${
+                addClass ? styles["color-black"] : ""
+              }`}
+            >
+              Log in
+            </button>
+          </div>
+        )}
 
         {/* will be shown when the user is logged in and the screen size is less than 450px */}
-        {/* 
-        <Burger
-          className={styles.hamburger}
-          opened={isOpen}
-          onClick={() => dispatch(toggleNavbar())}
-          title={title}
-        /> */}
+        {currentUser && isUserLoaded && (
+          <Burger
+            className={styles.hamburger}
+            opened={isOpen}
+            onClick={() => dispatch(toggleNavbar())}
+            title={title}
+          />
+        )}
       </div>
     </nav>
   );
