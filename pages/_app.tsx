@@ -9,6 +9,7 @@ import SideNavbar from "../components/SideNavbar/SideNavbar";
 import Footer from "../components/Footer/Footer";
 import { getFirestore } from "firebase/firestore";
 import { app } from "../firebase/firebaseConfig";
+import { useEffect } from "react";
 
 //this is just to call the firebase config and avoid any errors
 const db = getFirestore(app);
@@ -26,7 +27,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Provider store={store}>
         <SideNavbar />
         <Navbar />
-        <Component {...pageProps} />
+        <main>
+          <Component {...pageProps} />
+        </main>
         <Footer />
       </Provider>
     </MantineProvider>
