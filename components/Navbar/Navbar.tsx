@@ -9,6 +9,7 @@ import { openModal } from "../../context/modalSlice";
 import { Button } from "../Utilities";
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
+import { useRouter } from "next/router";
 interface NavbarState {
   navbar: {
     isOpen: boolean;
@@ -16,6 +17,8 @@ interface NavbarState {
 }
 
 const Navbar = () => {
+  const router = useRouter();
+
   const auth = getAuth();
   const dispatch = useDispatch();
   const { isOpen } = useSelector((state: NavbarState) => state.navbar);
@@ -34,13 +37,13 @@ const Navbar = () => {
     });
   }, []);
 
-  console.log(currentUser);
-
   useEffect(() => {
-    document.addEventListener("scroll", () => {
+    const checkPosition = () => {
       if (window.scrollY > 60) setAddClass(true);
       else setAddClass(false);
-    });
+    };
+
+    document.addEventListener("scroll", checkPosition);
   }, []);
 
   const openModalHandler = (loggingIn: boolean) => {
@@ -49,7 +52,9 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`${styles.navbar} ${addClass ? styles["add-background"] : ""}`}
+      className={`${styles.navbar} ${
+        addClass || router.pathname !== "/" ? styles["add-background"] : ""
+      }`}
     >
       <div className={styles.logo}>
         <Link href="/">
@@ -70,7 +75,7 @@ const Navbar = () => {
           <ul className={styles["nav-links"]}>
             <li
               className={`${styles["nav-link"]} ${
-                addClass ? styles["black-link"] : ""
+                addClass || router.pathname !== "/" ? styles["black-link"] : ""
               }`}
             >
               <Link href="/home">
@@ -79,7 +84,7 @@ const Navbar = () => {
             </li>
             <li
               className={`${styles["nav-link"]} ${
-                addClass ? styles["black-link"] : ""
+                addClass || router.pathname !== "/" ? styles["black-link"] : ""
               }`}
             >
               <Link href="/">
@@ -88,7 +93,7 @@ const Navbar = () => {
             </li>
             <li
               className={`${styles["nav-link"]} ${
-                addClass ? styles["black-link"] : ""
+                addClass || router.pathname !== "/" ? styles["black-link"] : ""
               }`}
             >
               <Link href="/">
@@ -97,7 +102,7 @@ const Navbar = () => {
             </li>
             <li
               className={`${styles["nav-link"]} ${
-                addClass ? styles["black-link"] : ""
+                addClass || router.pathname !== "/" ? styles["black-link"] : ""
               }`}
             >
               <Link href="/">
@@ -118,7 +123,7 @@ const Navbar = () => {
             <button
               onClick={openModalHandler.bind(this, true)}
               className={`${styles["login-btn"]} ${
-                addClass ? styles["color-black"] : ""
+                addClass || router.pathname !== "/" ? styles["color-black"] : ""
               }`}
             >
               Log in

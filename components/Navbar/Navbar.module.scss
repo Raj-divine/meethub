@@ -6,7 +6,6 @@
   align-items: center;
   padding: 1rem 2rem;
   z-index: 3;
-
   position: fixed;
   top: 0;
   transition: 0.4s all;
@@ -23,8 +22,18 @@
 .nav-links {
   display: flex;
   align-items: center;
+  animation: showUp 0.4s;
   @include xs {
     display: none;
+  }
+}
+
+@keyframes showUp {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
