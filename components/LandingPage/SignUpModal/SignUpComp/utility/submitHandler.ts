@@ -2,6 +2,8 @@ import { AnyAction } from "@reduxjs/toolkit";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 import { closeModal } from "../../../../../context/modalSlice";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../../../../firebase/firebaseConfig";
 type SubmitHandlerParameter = {
   fullName: string;
   email: string;
@@ -15,12 +17,14 @@ const submitHandler = async (
   userData: SubmitHandlerParameter,
   setErrors: Dispatch<SetStateAction<SubmitHandlerParameter>>,
   setUserData: Dispatch<SetStateAction<SubmitHandlerParameter>>,
-  dispatch: Dispatch<AnyAction>
+  dispatch: Dispatch<AnyAction>,
+  isVisible: boolean,
+  setIsVisible: Dispatch<SetStateAction<boolean>>
 ) => {
   event.preventDefault();
   const { fullName, email, password, confirmPassword } = userData;
   const auth = getAuth();
-  const initialErrorState = {
+  const initialState = {
     fullName: "",
     email: "",
     password: "",
@@ -30,64 +34,68 @@ const submitHandler = async (
   //checking validity
 
   if (fullName.trim().length < 1)
-    setErrors({ ...initialErrorState, fullName: "Full name is required" });
+    setErrors({ ...initialState, fullName: "Full name is required" });
   else if (fullName.trim().length < 5)
     setErrors({
-      ...initialErrorState,
+      ...initialState,
       fullName: "Please enter a valid full name",
     });
   else if (!fullName.trim().includes(" "))
     setErrors({
-      ...initialErrorState,
+      ...initialState,
       fullName: "Please enter a valid full name",
     });
   else if (email.trim().length < 1)
-    setErrors({ ...initialErrorState, email: "Email is required" });
+    setErrors({ ...initialState, email: "Email is required" });
   else if (!email.includes("@") || !email.includes("."))
-    setErrors({ ...initialErrorState, email: "Please enter a valid Email" });
+    setErrors({ ...initialState, email: "Please enter a valid Email" });
   else if (password.trim().length < 1)
-    setErrors({ ...initialErrorState, password: "Password is required" });
-  else if (password.trim().length < 5)
+    setErrors({ ...initialState, password: "Password is required" });
+  else if (password.trim().length < 6)
     setErrors({
-      ...initialErrorState,
+      ...initialState,
       password: "Password must be at least 6 characters long",
     });
   else if (confirmPassword.trim().length < 1)
     setErrors({
-      ...initialErrorState,
+      ...initialState,
       confirmPassword: "Confirm password is required",
     });
-  else if (confirmPassword.trim().length < 5)
+  else if (confirmPassword.trim().length < 6)
     setErrors({
-      ...initialErrorState,
+      ...initialState,
       confirmPassword: "Password must be at least 6 characters long",
     });
   else if (confirmPassword !== password)
     setErrors({
-      ...initialErrorState,
+      ...initialState,
       confirmPassword: "Passwords must match",
     });
   else {
-    setErrors(initialErrorState);
-    dispatch(closeModal());
+    setErrors(initialState);
 
-    if (
-      !errors.fullName &&
-      !errors.email &&
-      !errors.password &&
-      !errors.confirmPassword
-    ) {
-      try {
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        //accessing the user's uid
-        console.log(userCredential.user.uid);
-      } catch (error) {
-        console.log(error);
+    setIsVisible(true);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      //accessing the user's uid to create a user in firestore
+      await setDoc(doc(db, "users", userCredential.user.uid), {
+        fullName,
+        email,
+      });
+      setUserData(initialState);
+      dispatch(closeModal());
+      setIsVisible(false);
+    } catch (error: any) {
+      if (error.code === "auth/invalid-email") {
+        setErrors({ ...initialState, email: "Please enter a valid email" });
+        setIsVisible(false);
       }
+      //only for development
+      console.log(error);
     }
   }
 };

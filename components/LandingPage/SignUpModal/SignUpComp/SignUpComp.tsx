@@ -1,5 +1,5 @@
 import styles from "./SignUpComp.module.scss";
-import { TextInput, Space, PasswordInput } from "@mantine/core";
+import { TextInput, Space, PasswordInput, LoadingOverlay } from "@mantine/core";
 import { Button } from "../../../Utilities";
 import { useDispatch } from "react-redux";
 import { toggleLogIn } from "../../../../context/modalSlice";
@@ -17,10 +17,13 @@ const SignUpComp = () => {
 
   const [userData, setUserData] = useState(initialState);
 
+  const [isVisible, setIsVisible] = useState(false);
+
   const loginChangeHandler = () => dispatch(toggleLogIn());
 
   return (
-    <div>
+    <div className={styles["sign-up-comp"]}>
+      <LoadingOverlay visible={isVisible} overlayBlur={2} />
       <form
         noValidate
         onSubmit={(event) => {
@@ -30,7 +33,9 @@ const SignUpComp = () => {
             userData,
             setErrors,
             setUserData,
-            dispatch
+            dispatch,
+            isVisible,
+            setIsVisible
           );
         }}
       >

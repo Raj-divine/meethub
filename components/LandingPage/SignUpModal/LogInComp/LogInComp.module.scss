@@ -1,4 +1,7 @@
 @import "../SignUpComp/SignUpComp.module.scss";
+.log-in-comp {
+  position: relative;
+}
 .cta {
   composes: cta;
 }
