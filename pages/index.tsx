@@ -10,6 +10,8 @@ import {
 import { useSelector } from "react-redux";
 import AppLoader from "../components/AppLoader/AppLoader";
 import { useUser } from "../hooks";
+import { useEffect } from "react";
+import { getAuth, signOut } from "firebase/auth";
 interface ModalState {
   modal: {
     isOpen: boolean;
@@ -21,6 +23,12 @@ const Landing: NextPage = () => {
   const { isOpen, loggingIn } = useSelector((state: ModalState) => state.modal);
 
   const { user, loading } = useUser("/home");
+  const auth = getAuth();
+  useEffect(() => {
+    signOut(auth).then(() => {
+      console.log("logged out");
+    });
+  }, []);
 
   return (
     <>

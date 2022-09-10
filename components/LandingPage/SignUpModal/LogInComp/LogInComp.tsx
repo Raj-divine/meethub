@@ -5,11 +5,11 @@ import styles from "./LogInComp.module.scss";
 import { Button } from "../../../Utilities";
 import { useState } from "react";
 import submitHandler from "./utility/submitHandler";
-
+import { useRouter } from "next/router";
 const LogInComp = () => {
   const dispatch = useDispatch();
   const loginChangeHandler = () => dispatch(toggleLogIn());
-
+  const router = useRouter();
   const initialState = {
     email: "",
     password: "",
@@ -24,16 +24,14 @@ const LogInComp = () => {
       <form
         noValidate
         onSubmit={(event) =>
-          submitHandler(
+          submitHandler({
             event,
-            errors,
             userData,
             setErrors,
             setUserData,
             dispatch,
-            isVisible,
-            setIsVisible
-          )
+            setIsVisible,
+          })
         }
       >
         <TextInput

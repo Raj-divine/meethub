@@ -2,23 +2,27 @@ import { Dispatch, FormEvent, SetStateAction } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { closeModal } from "../../../../../context/modalSlice";
 import { AnyAction } from "@reduxjs/toolkit";
-
-type SubmitHandlerParameter = {
+type ErrorAndUserDataState = {
   email: string;
   password: string;
 };
+type SubmitHandlerParameter = {
+  event: FormEvent;
+  userData: ErrorAndUserDataState;
+  setErrors: Dispatch<SetStateAction<ErrorAndUserDataState>>;
+  setUserData: Dispatch<SetStateAction<ErrorAndUserDataState>>;
+  dispatch: Dispatch<AnyAction>;
+  setIsVisible: Dispatch<SetStateAction<boolean>>;
+};
 
-const submitHandler = async (
-  event: FormEvent,
-  errors: SubmitHandlerParameter,
-  userData: SubmitHandlerParameter,
-  setErrors: Dispatch<SetStateAction<SubmitHandlerParameter>>,
-  setUserData: Dispatch<SetStateAction<SubmitHandlerParameter>>,
-  dispatch: Dispatch<AnyAction>,
-
-  isVisible: boolean,
-  setIsVisible: Dispatch<SetStateAction<boolean>>
-) => {
+const submitHandler = async ({
+  event,
+  userData,
+  setErrors,
+  setUserData,
+  dispatch,
+  setIsVisible,
+}: SubmitHandlerParameter) => {
   event.preventDefault();
   const initialState = {
     email: "",

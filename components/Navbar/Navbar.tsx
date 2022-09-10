@@ -8,8 +8,8 @@ import { toggleNavbar } from "../../context/navbarSlice";
 import { openModal } from "../../context/modalSlice";
 import { Button } from "../Utilities";
 import { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import { useRouter } from "next/router";
+import { useUser } from "../../hooks";
 interface NavbarState {
   navbar: {
     isOpen: boolean;
@@ -19,24 +19,11 @@ interface NavbarState {
 const Navbar = () => {
   const router = useRouter();
 
-  const auth = getAuth();
   const dispatch = useDispatch();
   const { isOpen } = useSelector((state: NavbarState) => state.navbar);
   const title = isOpen ? "Close navigation" : "Open navigation";
   const [addClass, setAddClass] = useState(false);
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [isUserLoaded, setIsUserLoaded] = useState(false);
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setIsUserLoaded(false);
-      if (user) {
-        setCurrentUser(user);
-      }
-      setIsUserLoaded(true);
-    });
-  }, []);
-
+  const { user, loading } = useUser();
   useEffect(() => {
     const checkPosition = () => {
       if (window.scrollY > 60) setAddClass(true);
@@ -71,7 +58,7 @@ const Navbar = () => {
       <div>
         {/* will be shown when the user is logged in and the screen size is greater than 450px */}
 
-        {currentUser && isUserLoaded && (
+        {user && !loading && (
           <ul className={styles["nav-links"]}>
             <li
               className={`${styles["nav-link"]} ${
@@ -114,7 +101,7 @@ const Navbar = () => {
 
         {/* will be shown when the user is not logged in */}
 
-        {!currentUser && isUserLoaded && (
+        {!user && !loading && (
           <div className={styles["nav-actions"]}>
             <Button onClick={openModalHandler.bind(this, false)}>
               Sign up
@@ -132,7 +119,7 @@ const Navbar = () => {
         )}
 
         {/* will be shown when the user is logged in and the screen size is less than 450px */}
-        {currentUser && isUserLoaded && (
+        {user && !loading && (
           <Burger
             className={styles.hamburger}
             opened={isOpen}

@@ -14,6 +14,8 @@ const useUser = (redirectUrl?: string) => {
         if (redirectUrl) {
           router.replace(redirectUrl);
         }
+      } else {
+        setUser(null);
       }
       setLoading(false);
     });

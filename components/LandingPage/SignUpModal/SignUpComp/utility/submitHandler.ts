@@ -4,23 +4,29 @@ import { closeModal } from "../../../../../context/modalSlice";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../../../firebase/firebaseConfig";
-type SubmitHandlerParameter = {
+type ErrorAndUserDataState = {
   fullName: string;
   email: string;
   password: string;
   confirmPassword: string;
 };
+type SubmitHandlerParameter = {
+  event: FormEvent;
+  userData: ErrorAndUserDataState;
+  setErrors: Dispatch<SetStateAction<ErrorAndUserDataState>>;
+  setUserData: Dispatch<SetStateAction<ErrorAndUserDataState>>;
+  dispatch: Dispatch<AnyAction>;
+  setIsVisible: Dispatch<SetStateAction<boolean>>;
+};
 
-const submitHandler = async (
-  event: FormEvent,
-  errors: SubmitHandlerParameter,
-  userData: SubmitHandlerParameter,
-  setErrors: Dispatch<SetStateAction<SubmitHandlerParameter>>,
-  setUserData: Dispatch<SetStateAction<SubmitHandlerParameter>>,
-  dispatch: Dispatch<AnyAction>,
-  isVisible: boolean,
-  setIsVisible: Dispatch<SetStateAction<boolean>>
-) => {
+const submitHandler = async ({
+  event,
+  userData,
+  setErrors,
+  setUserData,
+  dispatch,
+  setIsVisible,
+}: SubmitHandlerParameter) => {
   event.preventDefault();
   const { fullName, email, password, confirmPassword } = userData;
   const auth = getAuth();
