@@ -4,7 +4,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>home</title>
+        <title>Meethub | Home</title>
       </Head>
       <div>this is that div</div>
     </>

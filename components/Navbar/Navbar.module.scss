@@ -10,6 +10,9 @@
   top: 0;
   transition: 0.4s all;
   width: 100%;
+  .nav-actions {
+    animation: showUp 0.4s;
+  }
 }
 
 .logo {

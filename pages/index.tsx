@@ -8,7 +8,8 @@ import {
   TestimonialSection,
 } from "../components/LandingPage";
 import { useSelector } from "react-redux";
-
+import AppLoader from "../components/AppLoader/AppLoader";
+import { useUser } from "../hooks";
 interface ModalState {
   modal: {
     isOpen: boolean;
@@ -19,6 +20,8 @@ interface ModalState {
 const Landing: NextPage = () => {
   const { isOpen, loggingIn } = useSelector((state: ModalState) => state.modal);
 
+  const { user, loading } = useUser("/home");
+
   return (
     <>
       <Head>
@@ -28,11 +31,16 @@ const Landing: NextPage = () => {
           content="Meethub is the best platform for finding meetups near you"
         />
       </Head>
-      <HeroSection />
-      <InfoSection />
-      <TestimonialSection />
-      <SectionSignUp />
-      <SignUpModal loggingIn={loggingIn} isOpen={isOpen} />
+      {!user && !loading && (
+        <>
+          <HeroSection />
+          <InfoSection />
+          <TestimonialSection />
+          <SectionSignUp />
+          <SignUpModal loggingIn={loggingIn} isOpen={isOpen} />
+        </>
+      )}
+      {!user && loading && <AppLoader />}
     </>
   );
 };
