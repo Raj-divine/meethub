@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAM10eHse_BRTR8DX1TbB02-mser2cMrpI",
   authDomain: "meethub-995d3.firebaseapp.com",
@@ -12,3 +14,4 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+export const storage = getStorage(app);

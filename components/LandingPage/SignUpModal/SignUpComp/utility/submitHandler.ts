@@ -4,19 +4,31 @@ import { closeModal } from "../../../../../context/modalSlice";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../../../firebase/firebaseConfig";
-type ErrorAndUserDataState = {
+
+import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
+
+type UserDataType = {
   fullName: string;
   email: string;
   password: string;
   confirmPassword: string;
 };
+
+type ErrorType = {
+  fullName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  profilePicture: string;
+};
 type SubmitHandlerParameter = {
   event: FormEvent;
-  userData: ErrorAndUserDataState;
-  setErrors: Dispatch<SetStateAction<ErrorAndUserDataState>>;
-  setUserData: Dispatch<SetStateAction<ErrorAndUserDataState>>;
+  userData: UserDataType;
+  setErrors: Dispatch<SetStateAction<ErrorType>>;
+  setUserData: Dispatch<SetStateAction<UserDataType>>;
   dispatch: Dispatch<AnyAction>;
   setIsVisible: Dispatch<SetStateAction<boolean>>;
+  profilePicture: File | null;
 };
 
 const submitHandler = async ({
@@ -26,62 +38,92 @@ const submitHandler = async ({
   setUserData,
   dispatch,
   setIsVisible,
+  profilePicture,
 }: SubmitHandlerParameter) => {
   event.preventDefault();
   const { fullName, email, password, confirmPassword } = userData;
+
   const auth = getAuth();
-  const initialState = {
+  const initialErrorState = {
     fullName: "",
     email: "",
     password: "",
     confirmPassword: "",
+    profilePicture: "",
+  };
+  const initialUserDataState = {
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    profilePicture: null,
   };
 
   //checking validity
 
   if (fullName.trim().length < 1)
-    setErrors({ ...initialState, fullName: "Full name is required" });
+    setErrors({ ...initialErrorState, fullName: "Full name is required" });
   else if (fullName.trim().length < 5)
     setErrors({
-      ...initialState,
+      ...initialErrorState,
       fullName: "Please enter a valid full name",
     });
   else if (!fullName.trim().includes(" "))
     setErrors({
-      ...initialState,
+      ...initialErrorState,
       fullName: "Please enter a valid full name",
     });
   else if (email.trim().length < 1)
-    setErrors({ ...initialState, email: "Email is required" });
+    setErrors({ ...initialErrorState, email: "Email is required" });
   else if (!email.includes("@") || !email.includes("."))
-    setErrors({ ...initialState, email: "Please enter a valid Email" });
+    setErrors({ ...initialErrorState, email: "Please enter a valid Email" });
   else if (password.trim().length < 1)
-    setErrors({ ...initialState, password: "Password is required" });
+    setErrors({ ...initialErrorState, password: "Password is required" });
   else if (password.trim().length < 6)
     setErrors({
-      ...initialState,
+      ...initialErrorState,
       password: "Password must be at least 6 characters long",
     });
   else if (confirmPassword.trim().length < 1)
     setErrors({
-      ...initialState,
+      ...initialErrorState,
       confirmPassword: "Confirm password is required",
     });
   else if (confirmPassword.trim().length < 6)
     setErrors({
-      ...initialState,
+      ...initialErrorState,
       confirmPassword: "Password must be at least 6 characters long",
     });
   else if (confirmPassword !== password)
     setErrors({
-      ...initialState,
+      ...initialErrorState,
       confirmPassword: "Passwords must match",
     });
+  else if (!profilePicture) {
+    setErrors({
+      ...initialErrorState,
+      profilePicture: "Profile picture is required",
+    });
+  } else if (!profilePicture?.type.match("image.*"))
+    setErrors({
+      ...initialErrorState,
+      profilePicture: "You can only upload Images",
+    });
+  else if (profilePicture?.size > 3 * 1024 * 1000)
+    setErrors({
+      ...initialErrorState,
+      profilePicture: "Profile picture must be less than 3 MB",
+    });
   else {
-    setErrors(initialState);
+    setErrors(initialErrorState);
 
     setIsVisible(true);
     try {
+      const storage = getStorage();
+      const storageRef = ref(storage, `images/${profilePicture?.name}`);
+      const snapshot = await uploadBytes(storageRef, profilePicture);
+      const profilePictureUrl = await getDownloadURL(snapshot.ref);
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -91,13 +133,18 @@ const submitHandler = async ({
       await setDoc(doc(db, "users", userCredential.user.uid), {
         fullName,
         email,
+        profilePicture: profilePictureUrl,
       });
-      setUserData(initialState);
+
+      setUserData(initialUserDataState);
       dispatch(closeModal());
       setIsVisible(false);
     } catch (error: any) {
       if (error.code === "auth/invalid-email") {
-        setErrors({ ...initialState, email: "Please enter a valid email" });
+        setErrors({
+          ...initialErrorState,
+          email: "Please enter a valid email",
+        });
         setIsVisible(false);
       }
       //only for development

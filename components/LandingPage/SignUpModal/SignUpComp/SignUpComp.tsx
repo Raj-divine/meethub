@@ -1,21 +1,38 @@
 import styles from "./SignUpComp.module.scss";
-import { TextInput, Space, PasswordInput, LoadingOverlay } from "@mantine/core";
+import {
+  TextInput,
+  Space,
+  PasswordInput,
+  LoadingOverlay,
+  FileInput,
+} from "@mantine/core";
 import { Button } from "../../../Utilities";
 import { useDispatch } from "react-redux";
 import { toggleLogIn } from "../../../../context/modalSlice";
 import { useState } from "react";
 import submitHandler from "./utility/submitHandler";
+
 const SignUpComp = () => {
   const dispatch = useDispatch();
-  const initialState = {
+
+  const [profilePicture, setProfilePicture] = useState<File | null>(null);
+
+  const initialErrorState = {
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    profilePicture: "",
+  };
+  const initialUserDataState = {
     fullName: "",
     email: "",
     password: "",
     confirmPassword: "",
   };
-  const [errors, setErrors] = useState(initialState);
+  const [errors, setErrors] = useState(initialErrorState);
 
-  const [userData, setUserData] = useState(initialState);
+  const [userData, setUserData] = useState(initialUserDataState);
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -27,16 +44,15 @@ const SignUpComp = () => {
       <form
         noValidate
         onSubmit={(event) => {
-          submitHandler(
+          submitHandler({
             event,
-            errors,
             userData,
             setErrors,
             setUserData,
             dispatch,
-            isVisible,
-            setIsVisible
-          );
+            setIsVisible,
+            profilePicture,
+          });
         }}
       >
         <TextInput
@@ -98,6 +114,19 @@ const SignUpComp = () => {
             })
           }
         />
+        <Space h="md" />
+
+        <FileInput
+          placeholder="Pick file"
+          variant="filled"
+          label="Your resume"
+          required
+          onChange={setProfilePicture}
+          value={profilePicture}
+          accept="image/png,image/jpeg"
+          error={errors.profilePicture}
+        />
+
         <div className={styles.cta}>
           <p>
             Already Have an account?

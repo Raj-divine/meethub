@@ -8,7 +8,7 @@ import { toggleNavbar } from "../../context/navbarSlice";
 import { useEffect } from "react";
 import Backdrop from "./Backdrop/Backdrop";
 import { getAuth, signOut } from "firebase/auth";
-import Router from "next/router";
+import { useRouter } from "next/router";
 interface NavbarState {
   navbar: {
     isOpen: boolean;
@@ -16,6 +16,7 @@ interface NavbarState {
 }
 const SideNavbar = () => {
   const { isOpen } = useSelector((state: NavbarState) => state.navbar);
+  const router = useRouter();
   const dispatch = useDispatch();
   const title = isOpen ? "Close navigation" : "Open navigation";
   const auth = getAuth();
@@ -27,11 +28,11 @@ const SideNavbar = () => {
     if (isOpen) {
       dispatch(toggleNavbar());
     }
-  }, [Router.pathname]);
+  }, [router.pathname]);
 
   const signOutHandler = async () => {
     await signOut(auth);
-    Router.replace("/");
+    router.replace("/");
   };
 
   return (
