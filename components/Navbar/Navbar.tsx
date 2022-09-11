@@ -10,6 +10,7 @@ import { Button } from "../Utilities";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useUser } from "../../hooks";
+import { getAuth, signOut } from "firebase/auth";
 interface NavbarState {
   navbar: {
     isOpen: boolean;
@@ -24,6 +25,7 @@ const Navbar = () => {
   const title = isOpen ? "Close navigation" : "Open navigation";
   const [addClass, setAddClass] = useState(false);
   const { user, loading } = useUser();
+  const auth = getAuth();
   useEffect(() => {
     const checkPosition = () => {
       if (window.scrollY > 60) setAddClass(true);
@@ -37,6 +39,11 @@ const Navbar = () => {
     dispatch(openModal({ loggingIn }));
   };
 
+  const signOutHandler = async () => {
+    await signOut(auth);
+    router.replace("/");
+  };
+
   return (
     <nav
       className={`${styles.navbar} ${
@@ -44,7 +51,7 @@ const Navbar = () => {
       }`}
     >
       <div className={styles.logo}>
-        <Link href="/">
+        <Link href={!user && !loading ? "/" : "/home"}>
           <a>
             <Image
               src={logo}
@@ -87,14 +94,13 @@ const Navbar = () => {
                 <a>Home</a>
               </Link>
             </li>
-            <li
-              className={`${styles["nav-link"]} ${
-                addClass || router.pathname !== "/" ? styles["black-link"] : ""
-              }`}
-            >
-              <Link href="/">
-                <a>Home</a>
-              </Link>
+            <li>
+              <button
+                className={styles["sign-out-btn"]}
+                onClick={signOutHandler}
+              >
+                Sign Out
+              </button>
             </li>
           </ul>
         )}
