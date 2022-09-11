@@ -109,7 +109,7 @@ const submitHandler = async ({
       ...initialErrorState,
       profilePicture: "You can only upload Images",
     });
-  else if (profilePicture?.size > 3 * 1024 * 1000)
+  else if (profilePicture?.size > 3 * 1024 * 1024)
     setErrors({
       ...initialErrorState,
       profilePicture: "Profile picture must be less than 3 MB",
@@ -121,14 +121,14 @@ const submitHandler = async ({
     try {
       const storage = getStorage();
       const storageRef = ref(storage, `images/${profilePicture?.name}`);
-      const snapshot = await uploadBytes(storageRef, profilePicture);
-      const profilePictureUrl = await getDownloadURL(snapshot.ref);
 
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
+      const snapshot = await uploadBytes(storageRef, profilePicture);
+      const profilePictureUrl = await getDownloadURL(snapshot.ref);
       //accessing the user's uid to create a user in firestore
       await setDoc(doc(db, "users", userCredential.user.uid), {
         fullName,
@@ -140,15 +140,31 @@ const submitHandler = async ({
       dispatch(closeModal());
       setIsVisible(false);
     } catch (error: any) {
+      console.log(error.code);
+
       if (error.code === "auth/invalid-email") {
         setErrors({
           ...initialErrorState,
           email: "Please enter a valid email",
         });
-        setIsVisible(false);
       }
+      if (error.code === "storage/unauthorized") {
+        setErrors({
+          ...initialErrorState,
+          profilePicture:
+            "Something went wrong try uploading a different Image",
+        });
+      }
+
+      if (error.code === "auth/email-already-in-use") {
+        setErrors({
+          ...initialErrorState,
+          email: "This email is already in use",
+        });
+      }
+      setIsVisible(false);
+
       //only for development
-      console.log(error);
     }
   }
 };
