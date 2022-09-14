@@ -1,0 +1,48 @@
+@import "../../../../styles/variables";
+.featured-meetup {
+  display: flex;
+  margin-bottom: 1.6rem;
+  cursor: pointer;
+
+  .meetup-data {
+    width: 90%;
+    margin-left: 2rem;
+  }
+  .image {
+    width: 8rem;
+    height: 8rem;
+    width: 35%;
+    position: relative;
+    margin: auto 0;
+  }
+  .info-container {
+    display: flex;
+    align-items: center;
+    .date {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .price {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-left: 3rem;
+      border-radius: 3px;
+      background-color: $color-primary;
+      padding: 2px 5px;
+      color: $color-white;
+    }
+  }
+  .title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 3px;
+    color: $color-grey-dark;
+  }
+
+  .description {
+    font-size: 1.3rem;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+}

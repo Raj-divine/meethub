@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import AppLoader from "../components/AppLoader/AppLoader";
 import { useUser } from "../hooks";
 import { useEffect } from "react";
-import { getAuth, signOut } from "firebase/auth";
+import { useRouter } from "next/router";
 interface ModalState {
   modal: {
     isOpen: boolean;
@@ -23,11 +23,11 @@ const Landing: NextPage = () => {
   const { isOpen, loggingIn } = useSelector((state: ModalState) => state.modal);
 
   const { user, loading } = useUser("/home");
-  const auth = getAuth();
+  const router = useRouter();
   useEffect(() => {
-    signOut(auth).then(() => {
-      console.log("logged out");
-    });
+    if (user && !loading) {
+      router.replace("/home");
+    }
   }, []);
 
   return (

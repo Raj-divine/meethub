@@ -16,6 +16,7 @@
     "@mantine/hooks": "^5.2.0",
     "@mantine/next": "^5.2.0",
     "@reduxjs/toolkit": "^1.8.5",
+    "dayjs": "^1.11.5",
     "embla-carousel-react": "^7.0.1",
     "firebase": "^9.9.4",
     "next": "12.2.5",

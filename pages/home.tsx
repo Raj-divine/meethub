@@ -4,6 +4,8 @@ import { useUser } from "../hooks";
 import AppLoader from "../components/AppLoader/AppLoader";
 import { useEffect } from "react";
 import Router from "next/router";
+import { SectionRecommendation } from "../components/HomePage";
+
 const Home: NextPage = () => {
   const { user, loading } = useUser();
   useEffect(() => {
@@ -16,7 +18,11 @@ const Home: NextPage = () => {
         <title>Meethub | Home</title>
       </Head>
       {loading && <AppLoader />}
-      {user && !loading && <div>this is that div</div>}
+      {user && !loading && (
+        <>
+          <SectionRecommendation />
+        </>
+      )}
     </>
   );
 };
