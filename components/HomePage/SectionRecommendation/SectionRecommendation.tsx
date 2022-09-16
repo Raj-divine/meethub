@@ -6,7 +6,14 @@ const SectionRecommendation = () => {
     <section className={styles["section-recommendation"]}>
       <h2 className={styles.heading}>Recommended by Meethub for you</h2>
       <div className={styles["meetup-container"]}>
-        <SimpleGrid spacing="xl" cols={3}>
+        <SimpleGrid
+          breakpoints={[
+            { maxWidth: 1280, cols: 2 },
+            { maxWidth: 640, cols: 1 },
+          ]}
+          spacing="sm"
+          cols={3}
+        >
           <FeaturedMeetup />
           <FeaturedMeetup />
           <FeaturedMeetup />

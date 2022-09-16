@@ -16,11 +16,7 @@ const FeaturedMeetup = () => {
         <Text lineClamp={1} className={styles.title}>
           Networking for Young professionals
         </Text>
-        <Text color="dimmed" className={styles.description} lineClamp={2}>
-          Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus
-          sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus
-          at, diam. Nam tristique tortor eu pede
-        </Text>
+
         <div className={styles["info-container"]}>
           <div className={styles.date}>
             {dayjs("2022-09-28T01:09:14Z").format("DD-MMM-YY")}

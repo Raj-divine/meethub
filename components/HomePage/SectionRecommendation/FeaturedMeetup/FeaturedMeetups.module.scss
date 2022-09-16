@@ -1,19 +1,41 @@
 @import "../../../../styles/variables";
+@import "../../../../styles/breakpoints";
 .featured-meetup {
   display: flex;
   margin-bottom: 1.6rem;
+  align-items: center;
   cursor: pointer;
 
   .meetup-data {
-    width: 90%;
     margin-left: 2rem;
+    @include md {
+      margin-left: 1rem;
+    }
+    @include breakpoint(640px) {
+      margin-left: 2rem;
+    }
   }
   .image {
-    width: 8rem;
-    height: 8rem;
-    width: 35%;
+    width: 10rem;
+    height: 6rem;
     position: relative;
     margin: auto 0;
+    @include lg {
+      width: 8rem;
+      height: 5rem;
+    }
+    @include md {
+      width: 6rem;
+      height: 4rem;
+    }
+    @include breakpoint(640px) {
+      width: 10rem;
+      height: 6rem;
+    }
+    @include xs {
+      width: 6rem;
+      height: 4rem;
+    }
   }
   .info-container {
     display: flex;
@@ -21,6 +43,15 @@
     .date {
       font-size: 1.3rem;
       font-weight: 700;
+      @include lg {
+        font-size: 1.1rem;
+      }
+      @include breakpoint(640px) {
+        font-size: 1.3rem;
+      }
+      @include xs {
+        font-size: 1.1rem;
+      }
     }
     .price {
       font-size: 1.3rem;
@@ -30,6 +61,15 @@
       background-color: $color-primary;
       padding: 2px 5px;
       color: $color-white;
+      @include lg {
+        font-size: 1.1rem;
+      }
+      @include breakpoint(640px) {
+        font-size: 1.3rem;
+      }
+      @include xs {
+        font-size: 1.1rem;
+      }
     }
   }
   .title {
@@ -37,12 +77,14 @@
     font-weight: 700;
     margin-bottom: 3px;
     color: $color-grey-dark;
-  }
-
-  .description {
-    font-size: 1.3rem;
-    font-family: "Inter", sans-serif;
-    font-weight: 500;
-    margin-bottom: 3px;
+    @include lg {
+      font-size: 1.2rem;
+    }
+    @include breakpoint(640px) {
+      font-size: 1.4rem;
+    }
+    @include xs {
+      font-size: 1.2rem;
+    }
   }
 }
