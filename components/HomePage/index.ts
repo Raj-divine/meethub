@@ -1,3 +1,3 @@
 import SectionRecommendation from "./SectionRecommendation/SectionRecommendation";
-
-export { SectionRecommendation };
+import Header from "./Header/Header";
+export { SectionRecommendation, Header };

@@ -1,0 +1,34 @@
+@import "../../../styles/variables";
+.header {
+  background-color: $color-grey-light;
+  margin-top: 6rem;
+  padding: 6rem 0;
+  .container {
+    padding: 0 8rem;
+    height: 40rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .header-image {
+      width: 50%;
+      border-radius: 55% 45% 59% 41% / 48% 65% 35% 52%;
+      overflow: hidden;
+      background-image: url(../../../assets/images/home-page-header-image.jpg);
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      box-shadow: $shadow-secondary;
+    }
+    .header-content {
+      width: 50%;
+      padding-right: 2rem;
+      h2 {
+        font-family: "Montserrat", sans-serif;
+        text-transform: uppercase;
+        color: $color-grey-dark;
+        font-size: 4.3rem;
+        line-height: 6rem;
+      }
+    }
+  }
+}

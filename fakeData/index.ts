@@ -24,6 +24,8 @@ export const meetups = [
     price: 792,
     location: "Netaji Nagar, Delhi, 110023",
     category: "Networking",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/meethub-995d3.appspot.com/o/meetup-images%2Fcharlesdeluvio-wn7dOzUh3Rs-unsplash.jpg?alt=media&token=ef894c49-0b10-4326-9772-da328a9076cd",
     host: {
       uid: "k1HetvjROhXuYNZPVDMvxcd0mNN2",
       fullName: "Raj kushwaha",
@@ -39,6 +41,8 @@ export const meetups = [
     price: 562,
     location: "Mu-4-a, Near Double Water Tank, Pitampura, Delhi, 110034",
     category: "Technology",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/meethub-995d3.appspot.com/o/meetup-images%2Fcharlesdeluvio-wn7dOzUh3Rs-unsplash.jpg?alt=media&token=ef894c49-0b10-4326-9772-da328a9076cd",
     host: {
       uid: "k1HetvjROhXuYNZPVDMvxcd0mNN2",
       fullName: "Raj kushwaha",
@@ -54,6 +58,8 @@ export const meetups = [
     price: 280,
     location: "J-9/64, Rajouri Garden, Delhi, 110027",
     category: "Career",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/meethub-995d3.appspot.com/o/meetup-images%2Fcharlesdeluvio-wn7dOzUh3Rs-unsplash.jpg?alt=media&token=ef894c49-0b10-4326-9772-da328a9076cd",
     host: {
       uid: "k1HetvjROhXuYNZPVDMvxcd0mNN2",
       fullName: "Raj kushwaha",
@@ -70,6 +76,8 @@ export const meetups = [
     price: 637,
     location: "G - 4, Saket, Delhi, 110017",
     category: "Hobby and passion",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/meethub-995d3.appspot.com/o/meetup-images%2Fcharlesdeluvio-wn7dOzUh3Rs-unsplash.jpg?alt=media&token=ef894c49-0b10-4326-9772-da328a9076cd",
     host: {
       uid: "k1HetvjROhXuYNZPVDMvxcd0mNN2",
       fullName: "Raj kushwaha",
@@ -86,6 +94,8 @@ export const meetups = [
     price: 591,
     location: "37/2103 A, Nai Wala, Delhi, 110005",
     category: "Sports",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/meethub-995d3.appspot.com/o/meetup-images%2Fcharlesdeluvio-wn7dOzUh3Rs-unsplash.jpg?alt=media&token=ef894c49-0b10-4326-9772-da328a9076cd",
     host: {
       uid: "k1HetvjROhXuYNZPVDMvxcd0mNN2",
       fullName: "Raj kushwaha",
@@ -102,6 +112,8 @@ export const meetups = [
     price: 276,
     location: "T-25, Super Market, Delhi, 110015",
     category: "Technology",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/meethub-995d3.appspot.com/o/meetup-images%2Fcharlesdeluvio-wn7dOzUh3Rs-unsplash.jpg?alt=media&token=ef894c49-0b10-4326-9772-da328a9076cd",
     host: {
       uid: "k1HetvjROhXuYNZPVDMvxcd0mNN2",
       fullName: "Raj kushwaha",

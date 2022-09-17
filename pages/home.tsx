@@ -4,7 +4,7 @@ import { useUser } from "../hooks";
 import AppLoader from "../components/AppLoader/AppLoader";
 import { useEffect } from "react";
 import Router from "next/router";
-import { SectionRecommendation } from "../components/HomePage";
+import { Header, SectionRecommendation } from "../components/HomePage";
 
 const Home: NextPage = () => {
   const { user, loading } = useUser();
@@ -20,6 +20,7 @@ const Home: NextPage = () => {
       {loading && <AppLoader />}
       {user && !loading && (
         <>
+          <Header />
           <SectionRecommendation />
         </>
       )}
