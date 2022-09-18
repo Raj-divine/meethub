@@ -1,4 +1,5 @@
 @import "../../../../styles/variables";
+@import "../../../../styles/breakpoints";
 .category-card {
   color: $color-white;
   aspect-ratio: 4/3;
@@ -13,6 +14,22 @@
   justify-content: center;
   transition: all 0.2s;
   cursor: pointer;
+
+  @include xl {
+    font-size: 2rem;
+  }
+  @include lg {
+    font-size: 2.8rem;
+  }
+  @include md {
+    font-size: 2.4rem;
+  }
+  @include sm {
+    font-size: 2rem;
+  }
+  @include xs {
+    font-size: 1.4rem;
+  }
   &:hover {
     box-shadow: $shadow-secondary;
     transform: translateY(-1rem);
