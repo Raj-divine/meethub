@@ -1,0 +1,20 @@
+@import "../../../../styles/variables";
+.category-card {
+  color: $color-white;
+  aspect-ratio: 4/3;
+  border-radius: 3px;
+  padding: 2rem;
+  font-size: 2.4rem;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  cursor: pointer;
+  &:hover {
+    box-shadow: $shadow-secondary;
+    transform: translateY(-1rem);
+  }
+}
