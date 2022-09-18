@@ -1,33 +1,64 @@
 @import "../../../styles/variables";
+@import "../../../styles/breakpoints";
 .header {
   background-color: $color-grey-light;
   margin-top: 6rem;
   padding: 6rem 0;
+
   .container {
     padding: 0 8rem;
     height: 40rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include lg {
+      flex-direction: column-reverse;
+    }
+    @include sm {
+      padding: 0 3rem;
+    }
     .header-image {
       width: 50%;
       border-radius: 55% 45% 59% 41% / 48% 65% 35% 52%;
       overflow: hidden;
       background-image: url(../../../assets/images/home-page-header-image.jpg);
       height: 100%;
+      max-width: 80rem;
       background-size: cover;
       background-position: center;
       box-shadow: $shadow-secondary;
+      @include lg {
+        width: 70%;
+        margin-bottom: 4rem;
+      }
+      @include md {
+        width: 90%;
+      }
     }
     .header-content {
       width: 50%;
       padding-right: 2rem;
+      @include lg {
+        width: 80%;
+        text-align: center;
+        padding-right: 0;
+      }
+      @include md {
+        width: 100%;
+      }
       h2 {
         font-family: "Montserrat", sans-serif;
         text-transform: uppercase;
         color: $color-grey-dark;
         font-size: 4.3rem;
         line-height: 6rem;
+        @include md {
+          font-size: 3.5rem;
+        }
+        @include sm {
+          font-size: 3rem;
+          line-height: 4rem;
+        }
       }
     }
   }
