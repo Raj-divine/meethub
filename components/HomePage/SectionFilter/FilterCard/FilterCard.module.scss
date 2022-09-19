@@ -12,6 +12,7 @@
   font-weight: 500;
   font-family: "Inter", sans-serif;
   color: $color-grey-extra-dark;
+  transition: all 0.2s;
   .icon-container {
     display: flex;
     align-items: center;
@@ -20,5 +21,9 @@
     border-radius: 100px;
     height: 80%;
     aspect-ratio: 1/1;
+  }
+  &:hover {
+    box-shadow: $shadow-secondary;
+    transform: translateY(-5px);
   }
 }
