@@ -44,8 +44,10 @@ const SectionFilter = () => {
       <div>
         <SimpleGrid
           breakpoints={[
-            { maxWidth: 1024, cols: 3 },
-            { maxWidth: 450, cols: 3, spacing: "xs" },
+            { maxWidth: 450, cols: 1 },
+            { maxWidth: 1300, cols: 4 },
+            { maxWidth: 950, cols: 3 },
+            { maxWidth: 650, cols: 2 },
           ]}
           cols={6}
         >

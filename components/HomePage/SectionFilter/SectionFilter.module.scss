@@ -6,6 +6,9 @@
   margin-top: 5rem;
   //temp
   padding-bottom: 5rem;
+  @include xs {
+    width: 80%;
+  }
   .heading {
     margin-bottom: 3rem;
     font-family: "Montserrat", sans-serif;
