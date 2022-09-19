@@ -7,6 +7,7 @@ import Router from "next/router";
 import {
   Header,
   SectionCategory,
+  SectionFilter,
   SectionRecommendation,
 } from "../components/HomePage";
 
@@ -27,6 +28,7 @@ const Home: NextPage = () => {
           <Header />
           <SectionRecommendation />
           <SectionCategory />
+          <SectionFilter />
         </>
       )}
     </>

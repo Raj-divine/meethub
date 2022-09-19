@@ -22,7 +22,7 @@ const FeaturedMeetup = ({ image, title, date, price }: FeaturedMeetupProps) => {
         </Text>
 
         <div className={styles["info-container"]}>
-          <div className={styles.date}>{dayjs(date).format("DD-MMM-YY")}</div>
+          <div className={styles.date}>{dayjs(date).format("DD MMM")}</div>
           <div className={styles.price}>₹{price}</div>
         </div>
       </div>
