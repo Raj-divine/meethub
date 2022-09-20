@@ -1,12 +1,10 @@
 @import "../../../styles/breakpoints";
-.section-filter {
+.section-meetup-tomorrow {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5rem;
-  @include xs {
-    width: 80%;
-  }
+  padding-bottom: 5rem;
   .heading {
     margin-bottom: 3rem;
     font-family: "Montserrat", sans-serif;

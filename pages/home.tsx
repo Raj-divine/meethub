@@ -8,8 +8,10 @@ import {
   Header,
   SectionCategory,
   SectionFilter,
+  SectionMeetup,
   SectionRecommendation,
 } from "../components/HomePage";
+import { meetups } from "../fakeData";
 
 const Home: NextPage = () => {
   const { user, loading } = useUser();
@@ -29,6 +31,7 @@ const Home: NextPage = () => {
           <SectionRecommendation />
           <SectionCategory />
           <SectionFilter />
+          <SectionMeetup heading="Meetup starting tomorrow" meetups={meetups} />
         </>
       )}
     </>

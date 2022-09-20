@@ -52,7 +52,13 @@ const SectionFilter = () => {
           cols={6}
         >
           {filters.map((filter) => {
-            return <FilterCard filter={filter.text} icon={filter.icon} />;
+            return (
+              <FilterCard
+                key={filter.text}
+                filter={filter.text}
+                icon={filter.icon}
+              />
+            );
           })}
         </SimpleGrid>
       </div>
