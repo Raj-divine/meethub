@@ -1,6 +1,6 @@
-import styles from "./SectionMeetupTomorrow.module.scss";
+import styles from "./SectionMeetup.module.scss";
 import { SimpleGrid } from "@mantine/core";
-import MeetupCard from "../MeetupCard/MeetupCard";
+import MeetupCard from "../../MeetupCard/MeetupCard";
 
 type SectionMeetupProps = {
   heading: string;
@@ -22,7 +22,7 @@ type SectionMeetupProps = {
 
 const SectionMeetup = ({ heading, meetups }: SectionMeetupProps) => {
   return (
-    <section className={styles["section-meetup-tomorrow"]}>
+    <section className={styles["section-meetup"]}>
       <h2 className={styles.heading}>{heading}</h2>
       <div>
         <SimpleGrid cols={4}>

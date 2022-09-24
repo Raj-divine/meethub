@@ -31,7 +31,15 @@ const Home: NextPage = () => {
           <SectionRecommendation />
           <SectionCategory />
           <SectionFilter />
-          <SectionMeetup heading="Meetup starting tomorrow" meetups={meetups} />
+          <SectionMeetup
+            heading="Meetups starting tomorrow"
+            meetups={meetups}
+          />
+          <SectionMeetup
+            heading='Meetups for "techy" people'
+            meetups={meetups}
+          />
+          <SectionMeetup heading="Meetup for free!" meetups={meetups} />
         </>
       )}
     </>

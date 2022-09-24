@@ -1,0 +1,54 @@
+@import "../../styles/variables";
+
+.meetup-card {
+  border-radius: 3px;
+  overflow: hidden;
+  background-color: $color-white;
+  box-shadow: $shadow-primary;
+  transition: 0.4s all;
+  position: relative;
+  cursor: pointer;
+  &:hover {
+    box-shadow: $shadow-secondary;
+    transform: translateY(-1rem);
+  }
+  .card-image {
+    width: 100%;
+    aspect-ratio: 5/3;
+    position: relative;
+  }
+  .card-body {
+    height: 20rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: $color-grey-extra-dark;
+      font-family: "Montserrat", sans-serif;
+    }
+    .description {
+      font-size: 1.3rem;
+      font-weight: 500;
+      line-height: 1.6rem;
+      font-family: "Inter", sans-serif;
+    }
+    .card-info {
+      display: flex;
+      .price {
+        margin-left: 3rem;
+        font-size: 1.6rem;
+        font-weight: 600;
+        border-radius: 3px;
+        background-color: $color-primary;
+        padding: 2px 5px;
+        color: $color-white;
+      }
+      .date {
+        font-weight: 600;
+      }
+    }
+  }
+}
