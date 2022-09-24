@@ -4,6 +4,20 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 5rem;
+
+  .content {
+    height: 45rem;
+    @include xl {
+      height: 50rem;
+    }
+    @include sm {
+      width: 80%;
+      margin: 0 auto;
+    }
+    @include xs {
+      width: 95%;
+    }
+  }
   // padding-bottom: 5rem;
   .heading {
     margin-bottom: 3rem;

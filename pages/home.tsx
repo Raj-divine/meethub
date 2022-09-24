@@ -39,7 +39,7 @@ const Home: NextPage = () => {
             heading='Meetups for "techy" people'
             meetups={meetups}
           />
-          <SectionMeetup heading="Meetup for free!" meetups={meetups} />
+          <SectionMeetup heading="Meetups for free!" meetups={meetups} />
         </>
       )}
     </>
