@@ -1,11 +1,15 @@
 @import "../../../styles/variables";
+@import "../../../styles/breakpoints";
 .divider {
   padding: 6rem 0;
-
   display: flex;
   justify-content: center;
   flex-direction: column;
   background-image: linear-gradient(90deg, #462664 0%, #9841e9 100%);
+  @include xl {
+    margin-top: 6rem;
+  }
+
   .content {
     width: 90%;
     margin: 0 auto;
@@ -14,12 +18,25 @@
       font-family: "Montserrat", sans-serif;
       font-weight: 700;
       font-size: 4rem;
+      @include sm {
+        font-size: 3rem;
+      }
+      @include xs {
+        font-size: 2.2rem;
+      }
     }
     .text {
       color: $color-white;
       font-family: "Inter", sans-serif;
       font-size: 1.8rem;
       font-weight: 400;
+      @include sm {
+        font-size: 1.5rem;
+      }
+      @include xs {
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
     }
     .button {
       margin-top: 1.6rem;
