@@ -1,19 +1,9 @@
 import styles from "./SectionCategory.module.scss";
 import { SimpleGrid } from "@mantine/core";
 import CategoryCard from "./CategoryCard/CategoryCard";
-import { useScrollAnimation } from "../../../hooks";
 const SectionCategory = () => {
-  const { ref: SectionRef, isIntersecting } = useScrollAnimation({
-    threshold: 0.4,
-  });
-
   return (
-    <section
-      ref={SectionRef}
-      className={`${styles["section-category"]} ${
-        isIntersecting ? styles.animate : ""
-      }`}
-    >
+    <section className={styles["section-category"]}>
       <h2 className={styles.heading}>Browse by category</h2>
       <div>
         <SimpleGrid
