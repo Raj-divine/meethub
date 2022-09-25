@@ -4,7 +4,10 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 5rem;
-
+  transform: translateX(-90%);
+  opacity: 0;
+  filter: blur(20px);
+  transition: all 0.8s;
   .content {
     height: 45rem;
     @include xl {
@@ -18,7 +21,6 @@
       width: 95%;
     }
   }
-  // padding-bottom: 5rem;
   .heading {
     margin-bottom: 3rem;
     font-family: "Montserrat", sans-serif;
@@ -30,4 +32,10 @@
       font-size: 1.8rem;
     }
   }
+}
+
+.animate {
+  transform: translateX(0);
+  opacity: 1;
+  filter: blur(0);
 }

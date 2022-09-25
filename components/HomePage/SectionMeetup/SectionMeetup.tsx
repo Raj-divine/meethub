@@ -1,6 +1,7 @@
 import styles from "./SectionMeetup.module.scss";
 import { SimpleGrid, ScrollArea } from "@mantine/core";
 import MeetupCard from "../../MeetupCard/MeetupCard";
+import { useScrollAnimation } from "../../../hooks";
 
 type SectionMeetupProps = {
   heading: string;
@@ -21,8 +22,17 @@ type SectionMeetupProps = {
 };
 
 const SectionMeetup = ({ heading, meetups }: SectionMeetupProps) => {
+  const { ref: sectionRef, isIntersecting } = useScrollAnimation({
+    threshold: 0.2,
+  });
+
   return (
-    <section className={styles["section-meetup"]}>
+    <section
+      ref={sectionRef}
+      className={`${styles["section-meetup"]} ${
+        isIntersecting ? styles.animate : ""
+      }`}
+    >
       <h2 className={styles.heading}>{heading}</h2>
       <ScrollArea className={styles.content}>
         <SimpleGrid
