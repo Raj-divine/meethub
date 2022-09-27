@@ -72,13 +72,13 @@ const SideNavbar = () => {
               </Link>
             </li>
             <li className={styles["nav-link"]}>
-              <Link href="/">
-                <a>Home</a>
+              <Link href="/meetups">
+                <a>Meetups</a>
               </Link>
             </li>
             <li className={styles["nav-link"]}>
               <Link href="/">
-                <a>Home</a>
+                <a>Host meetup</a>
               </Link>
             </li>
             <li>

@@ -2,7 +2,7 @@ import styles from "./Navbar.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../assets/images/logo.png";
-import { Burger } from "@mantine/core";
+import { Burger, Center } from "@mantine/core";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleNavbar } from "../../context/navbarSlice";
 import { openModal } from "../../context/modalSlice";
@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useUser } from "../../hooks";
 import { getAuth, signOut } from "firebase/auth";
+import { AiFillCaretDown } from "react-icons/ai";
 interface NavbarState {
   navbar: {
     isOpen: boolean;
@@ -67,29 +68,22 @@ const Navbar = () => {
 
         {user && !loading && (
           <ul className={styles["nav-links"]}>
-            <li
-              className={`${styles["nav-link"]} ${
-                addClass || router.pathname !== "/" ? styles["black-link"] : ""
-              }`}
-            >
+            <li className={styles["nav-link"]}>
               <Link href="/home">
                 <a>Home</a>
               </Link>
             </li>
-            <li
-              className={`${styles["nav-link"]} ${
-                addClass || router.pathname !== "/" ? styles["black-link"] : ""
-              }`}
-            >
-              <Link href="/">
-                <a>Home</a>
-              </Link>
+
+            <li className={styles.dropdown}>
+              <Center>
+                Meetups <AiFillCaretDown />
+              </Center>
+              <ul className={styles["dropdown-list"]}>
+                <li className={styles["dropdown-item"]}>All meetups</li>
+                <li className={styles["dropdown-item"]}>Host meetup</li>
+              </ul>
             </li>
-            <li
-              className={`${styles["nav-link"]} ${
-                addClass || router.pathname !== "/" ? styles["black-link"] : ""
-              }`}
-            >
+            <li className={styles["nav-link"]}>
               <Link href="/">
                 <a>Home</a>
               </Link>
