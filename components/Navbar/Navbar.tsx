@@ -79,8 +79,16 @@ const Navbar = () => {
                 Meetups <AiFillCaretDown />
               </Center>
               <ul className={styles["dropdown-list"]}>
-                <li className={styles["dropdown-item"]}>All meetups</li>
-                <li className={styles["dropdown-item"]}>Host meetup</li>
+                <li className={styles["dropdown-item"]}>
+                  <Link href="/meetups">
+                    <a>All meetups</a>
+                  </Link>
+                </li>
+                <li className={styles["dropdown-item"]}>
+                  <Link href="/home">
+                    <a>Host meetup</a>
+                  </Link>
+                </li>
               </ul>
             </li>
             <li className={styles["nav-link"]}>
