@@ -72,9 +72,19 @@ const SideNavbar = () => {
               </Link>
             </li>
             <li className={styles["nav-link"]}>
-              <Link href="/meetups">
-                <a>Meetups</a>
-              </Link>
+              <a className={styles["exclude-hover"]}>Meetup</a>
+              <ul>
+                <li className={`${styles["nav-link"]} ${styles["inner-link"]}`}>
+                  <Link href="/meetups">
+                    <a>All meetups</a>
+                  </Link>
+                </li>
+                <li className={`${styles["nav-link"]} ${styles["inner-link"]}`}>
+                  <Link href="/meetups">
+                    <a>All meetups</a>
+                  </Link>
+                </li>
+              </ul>
             </li>
             <li className={styles["nav-link"]}>
               <Link href="/">

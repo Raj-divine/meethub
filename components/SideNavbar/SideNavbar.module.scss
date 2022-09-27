@@ -1,5 +1,4 @@
 @import "../../styles/variables";
-// @import "../Navbar/Navbar.module.scss";
 
 .side-nav {
   z-index: 5;
@@ -41,6 +40,14 @@
   a:hover {
     color: $color-black;
   }
+  .exclude-hover:hover {
+    color: $color-grey;
+  }
+}
+
+.inner-link {
+  border-bottom: none;
+  margin-left: 2rem;
 }
 
 .sign-out-btn {
