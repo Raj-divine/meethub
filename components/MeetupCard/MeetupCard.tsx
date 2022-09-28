@@ -20,8 +20,7 @@ type MeetupCardProps = {
 };
 
 const MeetupCard = ({ meetup }: MeetupCardProps) => {
-  const { title, description, date, price, location, category, image, host } =
-    meetup;
+  const { title, description, date, price, image } = meetup;
   return (
     <div className={styles["meetup-card"]}>
       <div className={styles["card-image"]}>

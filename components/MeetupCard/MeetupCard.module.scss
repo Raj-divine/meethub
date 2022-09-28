@@ -7,10 +7,11 @@
   box-shadow: $shadow-secondary;
   position: relative;
   cursor: pointer;
-
+  height: 40rem;
   .card-image {
     width: 100%;
-    aspect-ratio: 5/3;
+    height: 50%;
+    // aspect-ratio: 5/3;
     position: relative;
   }
   .card-body {

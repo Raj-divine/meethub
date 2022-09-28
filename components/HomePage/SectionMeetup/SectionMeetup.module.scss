@@ -4,11 +4,13 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 5rem;
+  margin-bottom: 3rem;
   transform: translateY(10rem);
   opacity: 0;
   transition: all 1s;
   .content {
     height: 45rem;
+    min-height: fit-content;
     @include xl {
       height: 50rem;
     }
