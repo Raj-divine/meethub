@@ -80,15 +80,15 @@ const SideNavbar = () => {
                   </Link>
                 </li>
                 <li className={`${styles["nav-link"]} ${styles["inner-link"]}`}>
-                  <Link href="/meetups">
-                    <a>All meetups</a>
+                  <Link href="/meetups/create">
+                    <a>Host meetups</a>
                   </Link>
                 </li>
               </ul>
             </li>
             <li className={styles["nav-link"]}>
               <Link href="/">
-                <a>Host meetup</a>
+                <a>home page</a>
               </Link>
             </li>
             <li>

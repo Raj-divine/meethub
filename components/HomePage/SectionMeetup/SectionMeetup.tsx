@@ -5,6 +5,7 @@ import { useScrollAnimation } from "../../../hooks";
 
 type SectionMeetupProps = {
   heading: string;
+  last?: boolean;
   meetups: {
     title: string;
     description: string;
@@ -21,13 +22,14 @@ type SectionMeetupProps = {
   }[];
 };
 
-const SectionMeetup = ({ heading, meetups }: SectionMeetupProps) => {
+const SectionMeetup = ({ heading, meetups, last }: SectionMeetupProps) => {
   const { ref: sectionRef, isIntersecting } = useScrollAnimation({
     threshold: 0.2,
   });
 
   return (
     <section
+      style={last ? { paddingBottom: "50px" } : {}}
       ref={sectionRef}
       className={`${styles["section-meetup"]} ${
         isIntersecting ? styles.animate : ""

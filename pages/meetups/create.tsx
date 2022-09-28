@@ -5,7 +5,7 @@ import { useUser } from "../../hooks";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-const AllMeetups: NextPage = () => {
+const CreateMeetup: NextPage = () => {
   const { user, loading } = useUser();
   const router = useRouter();
   useEffect(() => {
@@ -15,16 +15,16 @@ const AllMeetups: NextPage = () => {
   return (
     <>
       <Head>
-        <title>All Meetups</title>
+        <title>Host A Meetup</title>
       </Head>
       {loading && <AppLoader />}
       {user && !loading && (
         <>
-          <div style={{ marginTop: "60px" }}>this is the meetups page</div>
+          <div style={{ marginTop: "60px" }}>this is the host meetup page</div>
         </>
       )}
     </>
   );
 };
 
-export default AllMeetups;
+export default CreateMeetup;

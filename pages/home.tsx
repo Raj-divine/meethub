@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useUser } from "../hooks";
 import AppLoader from "../components/AppLoader/AppLoader";
 import { useEffect } from "react";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import {
   Divider,
   Header,
@@ -16,8 +16,11 @@ import { meetups } from "../fakeData";
 
 const Home: NextPage = () => {
   const { user, loading } = useUser();
+  const router = useRouter();
   useEffect(() => {
-    if (!user && !loading) Router.replace("/");
+    if (!user && !loading) {
+      router.replace("/");
+    }
   }, [user]);
 
   return (
@@ -41,7 +44,7 @@ const Home: NextPage = () => {
             heading='Meetups for "techy" people'
             meetups={meetups}
           />
-          <SectionMeetup heading="Meetups for free!" meetups={meetups} />
+          <SectionMeetup last heading="Meetups for free!" meetups={meetups} />
         </>
       )}
     </>
