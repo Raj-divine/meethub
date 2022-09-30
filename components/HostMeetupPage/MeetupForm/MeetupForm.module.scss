@@ -33,3 +33,17 @@
     width: 100%;
   }
 }
+
+.flex {
+  display: flex;
+  @include sm {
+    flex-direction: column;
+  }
+}
+
+.w-set {
+  width: 50%;
+  @include sm {
+    width: 100%;
+  }
+}

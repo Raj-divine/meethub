@@ -1,28 +1,58 @@
 import styles from "./MeetupForm.module.scss";
 import { ChangeEvent, useState } from "react";
-import { TextInput, Select, NumberInput, Space, Textarea } from "@mantine/core";
+import {
+  TextInput,
+  Select,
+  NumberInput,
+  Space,
+  Textarea,
+  FileInput,
+} from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { Button } from "../../Utilities";
+import dayjs from "dayjs";
+import { category } from "../../../fakeData";
+
 const MeetupForm = () => {
+  // From data state and types
   const initialFormState = {
     title: "",
     description: "",
     price: undefined,
-    date: "",
     location: "",
     category: "",
-    image: "",
+    image: null,
+    date: dayjs(new Date()).add(1, "day").toDate(),
   };
   type FormDataType = {
     title: string;
     description: string;
     price: number | undefined;
-    date: string;
     location: string;
-    category: string;
-    image: string;
+    category: string | null;
+    image: File | null;
+    date: Date | null;
   };
   const [formData, setFormData] = useState<FormDataType>(initialFormState);
+
+  const initialFormError = {
+    title: "",
+    description: "",
+    price: "",
+    location: "",
+    category: null,
+    image: "",
+    date: "",
+  };
+
+  const [error, setError] = useState(initialFormError);
+
+  const categoryData = category.map((category) => {
+    return {
+      value: category.toLowerCase(),
+      label: category,
+    };
+  });
 
   const changeHandler = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -34,7 +64,6 @@ const MeetupForm = () => {
       };
     });
   };
-  console.log(formData);
 
   return (
     <div className={styles["form-container"]}>
@@ -46,6 +75,7 @@ const MeetupForm = () => {
           value={formData.title}
           name="title"
           onChange={changeHandler.bind(this)}
+          error={error.title}
         />
         <Space h="lg" />
         <TextInput
@@ -55,27 +85,94 @@ const MeetupForm = () => {
           value={formData.location}
           name="location"
           onChange={changeHandler.bind(this)}
+          error={error.location}
         />
         <Space h="lg" />
 
-        <NumberInput
-          value={formData.price}
-          placeholder="Please enter the price of the ticket"
-          label="Price"
-          name="price"
+        <Select
+          label="Category"
+          placeholder="Select a category for you meetup"
+          data={categoryData}
+          value={formData.category}
           variant="filled"
-          hideControls
-          min={0}
-          max={5000}
-          onChange={(price) => {
+          onChange={(category) =>
             setFormData((prevData) => {
               return {
                 ...prevData,
-                price,
+                category,
               };
-            });
-          }}
+            })
+          }
         />
+
+        <Space h="lg" />
+        <div className={styles.flex}>
+          <div className={styles["w-set"]}>
+            <DatePicker
+              placeholder="Pick a date"
+              value={formData.date}
+              variant="filled"
+              label="Date"
+              minDate={dayjs(new Date()).add(1, "day").toDate()}
+              maxDate={dayjs(new Date()).add(6, "months").toDate()}
+              onChange={(date) =>
+                setFormData((prevData) => {
+                  return {
+                    ...prevData,
+                    date,
+                  };
+                })
+              }
+              name="date"
+              error={error.date}
+            />
+          </div>
+
+          <Space w="lg" />
+          <Space h="lg" />
+
+          <div className={styles["w-set"]}>
+            <NumberInput
+              value={formData.price}
+              placeholder="Please enter the price of the ticket"
+              label="Price"
+              name="price"
+              variant="filled"
+              hideControls
+              min={0}
+              max={5000}
+              onChange={(price) => {
+                setFormData((prevData) => {
+                  return {
+                    ...prevData,
+                    price,
+                  };
+                });
+              }}
+              error={error.price}
+            />
+          </div>
+        </div>
+
+        <Space h="lg" />
+        <FileInput
+          name="image"
+          placeholder="Please upload an image for your meetup"
+          label="Image"
+          variant="filled"
+          value={formData.image}
+          onChange={(image) =>
+            setFormData((prevData) => {
+              return {
+                ...prevData,
+                image,
+              };
+            })
+          }
+          accept="image/png,image/jpeg"
+          error={error.image}
+        />
+
         <Space h="lg" />
 
         <Textarea
@@ -86,6 +183,7 @@ const MeetupForm = () => {
           variant="filled"
           name="description"
           onChange={(e) => changeHandler(e)}
+          error={error.description}
         />
         <Space h="xl" />
 
