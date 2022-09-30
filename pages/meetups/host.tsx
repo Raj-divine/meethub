@@ -4,8 +4,9 @@ import AppLoader from "../../components/AppLoader/AppLoader";
 import { useUser } from "../../hooks";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { Header, MeetupForm } from "../../components/HostMeetupPage";
 
-const CreateMeetup: NextPage = () => {
+const HostMeetup: NextPage = () => {
   const { user, loading } = useUser();
   const router = useRouter();
   useEffect(() => {
@@ -20,11 +21,12 @@ const CreateMeetup: NextPage = () => {
       {loading && <AppLoader />}
       {user && !loading && (
         <>
-          <div style={{ marginTop: "60px" }}>this is the host meetup page</div>
+          <Header />
+          <MeetupForm />
         </>
       )}
     </>
   );
 };
 
-export default CreateMeetup;
+export default HostMeetup;

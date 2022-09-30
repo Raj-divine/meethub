@@ -80,7 +80,7 @@ const SideNavbar = () => {
                   </Link>
                 </li>
                 <li className={`${styles["nav-link"]} ${styles["inner-link"]}`}>
-                  <Link href="/meetups/create">
+                  <Link href="/meetups/host">
                     <a>Host meetups</a>
                   </Link>
                 </li>

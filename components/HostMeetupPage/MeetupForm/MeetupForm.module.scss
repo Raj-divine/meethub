@@ -1,0 +1,15 @@
+@import "../../../styles/variables";
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+.form {
+  margin-top: 4rem;
+  padding: 4rem 6rem;
+  width: 50%;
+  background-color: $color-white;
+  box-shadow: $shadow-secondary;
+  .button {
+    width: 100%;
+  }
+}

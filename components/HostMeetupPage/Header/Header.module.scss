@@ -1,0 +1,10 @@
+@import "../../../styles/variables";
+.header {
+  margin-top: 6rem;
+  text-transform: uppercase;
+  color: $color-white;
+  background-color: $color-primary;
+  padding: 1.6rem 0;
+  font-size: 2rem;
+  text-align: center;
+}

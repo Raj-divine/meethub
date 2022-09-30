@@ -85,7 +85,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className={styles["dropdown-item"]}>
-                  <Link href="/meetups/create">
+                  <Link href="/meetups/host">
                     <a>Host meetup</a>
                   </Link>
                 </li>
