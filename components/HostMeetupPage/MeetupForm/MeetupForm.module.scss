@@ -11,6 +11,8 @@
   background-color: $color-white;
   box-shadow: $shadow-secondary;
   max-width: 80rem;
+  position: relative;
+
   @include xxl {
     width: 50%;
   }

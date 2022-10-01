@@ -163,8 +163,6 @@ const submitHandler = async ({
         });
       }
       setIsVisible(false);
-
-      //only for development
     }
   }
 };

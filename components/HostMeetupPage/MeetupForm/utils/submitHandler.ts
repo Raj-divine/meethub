@@ -1,4 +1,8 @@
+import dayjs from "dayjs";
+import { addDoc, collection } from "firebase/firestore";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { Dispatch, FormEvent, SetStateAction } from "react";
+import { db } from "../../../../firebase/firebaseConfig";
 
 type FormData = {
   title: string;
@@ -26,14 +30,16 @@ interface submitHandlerArgs {
   setFormData: Dispatch<SetStateAction<FormData>>;
   error: FormErrors;
   setError: Dispatch<SetStateAction<FormErrors>>;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-const submitHandler = ({
+const submitHandler = async ({
   event,
   error,
   formData,
   setFormData,
   setError,
+  setIsLoading,
 }: submitHandlerArgs) => {
   event.preventDefault();
   const initialFormError = {
@@ -48,11 +54,11 @@ const submitHandler = ({
   //validations
   const { title, description, price, location, category, image, date } =
     formData;
-  if (title.length < 1)
+  if (title.trim().length < 1)
     setError({ ...initialFormError, title: "Title cannot be empty" });
-  else if (location.length < 1)
+  else if (location.trim().length < 1)
     setError({ ...initialFormError, location: "Location cannot be empty" });
-  else if (location.length < 5)
+  else if (location.trim().length < 5)
     setError({
       ...initialFormError,
       location: "Please enter a valid location",
@@ -62,12 +68,12 @@ const submitHandler = ({
       ...initialFormError,
       price: "Please enter an entry fee or 0 for free entry",
     });
-  else if (description.length < 1)
+  else if (description.trim().length < 1)
     setError({
       ...initialFormError,
       description: "Description cannot be empty",
     });
-  else if (description.length < 30)
+  else if (description.trim().length < 30)
     setError({
       ...initialFormError,
       description: "Description Must be at least 30 characters long",
@@ -93,9 +99,31 @@ const submitHandler = ({
     });
   else {
     setError(initialFormError);
-    console.log(date);
 
-    console.log("submitted");
+    try {
+      setIsLoading(true);
+      const storage = getStorage();
+      const storageRef = ref(storage, `meetup-images/${image?.name}`);
+
+      const snapshot = await uploadBytes(storageRef, image);
+      const imageUrl = await getDownloadURL(snapshot.ref);
+
+      await addDoc(collection(db, "meetups"), {
+        ...formData,
+        image: imageUrl,
+        date: dayjs(date).toISOString(),
+      });
+      setIsLoading(false);
+    } catch (error: any) {
+      setIsLoading(false);
+      if (error.code === "storage/unauthorized") {
+        setError({
+          ...initialFormError,
+          image: "Something went wrong please try again with a different image",
+        });
+      }
+      console.log(error.code);
+    }
   }
 };
 

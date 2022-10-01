@@ -7,6 +7,7 @@ import {
   Space,
   Textarea,
   FileInput,
+  LoadingOverlay,
 } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { Button } from "../../Utilities";
@@ -48,6 +49,8 @@ const MeetupForm = () => {
 
   const [error, setError] = useState(initialFormError);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const categoryData = category.map((category) => {
     return {
       value: category.toLowerCase(),
@@ -71,10 +74,19 @@ const MeetupForm = () => {
       <form
         noValidate
         onSubmit={(event) => {
-          submitHandler({ event, formData, setFormData, error, setError });
+          submitHandler({
+            event,
+            formData,
+            setFormData,
+            error,
+            setError,
+            setIsLoading,
+          });
         }}
         className={styles.form}
       >
+        <LoadingOverlay visible={isLoading} overlayBlur={2} />
+
         <TextInput
           placeholder="Please enter the title"
           label="Title"
