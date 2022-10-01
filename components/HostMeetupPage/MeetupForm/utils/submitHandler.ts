@@ -3,7 +3,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 import { db } from "../../../../firebase/firebaseConfig";
-
+import { getUser } from "../../../../utils";
 type FormData = {
   title: string;
   description: string;
@@ -108,10 +108,20 @@ const submitHandler = async ({
       const snapshot = await uploadBytes(storageRef, image);
       const imageUrl = await getDownloadURL(snapshot.ref);
 
+      const user = await getUser();
+
+      console.log(user);
+
       await addDoc(collection(db, "meetups"), {
         ...formData,
         image: imageUrl,
         date: dayjs(date).toISOString(),
+        host: {
+          email: user?.email,
+          fullName: user?.fullName,
+          profilePicture: user?.profilePicture,
+          uid: user?.uid,
+        },
       });
       setIsLoading(false);
     } catch (error: any) {
