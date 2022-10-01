@@ -12,6 +12,7 @@ import { DatePicker } from "@mantine/dates";
 import { Button } from "../../Utilities";
 import dayjs from "dayjs";
 import { category } from "../../../fakeData";
+import submitHandler from "./utils/submitHandler";
 
 const MeetupForm = () => {
   // From data state and types
@@ -40,7 +41,7 @@ const MeetupForm = () => {
     description: "",
     price: "",
     location: "",
-    category: null,
+    category: "",
     image: "",
     date: "",
   };
@@ -67,7 +68,13 @@ const MeetupForm = () => {
 
   return (
     <div className={styles["form-container"]}>
-      <form className={styles.form}>
+      <form
+        noValidate
+        onSubmit={(event) => {
+          submitHandler({ event, formData, setFormData, error, setError });
+        }}
+        className={styles.form}
+      >
         <TextInput
           placeholder="Please enter the title"
           label="Title"

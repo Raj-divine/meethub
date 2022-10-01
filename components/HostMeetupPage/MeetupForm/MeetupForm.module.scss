@@ -7,9 +7,13 @@
 .form {
   margin-top: 4rem;
   padding: 4rem 6rem;
-  width: 50%;
+  width: 35%;
   background-color: $color-white;
   box-shadow: $shadow-secondary;
+  max-width: 80rem;
+  @include xxl {
+    width: 50%;
+  }
   @include xl {
     width: 60%;
   }
