@@ -4,14 +4,7 @@ import { useUser } from "../hooks";
 import AppLoader from "../components/AppLoader/AppLoader";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import {
-  collection,
-  limit,
-  query,
-  where,
-  getDocs,
-  DocumentData,
-} from "firebase/firestore";
+import { DocumentData } from "firebase/firestore";
 import {
   Divider,
   Header,
@@ -21,12 +14,13 @@ import {
   SectionRecommendation,
 } from "../components/HomePage";
 import { meetups } from "../fakeData";
-import { db } from "../firebase/firebaseConfig";
+import { getMeetups } from "../utils";
 
 const Home: NextPage = () => {
   const { user, loading } = useUser();
   const router = useRouter();
   const [techMeetups, setTechMeetups] = useState<DocumentData[]>([]);
+  const [freeMeetups, setFreeMeetups] = useState<DocumentData[]>([]);
   useEffect(() => {
     if (!user && !loading) {
       router.replace("/");
@@ -34,22 +28,13 @@ const Home: NextPage = () => {
   }, [user]);
 
   useEffect(() => {
-    const getTechMeetups = async () => {
-      setTechMeetups([]);
-      const techMeetupQuery = query(
-        collection(db, "meetups"),
-        where("category", "==", "technology"),
-        limit(4)
-      );
-      const meetups = await getDocs(techMeetupQuery);
-      meetups.forEach((meetup) => {
-        setTechMeetups((prevMeetups) => {
-          return [...prevMeetups, meetup.data()];
-        });
-      });
+    setFreeMeetups([]);
+    setTechMeetups([]);
+    const fetchAllMeetups = async () => {
+      await getMeetups("category", "==", "technology", 4, setTechMeetups);
+      await getMeetups("price", "<", 1, 4, setFreeMeetups);
     };
-
-    getTechMeetups();
+    fetchAllMeetups();
   }, []);
 
   return (
@@ -66,14 +51,18 @@ const Home: NextPage = () => {
           <SectionFilter />
           <SectionMeetup
             heading="Meetups starting tomorrow"
-            meetups={techMeetups}
+            meetups={meetups}
           />
           <Divider />
           <SectionMeetup
             heading='Meetups for "techy" people'
-            meetups={meetups}
+            meetups={techMeetups}
           />
-          <SectionMeetup last heading="Meetups for free!" meetups={meetups} />
+          <SectionMeetup
+            last
+            heading="Meetups for free!"
+            meetups={freeMeetups}
+          />
         </>
       )}
     </>

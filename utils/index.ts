@@ -1,3 +1,3 @@
 import getUser from "./getUser";
-
-export { getUser };
+import getMeetups from "./getMeetups";
+export { getUser, getMeetups };

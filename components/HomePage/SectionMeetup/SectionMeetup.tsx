@@ -33,8 +33,8 @@ const SectionMeetup = ({ heading, meetups, last }: SectionMeetupProps) => {
           ]}
           cols={4}
         >
-          {meetups.slice(0, 4).map((meetup) => {
-            return <MeetupCard key={meetup.title} meetup={meetup} />;
+          {meetups.map((meetup) => {
+            return <MeetupCard key={meetup.uid} meetup={meetup} />;
           })}
         </SimpleGrid>
       </ScrollArea>

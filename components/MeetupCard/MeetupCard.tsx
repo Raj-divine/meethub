@@ -20,7 +20,7 @@ const MeetupCard = ({ meetup }: DocumentData) => {
         </Text>
         <div className={styles["card-info"]}>
           <div className={styles.date}>{dayjs(date).format("DD MMM")}</div>
-          <div className={styles.price}>₹{price < 1 ? "Free" : price}</div>
+          <div className={styles.price}>{price < 1 ? "Free" : `₹${price}`}</div>
         </div>
       </div>
     </div>
