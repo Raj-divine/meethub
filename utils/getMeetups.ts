@@ -25,7 +25,7 @@ const getTechMeetups = async (
 
   meetups.forEach((meetup) => {
     setMeetups((prevMeetups) => {
-      return [...prevMeetups, meetup.data()];
+      return [...prevMeetups, { ...meetup.data(), uid: meetup.id }];
     });
   });
 

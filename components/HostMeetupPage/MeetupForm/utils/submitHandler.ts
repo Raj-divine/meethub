@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { addDoc, collection, updateDoc, doc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import Router from "next/router";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 import { db } from "../../../../firebase/firebaseConfig";
 import { getUser } from "../../../../utils";
@@ -135,6 +136,8 @@ const submitHandler = async ({
       }
 
       setIsLoading(false);
+      // temp redirect to be replaced with the url of the created meetup
+      Router.replace("/home");
     } catch (error: any) {
       setIsLoading(false);
       if (error.code === "storage/unauthorized") {

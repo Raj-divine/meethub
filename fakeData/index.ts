@@ -32,6 +32,7 @@ export const meetups = [
       profilePicture:
         "https://firebasestorage.googleapis.com/v0/b/meethub-995d3.appspot.com/o/images%2FPhoto%20on%2011-09-22%20at%207.01%20PM.jpg?alt=media&token=a358e5f9-83d5-4c7f-b871-4cba7d7242b5",
     },
+    uid: 1,
   },
   {
     title: "Discussing the future or AI",
@@ -49,6 +50,7 @@ export const meetups = [
       profilePicture:
         "https://firebasestorage.googleapis.com/v0/b/meethub-995d3.appspot.com/o/images%2FPhoto%20on%2011-09-22%20at%207.01%20PM.jpg?alt=media&token=a358e5f9-83d5-4c7f-b871-4cba7d7242b5",
     },
+    uid: 2,
   },
   {
     title: "Career consulting for youngsters",
@@ -66,6 +68,7 @@ export const meetups = [
       profilePicture:
         "https://firebasestorage.googleapis.com/v0/b/meethub-995d3.appspot.com/o/images%2FPhoto%20on%2011-09-22%20at%207.01%20PM.jpg?alt=media&token=a358e5f9-83d5-4c7f-b871-4cba7d7242b5",
     },
+    uid: 3,
   },
   {
     title: "A casual meetup for millennial",
@@ -84,5 +87,6 @@ export const meetups = [
       profilePicture:
         "https://firebasestorage.googleapis.com/v0/b/meethub-995d3.appspot.com/o/images%2FPhoto%20on%2011-09-22%20at%207.01%20PM.jpg?alt=media&token=a358e5f9-83d5-4c7f-b871-4cba7d7242b5",
     },
+    uid: 4,
   },
 ];
