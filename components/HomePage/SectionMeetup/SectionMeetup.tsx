@@ -2,24 +2,12 @@ import styles from "./SectionMeetup.module.scss";
 import { SimpleGrid, ScrollArea } from "@mantine/core";
 import MeetupCard from "../../MeetupCard/MeetupCard";
 import { useScrollAnimation } from "../../../hooks";
+import { DocumentData } from "firebase/firestore";
 
 type SectionMeetupProps = {
   heading: string;
   last?: boolean;
-  meetups: {
-    title: string;
-    description: string;
-    date: string;
-    price: number;
-    location: string;
-    category: string;
-    image: string;
-    host: {
-      uid: string;
-      fullName: string;
-      profilePicture: string;
-    };
-  }[];
+  meetups: DocumentData[];
 };
 
 const SectionMeetup = ({ heading, meetups, last }: SectionMeetupProps) => {
