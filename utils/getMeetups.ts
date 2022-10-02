@@ -22,16 +22,13 @@ const getTechMeetups = async (
     limit(meetupLimit)
   );
   const meetups = await getDocs(techMeetupQuery);
-  let meetupData: DocumentData[] = [];
 
   meetups.forEach((meetup) => {
-    meetupData = [...meetupData, meetup.data()];
+    setMeetups((prevMeetups) => {
+      return [...prevMeetups, meetup.data()];
+    });
   });
 
-  let uniqueMeetupData = meetupData.filter((item, index) => {
-    return meetupData.indexOf(item) == index;
-  });
-  setMeetups(uniqueMeetupData);
   return meetups;
 };
 
