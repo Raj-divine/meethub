@@ -120,20 +120,26 @@ const submitHandler = async ({
     setIsVisible(true);
     try {
       const storage = getStorage();
-      const storageRef = ref(storage, `images/${profilePicture?.name}`);
 
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
+      const storageRef = ref(
+        storage,
+        `profile-picture/user-${userCredential.user.uid}`
+      );
+
       const snapshot = await uploadBytes(storageRef, profilePicture);
       const profilePictureUrl = await getDownloadURL(snapshot.ref);
       //accessing the user's uid to create a user in firestore
+
       await setDoc(doc(db, "users", userCredential.user.uid), {
         fullName,
         email,
         profilePicture: profilePictureUrl,
+        upcomingEvents: [],
       });
 
       setUserData(initialUserDataState);

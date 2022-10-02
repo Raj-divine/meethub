@@ -7,15 +7,16 @@ const getUser = async () => {
 
   if (currentUser) {
     const userSnap = await getDoc(doc(db, "users", currentUser.uid));
+
     const userData = userSnap.data();
     return {
       fullName: userData?.fullName,
       profilePicture: userData?.profilePicture,
       email: userData?.email,
-      uid: currentUser.uid,
+      upcomingEvents: userData?.upcomingEvents,
+      uid: currentUser?.uid,
     };
   }
-  return null;
 };
 
 export default getUser;

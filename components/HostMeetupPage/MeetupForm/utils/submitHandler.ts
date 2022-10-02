@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, updateDoc, doc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 import { db } from "../../../../firebase/firebaseConfig";
@@ -103,18 +103,12 @@ const submitHandler = async ({
     try {
       setIsLoading(true);
       const storage = getStorage();
-      const storageRef = ref(storage, `meetup-images/${image?.name}`);
-
-      const snapshot = await uploadBytes(storageRef, image);
-      const imageUrl = await getDownloadURL(snapshot.ref);
 
       const user = await getUser();
 
-      console.log(user);
-
-      await addDoc(collection(db, "meetups"), {
+      const meetupRef = await addDoc(collection(db, "meetups"), {
         ...formData,
-        image: imageUrl,
+        image: null,
         date: dayjs(date).toISOString(),
         host: {
           email: user?.email,
@@ -123,6 +117,23 @@ const submitHandler = async ({
           uid: user?.uid,
         },
       });
+
+      const storageRef = ref(storage, `meetup-images/meetup-${meetupRef.id}`);
+
+      const snapshot = await uploadBytes(storageRef, image);
+      const imageUrl = await getDownloadURL(snapshot.ref);
+
+      await updateDoc(doc(db, "meetups", meetupRef.id), {
+        image: imageUrl,
+      });
+
+      const upcomingEvents = [...user?.upcomingEvents, meetupRef.id];
+      if (user) {
+        await updateDoc(doc(db, "users", user?.uid), {
+          upcomingEvents,
+        });
+      }
+
       setIsLoading(false);
     } catch (error: any) {
       setIsLoading(false);
@@ -133,6 +144,7 @@ const submitHandler = async ({
         });
       }
       console.log(error.code);
+      console.log(error);
     }
   }
 };

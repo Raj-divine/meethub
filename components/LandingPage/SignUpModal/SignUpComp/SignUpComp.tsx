@@ -117,9 +117,9 @@ const SignUpComp = () => {
         <Space h="md" />
 
         <FileInput
-          placeholder="Pick file"
+          placeholder="Pick for picture"
           variant="filled"
-          label="Your resume"
+          label="Profile picture"
           required
           onChange={setProfilePicture}
           value={profilePicture}

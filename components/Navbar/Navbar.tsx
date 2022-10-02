@@ -42,7 +42,6 @@ const Navbar = () => {
 
   const signOutHandler = async () => {
     await signOut(auth);
-    router.replace("/");
   };
 
   return (
