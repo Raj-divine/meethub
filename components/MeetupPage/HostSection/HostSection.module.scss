@@ -5,6 +5,10 @@
   padding: 4rem 2rem;
   border-radius: 3px;
   border: 1px solid $color-grey-light;
+  margin-bottom: 4rem;
+  @include breakpoint(866px) {
+    margin-bottom: 0;
+  }
 }
 .heading {
   font-weight: 600;
@@ -16,6 +20,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @include md {
+    flex-direction: column;
+  }
 }
 .image-container {
   height: 8rem;
@@ -31,8 +39,15 @@
 .email {
   font-size: 1.4rem;
   margin-left: 2rem;
+  width: 100%;
 }
 .image-name {
   display: flex;
   align-items: center;
+
+  @include md {
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
 }

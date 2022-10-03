@@ -1,11 +1,22 @@
+@import "../styles/breakpoints";
 .page-container {
   display: flex;
   justify-content: space-between;
   width: 90%;
+  @include breakpoint(866px) {
+    flex-direction: column;
+  }
+
   margin: 0 auto;
   .center {
     width: 60%;
     max-width: 85rem;
+    @include lg {
+      width: 70%;
+    }
+    @include breakpoint(866px) {
+      width: 100%;
+    }
   }
   .right {
     display: flex;
@@ -13,5 +24,13 @@
     align-items: flex-end;
     margin-top: 10rem;
     width: 35%;
+    @include lg {
+      width: 25%;
+    }
+    @include breakpoint(866px) {
+      margin-top: 2rem;
+      width: 100%;
+      padding-bottom: 5rem;
+    }
   }
 }

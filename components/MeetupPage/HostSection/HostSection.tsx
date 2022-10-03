@@ -21,8 +21,10 @@ const HostSection = ({ meetup }: DocumentData) => {
               />
             </div>
             <div>
-              <div className={styles.fullname}>{meetup.host.fullName}</div>
-              <Text color="dimmed" className={styles.email}>
+              <Text lineClamp={1} className={styles.fullname}>
+                {meetup.host.fullName}
+              </Text>
+              <Text color="dimmed" lineClamp={1} className={styles.email}>
                 {meetup.host.email}
               </Text>
             </div>
@@ -35,7 +37,6 @@ const HostSection = ({ meetup }: DocumentData) => {
           </div>
         </div>
       </section>
-      <Space h="xl" />
     </>
   );
 };

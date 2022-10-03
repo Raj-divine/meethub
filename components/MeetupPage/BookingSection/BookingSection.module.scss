@@ -3,6 +3,9 @@
 
 .booking-section {
   width: 55%;
+  @include lg {
+    width: 100%;
+  }
   .price {
     display: flex;
     align-items: center;
