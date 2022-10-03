@@ -66,7 +66,7 @@ const AllMeetups: NextPage = () => {
               <HostSection meetup={meetup} />
             </div>
             <div className={styles.right}>
-              <BookingSection />
+              <BookingSection meetup={meetup} />
             </div>
           </div>
         </>

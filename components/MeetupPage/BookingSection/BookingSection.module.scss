@@ -1,0 +1,20 @@
+@import "../../../styles/breakpoints";
+@import "../../../styles/variables";
+
+.booking-section {
+  width: 55%;
+  .price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    border: 1px solid $color-grey-light;
+    font-size: 4rem;
+    font-weight: 700;
+    color: $color-primary;
+  }
+  .button {
+    width: 100%;
+    margin-top: 2rem;
+  }
+}
