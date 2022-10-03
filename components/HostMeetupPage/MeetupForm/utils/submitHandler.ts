@@ -1,5 +1,11 @@
 import dayjs from "dayjs";
-import { addDoc, collection, updateDoc, doc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  updateDoc,
+  doc,
+  Timestamp,
+} from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Router from "next/router";
 import { Dispatch, FormEvent, SetStateAction } from "react";
@@ -111,6 +117,7 @@ const submitHandler = async ({
         ...formData,
         image: null,
         date: dayjs(date).toISOString(),
+        dateInTimeStamp: Timestamp.fromDate(date),
         host: {
           email: user?.email,
           fullName: user?.fullName,

@@ -22,6 +22,7 @@ const SectionRecommendation = () => {
                 date={meetup.date}
                 price={meetup.price}
                 image={meetup.image}
+                uid={meetup.uid}
                 key={meetup.title}
               />
             );

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { stat } from "fs";
 
 const initialState = {
   isOpen: false,

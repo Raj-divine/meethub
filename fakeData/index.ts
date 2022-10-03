@@ -13,6 +13,8 @@ export const category = [
   "Anime",
   "Lifestyle",
   "Marketing",
+  "Casual",
+  "Business",
 ];
 
 export const meetups = [
