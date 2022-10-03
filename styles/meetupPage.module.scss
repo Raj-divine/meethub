@@ -1,0 +1,14 @@
+.page-container {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+  .center {
+    width: 60%;
+    max-width: 85rem;
+  }
+  .right {
+    margin-top: 10rem;
+    width: 35%;
+  }
+}

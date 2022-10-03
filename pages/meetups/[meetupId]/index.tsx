@@ -5,12 +5,14 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import AppLoader from "../../../components/AppLoader/AppLoader";
 import {
+  BookingSection,
   DescriptionSection,
   HeadSection,
   HostSection,
 } from "../../../components/MeetupPage";
 import { db } from "../../../firebase/firebaseConfig";
 import { useUser } from "../../../hooks";
+import styles from "../../../styles/meetupPage.module.scss";
 
 const AllMeetups: NextPage = () => {
   const { user, loading } = useUser();
@@ -57,9 +59,16 @@ const AllMeetups: NextPage = () => {
       {loading || (isMeetupLoading && <AppLoader />)}
       {user && !loading && !isMeetupLoading && meetupExists && (
         <>
-          <HeadSection meetup={meetup} />
-          <DescriptionSection meetup={meetup} />
-          <HostSection meetup={meetup} />
+          <div className={styles["page-container"]}>
+            <div className={styles.center}>
+              <HeadSection meetup={meetup} />
+              <DescriptionSection meetup={meetup} />
+              <HostSection meetup={meetup} />
+            </div>
+            <div className={styles.right}>
+              <BookingSection />
+            </div>
+          </div>
         </>
       )}
     </>

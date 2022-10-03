@@ -1,9 +1,7 @@
 @import "../../../styles/variables";
 @import "../../../styles/breakpoints";
 .description-section {
-  margin-left: 15rem;
   margin-top: 2rem;
-  width: 50%;
   padding: 4rem 2rem;
   border-radius: 3px;
   border: 1px solid $color-grey-light;
@@ -18,4 +16,10 @@
 .description {
   font-size: 1.5rem;
   color: $color-grey-dark;
+}
+.description-container {
+  margin-bottom: 2rem;
+}
+.location-container {
+  margin-top: 2rem;
 }
