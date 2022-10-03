@@ -7,6 +7,7 @@ import AppLoader from "../../../components/AppLoader/AppLoader";
 import {
   DescriptionSection,
   HeadSection,
+  HostSection,
 } from "../../../components/MeetupPage";
 import { db } from "../../../firebase/firebaseConfig";
 import { useUser } from "../../../hooks";
@@ -58,6 +59,7 @@ const AllMeetups: NextPage = () => {
         <>
           <HeadSection meetup={meetup} />
           <DescriptionSection meetup={meetup} />
+          <HostSection meetup={meetup} />
         </>
       )}
     </>
