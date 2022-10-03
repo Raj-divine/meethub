@@ -1,3 +1,3 @@
 import HeadSection from "./HeadSection/HeadSection";
-
-export { HeadSection };
+import DescriptionSection from "./DescriptionSection/DescriptionSection";
+export { HeadSection, DescriptionSection };

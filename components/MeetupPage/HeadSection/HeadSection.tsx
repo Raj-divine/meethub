@@ -3,7 +3,6 @@ import { DocumentData } from "firebase/firestore";
 import Image from "next/image";
 import styles from "./HeadSection.module.scss";
 import { BsBookmark, BsCalendarEvent, BsBookmarkFill } from "react-icons/bs";
-import { Divider } from "@mantine/core";
 
 const HeadSection = ({ meetup }: DocumentData) => {
   const { title, image, date, category } = meetup;
@@ -21,9 +20,7 @@ const HeadSection = ({ meetup }: DocumentData) => {
       <div className={styles["meetup-info"]}>
         <div className={styles["title-container"]}>
           <div className={styles.title}>{title}</div>
-          <div className={styles.bookmark}>
-            <BsBookmark color="#9333ea" size={25} />
-          </div>
+          <div className={styles.bookmark}>{bookmarks[0]}</div>
         </div>
         <div className={styles["date-category-container"]}>
           <div className={styles["date-container"]}>

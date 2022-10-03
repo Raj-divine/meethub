@@ -4,7 +4,10 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import AppLoader from "../../../components/AppLoader/AppLoader";
-import { HeadSection } from "../../../components/MeetupPage";
+import {
+  DescriptionSection,
+  HeadSection,
+} from "../../../components/MeetupPage";
 import { db } from "../../../firebase/firebaseConfig";
 import { useUser } from "../../../hooks";
 
@@ -54,6 +57,7 @@ const AllMeetups: NextPage = () => {
       {user && !loading && !isMeetupLoading && meetupExists && (
         <>
           <HeadSection meetup={meetup} />
+          <DescriptionSection meetup={meetup} />
         </>
       )}
     </>
