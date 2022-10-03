@@ -3,20 +3,10 @@ import Image from "next/image";
 import { Text } from "@mantine/core";
 import dayjs from "dayjs";
 import Link from "next/link";
-type FeaturedMeetupProps = {
-  image: string;
-  title: string;
-  date: string;
-  price: number;
-  uid: number | string;
-};
-const FeaturedMeetup = ({
-  image,
-  title,
-  date,
-  price,
-  uid,
-}: FeaturedMeetupProps) => {
+import { DocumentData } from "firebase/firestore";
+
+const FeaturedMeetup = ({ meetup }: DocumentData) => {
+  const { uid, image, title, price, date } = meetup;
   return (
     <Link href={`meetups/${uid}`} passHref>
       <div className={styles["featured-meetup"]}>
@@ -31,7 +21,7 @@ const FeaturedMeetup = ({
 
           <div className={styles["info-container"]}>
             <div className={styles.date}>{dayjs(date).format("DD MMM")}</div>
-            <div className={styles.price}>₹{price}</div>
+            <div className={styles.price}>{price ? `₹${price}` : "Free"}</div>
           </div>
         </div>
       </div>
