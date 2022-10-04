@@ -3,8 +3,9 @@ import { SimpleGrid } from "@mantine/core";
 import {
   BsCalendarEvent,
   BsCalendar,
-  BsCalendarDay,
   BsCalendar3,
+  BsFillArrowDownCircleFill,
+  BsFillArrowUpCircleFill,
 } from "react-icons/bs";
 import FilterCard from "./FilterCard/FilterCard";
 import { TbDiscount2 } from "react-icons/tb";
@@ -13,27 +14,33 @@ const filters = [
   {
     text: "Tomorrow",
     icon: <BsCalendarEvent size={20} color="#7718d1" />,
+    filter: "tomorrow",
   },
   {
     text: "Today",
     icon: <BsCalendar size={20} color="#7718d1" />,
+    filter: "today",
   },
 
   {
     text: "Free",
     icon: <TbDiscount2 size={25} color="#7718d1" />,
+    filter: "free",
   },
   {
     text: "Paid",
     icon: <ImPriceTag size={20} color="#7718d1" />,
+    filter: "paid",
   },
   {
-    text: "Friday",
-    icon: <BsCalendarDay size={20} color="#7718d1" />,
+    text: "Below 500",
+    icon: <BsFillArrowDownCircleFill size={20} color="#7718d1" />,
+    filter: "below-500",
   },
   {
-    text: "This month",
-    icon: <BsCalendar3 size={20} color="#7718d1" />,
+    text: "Above 1000",
+    icon: <BsFillArrowUpCircleFill size={20} color="#7718d1" />,
+    filter: "above-1000",
   },
 ];
 
@@ -55,8 +62,9 @@ const SectionFilter = () => {
             return (
               <FilterCard
                 key={filter.text}
-                filter={filter.text}
+                text={filter.text}
                 icon={filter.icon}
+                filter={filter.filter}
               />
             );
           })}

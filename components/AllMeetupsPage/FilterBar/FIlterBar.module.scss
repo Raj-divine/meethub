@@ -1,0 +1,24 @@
+@import "../../../styles/variables";
+@import "../../../styles/breakpoints";
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  padding: 2rem 8rem;
+  top: 6rem;
+  position: fixed;
+  background-color: $color-white;
+  width: 100%;
+  // height: 6rem;
+}
+.container {
+  display: flex;
+  align-items: center;
+  .text {
+    font-size: 1.4rem;
+  }
+  .select-container {
+    margin-left: 2rem;
+    width: 20rem;
+  }
+}

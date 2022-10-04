@@ -4,6 +4,7 @@ import AppLoader from "../../components/AppLoader/AppLoader";
 import { useUser } from "../../hooks";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { FilterBar } from "../../components/AllMeetupsPage";
 
 const AllMeetups: NextPage = () => {
   const { user, loading } = useUser();
@@ -20,7 +21,7 @@ const AllMeetups: NextPage = () => {
       {loading && <AppLoader />}
       {user && !loading && (
         <>
-          <div style={{ marginTop: "60px" }}>this is the meetups page</div>
+          <FilterBar />
         </>
       )}
     </>

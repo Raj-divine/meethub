@@ -1,6 +1,6 @@
 import { Button } from "../../Utilities";
 import styles from "./Divider.module.scss";
-
+import Link from "next/link";
 const Divider = () => {
   return (
     <div className={styles.divider}>
@@ -9,7 +9,9 @@ const Divider = () => {
         <p className={styles.text}>
           We have enough meetups for everyone. Find more!
         </p>
-        <Button className={styles.button}>View more</Button>
+        <Link href="/meetups" passHref>
+          <Button className={styles.button}>View more</Button>
+        </Link>
       </div>
     </div>
   );
