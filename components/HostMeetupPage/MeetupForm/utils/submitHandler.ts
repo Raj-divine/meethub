@@ -122,8 +122,8 @@ const submitHandler = async ({
           email: user?.email,
           fullName: user?.fullName,
           profilePicture: user?.profilePicture,
-          uid: user?.uid,
         },
+        hostId: user?.uid,
       });
 
       const storageRef = ref(storage, `meetup-images/meetup-${meetupRef.id}`);
@@ -144,7 +144,7 @@ const submitHandler = async ({
 
       setIsLoading(false);
       // temp redirect to be replaced with the url of the created meetup
-      Router.replace("/home");
+      Router.replace(`/meetups/${meetupRef.id}`);
     } catch (error: any) {
       setIsLoading(false);
       if (error.code === "storage/unauthorized") {

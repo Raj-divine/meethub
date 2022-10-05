@@ -1,3 +1,3 @@
 import FilterBar from "./FilterBar/FilterBar";
-
-export { FilterBar };
+import MeetupsContainer from "./MeetupsContainer/MeetupsContainer";
+export { FilterBar, MeetupsContainer };
