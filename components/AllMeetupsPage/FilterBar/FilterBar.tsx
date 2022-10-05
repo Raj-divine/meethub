@@ -63,7 +63,7 @@ const FilterBar = () => {
     <div className={styles["filter-bar"]}>
       <div className={styles.container}>
         <Text className={styles.text} color="dimmed">
-          Search meetups by
+          Meetups that are
         </Text>
         <div className={styles["select-container"]}>
           <Select
