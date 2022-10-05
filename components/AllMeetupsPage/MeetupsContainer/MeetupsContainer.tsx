@@ -22,7 +22,7 @@ const MeetupsContainer = ({ meetups }: DocumentData) => {
         <Text className={styles.text}>{text}</Text>
       </div>
       <div className={styles["all-meetups"]}>
-        <SimpleGrid cols={3}>
+        <SimpleGrid cols={3} spacing="lg">
           <div>1</div>
           <div>2</div>
           <div>3</div>
