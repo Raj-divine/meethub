@@ -1,10 +1,16 @@
 import { Text, SimpleGrid } from "@mantine/core";
 import { DocumentData } from "firebase/firestore";
 import { useRouter } from "next/router";
+import MeetupCard from "../../MeetupCard/MeetupCard";
 import styles from "./MeetupsContainer.module.scss";
 
-const MeetupsContainer = ({ meetups }: DocumentData) => {
+interface MeetupsContainerProps {
+  meetups: DocumentData[];
+}
+
+const MeetupsContainer = ({ meetups }: MeetupsContainerProps) => {
   const router = useRouter();
+
   let text = "";
   if (router.query.filter) {
     text = router.query.filter.toString();
@@ -23,11 +29,9 @@ const MeetupsContainer = ({ meetups }: DocumentData) => {
       </div>
       <div className={styles["all-meetups"]}>
         <SimpleGrid cols={3} spacing="lg">
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
+          {meetups.map((meetup) => {
+            return <MeetupCard meetup={meetup} key={meetup.uid} />;
+          })}
         </SimpleGrid>
       </div>
     </div>

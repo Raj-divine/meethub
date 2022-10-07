@@ -4,7 +4,11 @@ import AppLoader from "../../components/AppLoader/AppLoader";
 import { useUser } from "../../hooks";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { FilterBar, MeetupsContainer } from "../../components/AllMeetupsPage";
+import {
+  FilterBar,
+  MeetupsContainer,
+  MeetupsLoader,
+} from "../../components/AllMeetupsPage";
 import {
   collection,
   DocumentData,
@@ -65,8 +69,6 @@ const AllMeetups: NextPage = () => {
     fetchMeetups();
   }, [router.query]);
 
-  console.log(meetups);
-
   return (
     <>
       <Head>
@@ -76,7 +78,10 @@ const AllMeetups: NextPage = () => {
       {user && !loading && (
         <>
           <FilterBar />
-          <MeetupsContainer />
+          {meetups.length > 0 && !meetupsLoading && (
+            <MeetupsContainer meetups={meetups} />
+          )}
+          {meetupsLoading && <MeetupsLoader />}
         </>
       )}
     </>
