@@ -1,7 +1,7 @@
 @import "../../../styles/breakpoints";
 .meetups-loader {
   position: absolute;
-  top: 20.6rem;
+  top: 3rem;
   bottom: 0;
   left: 0;
   right: 0;
@@ -10,6 +10,6 @@
   justify-content: center;
   @include sm {
     //21.37rem is the height of the navbar and the filter bar combined on "sm" screen size
-    top: 21.37rem;
+    top: 3rem;
   }
 }

@@ -2,22 +2,35 @@
 @import "../../../styles/variables";
 .meetups-container {
   // 13.6rem is the height of the navbar and the filter bar combined on screen size > "sm"
-  margin-top: 20.6rem;
+  // margin-top: 20.6rem;
+  margin-top: 3rem;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
 
   @include sm {
     //21.37rem is the height of the navbar and the filter bar combined on "sm" screen size
-    margin-top: 21.37rem;
+    margin-top: 3rem;
+    width: 90%;
   }
 }
-
+.all-meetups {
+  @include md {
+    margin: 0 auto;
+    width: 70%;
+  }
+  @include sm {
+    width: 100%;
+  }
+}
 .heading-container {
   margin-bottom: 4rem;
   .heading {
     color: $color-grey-extra-dark;
     font-size: 4rem;
+    @include sm {
+      font-size: 2.4rem;
+    }
   }
   .text {
     color: $color-grey-dark;

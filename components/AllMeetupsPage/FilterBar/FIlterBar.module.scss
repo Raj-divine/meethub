@@ -5,8 +5,9 @@
   display: flex;
   align-items: center;
   padding: 2rem 8rem;
-  top: 6rem;
-  position: fixed;
+  margin-top: 6rem;
+  // top: 6rem;
+  position: sticky;
   background-color: $color-white;
   width: 100%;
   z-index: 3;

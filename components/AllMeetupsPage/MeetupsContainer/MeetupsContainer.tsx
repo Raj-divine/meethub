@@ -10,14 +10,14 @@ interface MeetupsContainerProps {
 
 const MeetupsContainer = ({ meetups }: MeetupsContainerProps) => {
   const router = useRouter();
-
+  const { filter, category } = router.query;
   let text = "";
-  if (router.query.filter) {
-    text = router.query.filter.toString();
-  } else if (router.query.category) {
-    text = `related to ${router.query.category}`;
-  } else if (router.query.category && router.query.filter) {
-    text = `${router.query.filter} and related to ${router.query.category}`;
+  if (filter && !category) {
+    text = filter.toString();
+  } else if (category && !filter) {
+    text = `related to ${category}`;
+  } else if (category && filter) {
+    text = `${filter} and related to ${category}`;
   } else {
     text = "recommended by meethub";
   }
@@ -28,7 +28,14 @@ const MeetupsContainer = ({ meetups }: MeetupsContainerProps) => {
         <Text className={styles.text}>{text}</Text>
       </div>
       <div className={styles["all-meetups"]}>
-        <SimpleGrid cols={3} spacing="lg">
+        <SimpleGrid
+          breakpoints={[
+            { maxWidth: 1100, cols: 2 },
+            { maxWidth: 768, cols: 1 },
+          ]}
+          cols={3}
+          spacing="lg"
+        >
           {meetups.map((meetup) => {
             return <MeetupCard meetup={meetup} key={meetup.uid} />;
           })}

@@ -8,6 +8,7 @@ import {
   FilterBar,
   MeetupsContainer,
   MeetupsLoader,
+  NoMeetups,
 } from "../../components/AllMeetupsPage";
 import {
   collection,
@@ -82,6 +83,7 @@ const AllMeetups: NextPage = () => {
             <MeetupsContainer meetups={meetups} />
           )}
           {meetupsLoading && <MeetupsLoader />}
+          {!meetupsLoading && meetups.length < 1 && <NoMeetups />}
         </>
       )}
     </>

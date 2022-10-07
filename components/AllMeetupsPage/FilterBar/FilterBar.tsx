@@ -67,6 +67,7 @@ const FilterBar = () => {
         </Text>
         <div className={styles["select-container"]}>
           <Select
+            clearable
             value={filterState}
             placeholder="Filter"
             onChange={filterChangeHandler}
@@ -75,6 +76,7 @@ const FilterBar = () => {
         </div>
         <div className={styles["select-container"]}>
           <Select
+            clearable
             value={categoryState}
             placeholder="Category"
             data={categoryData}
