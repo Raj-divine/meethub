@@ -23,6 +23,8 @@ const Home: NextPage = () => {
   const isDataFetched = useRef(false);
   const [techMeetups, setTechMeetups] = useState<DocumentData[]>([]);
   const [freeMeetups, setFreeMeetups] = useState<DocumentData[]>([]);
+  console.log(freeMeetups);
+
   useEffect(() => {
     if (!user && !loading) {
       router.replace("/");
@@ -32,7 +34,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     const fetchAllMeetups = async () => {
       await getMeetups("category", "==", "technology", 4, setTechMeetups);
-      await getMeetups("price", "<", 1, 4, setFreeMeetups);
+      await getMeetups("price", "==", 0, 4, setFreeMeetups);
     };
     if (!isDataFetched.current) {
       fetchAllMeetups();
