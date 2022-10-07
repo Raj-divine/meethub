@@ -28,7 +28,9 @@ const getTechMeetups = async (
     limit(meetupLimit)
   );
   const meetups = await getDocs(meetupQuery);
-
+  if (!after) {
+    setMeetups([]);
+  }
   meetups.forEach((meetup) => {
     setMeetups((prevMeetups) => {
       return [...prevMeetups, { ...meetup.data(), uid: meetup.id }];

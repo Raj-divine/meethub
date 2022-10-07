@@ -14,7 +14,7 @@ const SectionCategory = () => {
           cols={6}
         >
           <CategoryCard color="#ea580c" category="Fitness" />
-          <CategoryCard color="#1d4ed8" category="Tech" />
+          <CategoryCard color="#1d4ed8" category="Technology" />
           <CategoryCard color="#7e22ce" category="Networking" />
           <CategoryCard color="#be123c" category="Art" />
           <CategoryCard color="#0CA678" category="Casual" />

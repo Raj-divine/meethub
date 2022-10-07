@@ -23,7 +23,6 @@ const Home: NextPage = () => {
   const isDataFetched = useRef(false);
   const [techMeetups, setTechMeetups] = useState<DocumentData[]>([]);
   const [freeMeetups, setFreeMeetups] = useState<DocumentData[]>([]);
-  console.log(freeMeetups);
 
   useEffect(() => {
     if (!user && !loading) {

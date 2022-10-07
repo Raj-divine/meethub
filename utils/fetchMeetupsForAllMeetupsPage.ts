@@ -32,6 +32,8 @@ const fetchMeetupsForAllMeetupsPage = async ({
   if (!after) {
     setMeetups([]);
   }
+  // console.log("hello");
+
   setMeetupsLoading(true);
   setLastVisible(0);
 
@@ -44,7 +46,7 @@ const fetchMeetupsForAllMeetupsPage = async ({
       queryFilter.field,
       queryFilter.opStr,
       queryFilter.value,
-      25,
+      1,
       setMeetups,
       after
     );
