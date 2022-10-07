@@ -10,75 +10,43 @@ import {
   MeetupsLoader,
   NoMeetups,
 } from "../../components/AllMeetupsPage";
-import {
-  collection,
-  DocumentData,
-  getDocs,
-  limit,
-  query,
-  where,
-} from "firebase/firestore";
-import { getMeetups } from "../../utils";
-import { db } from "../../firebase/firebaseConfig";
-import getQueryFilter from "../../utils/getQueryFilter";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import { fetchMeetupsForAllMeetupsPage, getMeetups } from "../../utils";
+
 const AllMeetups: NextPage = () => {
   const { user, loading } = useUser();
   const router = useRouter();
   const [meetupsLoading, setMeetupsLoading] = useState<boolean>(true);
   const [meetups, setMeetups] = useState<DocumentData[]>([]);
+  const [lastVisible, setLastVisible] = useState<
+    QueryDocumentSnapshot<DocumentData> | number
+  >(0);
   useEffect(() => {
     if (!user && !loading) router.replace("/");
   }, [user]);
 
   useEffect(() => {
-    const fetchMeetups = async () => {
-      setMeetups([]);
-      setMeetupsLoading(true);
-
-      const { filter, category } = router.query;
-      const queryFilter = getQueryFilter(router);
-      if (filter && !category && router.isReady) {
-        //here we are fetching meetups with filter applied
-
-        await getMeetups(
-          queryFilter.field,
-          queryFilter.opStr,
-          queryFilter.value,
-          25,
-          setMeetups
-        );
-      } else if (category && !filter && router.isReady) {
-        //here we are fetching meetups with specific category
-
-        await getMeetups("category", "==", category.toString(), 25, setMeetups);
-      } else if (category && filter && router.isReady) {
-        //here we are fetching meetups with a specific category and filter applied
-        const meetupQuery = query(
-          collection(db, "meetups"),
-          where("category", "==", category),
-          where(queryFilter.field, queryFilter.opStr, queryFilter.value),
-          limit(25)
-        );
-        const meetups = await getDocs(meetupQuery);
-
-        meetups.forEach((meetup) => {
-          setMeetups((prevMeetups) => {
-            return [...prevMeetups, { ...meetup.data(), uid: meetup.id }];
-          });
-        });
-      } else if (!category && !filter && router.isReady) {
-        const meetupSnapshot = await getDocs(collection(db, "meetups"));
-        setMeetups([]);
-        meetupSnapshot.forEach((meetup) => {
-          setMeetups((prevMeetups) => {
-            return [...prevMeetups, { ...meetup.data(), uid: meetup.id }];
-          });
-        });
-      }
-      setMeetupsLoading(false);
+    setLastVisible(0);
+    const getData = async () => {
+      await fetchMeetupsForAllMeetupsPage({
+        setMeetups,
+        setMeetupsLoading,
+        setLastVisible,
+        router,
+      });
     };
-    fetchMeetups();
+    getData();
   }, [router.query]);
+
+  const getNextMeetups = async () => {
+    await fetchMeetupsForAllMeetupsPage({
+      setMeetups,
+      setMeetupsLoading,
+      setLastVisible,
+      router,
+      after: lastVisible,
+    });
+  };
 
   return (
     <>
@@ -90,7 +58,10 @@ const AllMeetups: NextPage = () => {
         <>
           <FilterBar />
           {meetups.length > 0 && !meetupsLoading && (
-            <MeetupsContainer meetups={meetups} />
+            <MeetupsContainer
+              getNextMeetups={getNextMeetups}
+              meetups={meetups}
+            />
           )}
           {meetupsLoading && <MeetupsLoader />}
           {!meetupsLoading && meetups.length < 1 && <NoMeetups />}

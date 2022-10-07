@@ -7,7 +7,7 @@ import {
   DocumentData,
   WhereFilterOp,
   orderBy,
-  QuerySnapshot,
+  QueryDocumentSnapshot,
   startAfter,
 } from "firebase/firestore";
 import { Dispatch, SetStateAction } from "react";
@@ -18,12 +18,12 @@ const getTechMeetups = async (
   value: string | number,
   meetupLimit: number,
   setMeetups: Dispatch<SetStateAction<DocumentData[]>>,
-  after: QuerySnapshot<DocumentData> | number = 0
+  after: QueryDocumentSnapshot<DocumentData> | number = 0
 ) => {
   const meetupQuery = query(
     collection(db, "meetups"),
     where(fieldPath, opStr, value),
-    orderBy("date"),
+    orderBy(fieldPath === "price" && opStr !== "==" ? "price" : "date"),
     startAfter(after),
     limit(meetupLimit)
   );

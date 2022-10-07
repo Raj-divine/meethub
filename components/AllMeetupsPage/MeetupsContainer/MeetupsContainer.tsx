@@ -6,9 +6,13 @@ import styles from "./MeetupsContainer.module.scss";
 
 interface MeetupsContainerProps {
   meetups: DocumentData[];
+  getNextMeetups: () => void;
 }
 
-const MeetupsContainer = ({ meetups }: MeetupsContainerProps) => {
+const MeetupsContainer = ({
+  meetups,
+  getNextMeetups,
+}: MeetupsContainerProps) => {
   const router = useRouter();
   const { filter, category } = router.query;
   let text = "";
@@ -42,6 +46,9 @@ const MeetupsContainer = ({ meetups }: MeetupsContainerProps) => {
             })}
           </SimpleGrid>
         </div>
+      </div>
+      <div>
+        <button onClick={getNextMeetups}>get new meetups</button>
       </div>
       <Space h="xl" />
     </>
