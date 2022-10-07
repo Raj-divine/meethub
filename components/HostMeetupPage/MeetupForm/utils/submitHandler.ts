@@ -117,7 +117,7 @@ const submitHandler = async ({
         ...formData,
         image: null,
         date: dayjs(date).toISOString(),
-        dateInTimeStamp: Timestamp.fromDate(date),
+        dateInString: dayjs(date).format("DD-MM-YY"),
         host: {
           email: user?.email,
           fullName: user?.fullName,

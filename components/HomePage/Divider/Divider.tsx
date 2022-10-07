@@ -9,8 +9,10 @@ const Divider = () => {
         <p className={styles.text}>
           We have enough meetups for everyone. Find more!
         </p>
-        <Link href="/meetups" passHref>
-          <Button className={styles.button}>View more</Button>
+        <Link href="/meetups">
+          <a>
+            <Button className={styles.button}>View more</Button>
+          </a>
         </Link>
       </div>
     </div>

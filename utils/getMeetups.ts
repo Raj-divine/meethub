@@ -13,7 +13,7 @@ import { db } from "../firebase/firebaseConfig";
 const getTechMeetups = async (
   fieldPath: string,
   opStr: WhereFilterOp,
-  value: string | number | Date,
+  value: string | number,
   meetupLimit: number,
   setMeetups: Dispatch<SetStateAction<DocumentData[]>>
 ) => {

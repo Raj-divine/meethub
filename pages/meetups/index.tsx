@@ -5,9 +5,17 @@ import { useUser } from "../../hooks";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FilterBar, MeetupsContainer } from "../../components/AllMeetupsPage";
-import { DocumentData, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  DocumentData,
+  getDocs,
+  limit,
+  query,
+  where,
+} from "firebase/firestore";
 import { getMeetups } from "../../utils";
-import dayjs from "dayjs";
+import { db } from "../../firebase/firebaseConfig";
+import getQueryFilter from "../../utils/getQueryFilter";
 const AllMeetups: NextPage = () => {
   const { user, loading } = useUser();
   const router = useRouter();
@@ -22,21 +30,42 @@ const AllMeetups: NextPage = () => {
       setMeetups([]);
       setMeetupsLoading(true);
 
-      if (router.query.filter) {
-        const { filter } = router.query;
-        if (filter === "free") {
-          await getMeetups("price", "==", 0, 25, setMeetups);
-        } else if (filter === "paid") {
-          await getMeetups("price", ">", 0, 25, setMeetups);
-        } else if (filter === "below-500") {
-          await getMeetups("price", "<", 500, 25, setMeetups);
-        } else if (filter === "above-1000") {
-          await getMeetups("price", ">", 1000, 25, setMeetups);
-        }
+      const { filter, category } = router.query;
+      const queryFilter = getQueryFilter(router);
+      if (filter && !category) {
+        //here we are fetching meetups with filter applied
+        await getMeetups(
+          queryFilter.field,
+          queryFilter.opStr,
+          queryFilter.value,
+          25,
+          setMeetups
+        );
+      } else if (category && !filter) {
+        //here we are fetching meetups with specific category
+        await getMeetups("category", "==", category.toString(), 25, setMeetups);
+      } else if (category && filter) {
+        //here we are fetching meetups with a specific category and filter applied
+        const meetupQuery = query(
+          collection(db, "meetups"),
+          where("category", "==", category),
+          where(queryFilter.field, queryFilter.opStr, queryFilter.value),
+          limit(25)
+        );
+        const meetups = await getDocs(meetupQuery);
+
+        meetups.forEach((meetup) => {
+          setMeetups((prevMeetups) => {
+            return [...prevMeetups, { ...meetup.data(), uid: meetup.id }];
+          });
+        });
       }
+      setMeetupsLoading(false);
     };
     fetchMeetups();
   }, [router.query]);
+
+  console.log(meetups);
 
   return (
     <>

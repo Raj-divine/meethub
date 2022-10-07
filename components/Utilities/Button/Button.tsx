@@ -1,3 +1,4 @@
+import { forwardRef, RefObject } from "react";
 import styles from "./Button.module.scss";
 
 type ButtonProps = {
@@ -18,5 +19,4 @@ const Button = ({ children, className, type, onClick }: ButtonProps) => {
     </button>
   );
 };
-
 export default Button;

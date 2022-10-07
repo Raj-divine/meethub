@@ -32,7 +32,9 @@ const HostSection = ({ meetup }: DocumentData) => {
 
           <div>
             <Link href={`/users/profile/${meetup.host.uid}`} passHref>
-              <Button>View Profile</Button>
+              <a>
+                <Button>View Profile</Button>
+              </a>
             </Link>
           </div>
         </div>
