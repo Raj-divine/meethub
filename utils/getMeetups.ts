@@ -6,9 +6,6 @@ import {
   getDocs,
   DocumentData,
   WhereFilterOp,
-  startAfter,
-  QuerySnapshot,
-  orderBy,
 } from "firebase/firestore";
 import { Dispatch, SetStateAction } from "react";
 import { db } from "../firebase/firebaseConfig";

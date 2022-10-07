@@ -37,7 +37,7 @@ const AllMeetups: NextPage = () => {
 
       const { filter, category } = router.query;
       const queryFilter = getQueryFilter(router);
-      if (filter && !category) {
+      if (filter && !category && router.isReady) {
         //here we are fetching meetups with filter applied
 
         await getMeetups(
@@ -47,11 +47,11 @@ const AllMeetups: NextPage = () => {
           25,
           setMeetups
         );
-      } else if (category && !filter) {
+      } else if (category && !filter && router.isReady) {
         //here we are fetching meetups with specific category
 
         await getMeetups("category", "==", category.toString(), 25, setMeetups);
-      } else if (category && filter) {
+      } else if (category && filter && router.isReady) {
         //here we are fetching meetups with a specific category and filter applied
         const meetupQuery = query(
           collection(db, "meetups"),
@@ -66,8 +66,9 @@ const AllMeetups: NextPage = () => {
             return [...prevMeetups, { ...meetup.data(), uid: meetup.id }];
           });
         });
-      } else {
+      } else if (!category && !filter && router.isReady) {
         const meetupSnapshot = await getDocs(collection(db, "meetups"));
+        setMeetups([]);
         meetupSnapshot.forEach((meetup) => {
           setMeetups((prevMeetups) => {
             return [...prevMeetups, { ...meetup.data(), uid: meetup.id }];

@@ -32,7 +32,6 @@ const FilterBar = () => {
       query: { ...router.query, category: value },
     });
   };
-  console.log(categoryState, filterState);
 
   const filterData = [
     {

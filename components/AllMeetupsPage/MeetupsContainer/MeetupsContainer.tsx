@@ -1,4 +1,4 @@
-import { Text, SimpleGrid } from "@mantine/core";
+import { Text, SimpleGrid, Space } from "@mantine/core";
 import { DocumentData } from "firebase/firestore";
 import { useRouter } from "next/router";
 import MeetupCard from "../../MeetupCard/MeetupCard";
@@ -22,26 +22,29 @@ const MeetupsContainer = ({ meetups }: MeetupsContainerProps) => {
     text = "recommended by meethub";
   }
   return (
-    <div className={styles["meetups-container"]}>
-      <div className={styles["heading-container"]}>
-        <h3 className={styles.heading}>All meetups that are</h3>
-        <Text className={styles.text}>{text}</Text>
+    <>
+      <div className={styles["meetups-container"]}>
+        <div className={styles["heading-container"]}>
+          <h3 className={styles.heading}>All meetups that are</h3>
+          <Text className={styles.text}>{text}</Text>
+        </div>
+        <div className={styles["all-meetups"]}>
+          <SimpleGrid
+            breakpoints={[
+              { maxWidth: 1100, cols: 2 },
+              { maxWidth: 768, cols: 1 },
+            ]}
+            cols={3}
+            spacing="lg"
+          >
+            {meetups.map((meetup) => {
+              return <MeetupCard meetup={meetup} key={meetup.uid} />;
+            })}
+          </SimpleGrid>
+        </div>
       </div>
-      <div className={styles["all-meetups"]}>
-        <SimpleGrid
-          breakpoints={[
-            { maxWidth: 1100, cols: 2 },
-            { maxWidth: 768, cols: 1 },
-          ]}
-          cols={3}
-          spacing="lg"
-        >
-          {meetups.map((meetup) => {
-            return <MeetupCard meetup={meetup} key={meetup.uid} />;
-          })}
-        </SimpleGrid>
-      </div>
-    </div>
+      <Space h="xl" />
+    </>
   );
 };
 
