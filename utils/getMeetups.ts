@@ -6,7 +6,9 @@ import {
   getDocs,
   DocumentData,
   WhereFilterOp,
-  Timestamp,
+  startAfter,
+  QuerySnapshot,
+  orderBy,
 } from "firebase/firestore";
 import { Dispatch, SetStateAction } from "react";
 import { db } from "../firebase/firebaseConfig";
@@ -29,7 +31,6 @@ const getTechMeetups = async (
       return [...prevMeetups, { ...meetup.data(), uid: meetup.id }];
     });
   });
-
   return meetups;
 };
 

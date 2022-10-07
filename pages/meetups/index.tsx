@@ -39,6 +39,7 @@ const AllMeetups: NextPage = () => {
       const queryFilter = getQueryFilter(router);
       if (filter && !category) {
         //here we are fetching meetups with filter applied
+
         await getMeetups(
           queryFilter.field,
           queryFilter.opStr,
@@ -48,6 +49,7 @@ const AllMeetups: NextPage = () => {
         );
       } else if (category && !filter) {
         //here we are fetching meetups with specific category
+
         await getMeetups("category", "==", category.toString(), 25, setMeetups);
       } else if (category && filter) {
         //here we are fetching meetups with a specific category and filter applied
@@ -60,6 +62,13 @@ const AllMeetups: NextPage = () => {
         const meetups = await getDocs(meetupQuery);
 
         meetups.forEach((meetup) => {
+          setMeetups((prevMeetups) => {
+            return [...prevMeetups, { ...meetup.data(), uid: meetup.id }];
+          });
+        });
+      } else {
+        const meetupSnapshot = await getDocs(collection(db, "meetups"));
+        meetupSnapshot.forEach((meetup) => {
           setMeetups((prevMeetups) => {
             return [...prevMeetups, { ...meetup.data(), uid: meetup.id }];
           });

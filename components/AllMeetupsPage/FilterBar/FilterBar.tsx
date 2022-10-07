@@ -26,11 +26,13 @@ const FilterBar = () => {
       query: { ...router.query, filter: value },
     });
   };
+
   const categoryChangeHandler = (value: string) => {
     router.replace({
       query: { ...router.query, category: value },
     });
   };
+  console.log(categoryState, filterState);
 
   const filterData = [
     {
