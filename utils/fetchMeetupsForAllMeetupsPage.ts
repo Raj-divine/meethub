@@ -31,10 +31,9 @@ const fetchMeetupsForAllMeetupsPage = async ({
 }: FunctionParameters) => {
   if (!after) {
     setMeetups([]);
+    setMeetupsLoading(true);
   }
-  // console.log("hello");
 
-  setMeetupsLoading(true);
   setLastVisible(0);
 
   const { filter, category } = router.query;
@@ -46,7 +45,7 @@ const fetchMeetupsForAllMeetupsPage = async ({
       queryFilter.field,
       queryFilter.opStr,
       queryFilter.value,
-      1,
+      25,
       setMeetups,
       after
     );

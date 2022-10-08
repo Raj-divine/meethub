@@ -1,7 +1,8 @@
-import { Text, SimpleGrid, Space } from "@mantine/core";
+import { Text, SimpleGrid, Space, Divider } from "@mantine/core";
 import { DocumentData } from "firebase/firestore";
 import { useRouter } from "next/router";
 import MeetupCard from "../../MeetupCard/MeetupCard";
+import { Button } from "../../Utilities";
 import styles from "./MeetupsContainer.module.scss";
 
 interface MeetupsContainerProps {
@@ -46,10 +47,24 @@ const MeetupsContainer = ({
             })}
           </SimpleGrid>
         </div>
+        {meetups.length % 25 === 0 && (
+          <div className={styles["button-container"]}>
+            <Button onClick={getNextMeetups}>Load more Meetups</Button>
+          </div>
+        )}
+        <div className={styles["divider-container"]}>
+          {meetups.length % 25 !== 0 && (
+            <Divider
+              classNames={{
+                label: styles["divider-label"],
+              }}
+              label="No more meetups"
+              labelPosition="center"
+            />
+          )}
+        </div>
       </div>
-      <div>
-        <button onClick={getNextMeetups}>get new meetups</button>
-      </div>
+
       <Space h="xl" />
     </>
   );

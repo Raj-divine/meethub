@@ -38,3 +38,16 @@
     font-size: 1.7rem;
   }
 }
+.button-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 3rem;
+}
+.divider-container {
+  margin-top: 3rem;
+}
+.divider-label {
+  font-size: 3rem;
+  font-weight: 200;
+}
