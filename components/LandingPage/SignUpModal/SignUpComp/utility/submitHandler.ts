@@ -140,6 +140,7 @@ const submitHandler = async ({
         email,
         profilePicture: profilePictureUrl,
         upcomingEvents: [],
+        bookmarkedEvents: [],
       });
 
       setUserData(initialUserDataState);

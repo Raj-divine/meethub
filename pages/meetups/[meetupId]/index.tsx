@@ -33,7 +33,7 @@ const AllMeetups: NextPage = () => {
         doc(db, "meetups", `${router.query.meetupId}`)
       );
       if (meetupSnapshot.exists()) {
-        setMeetup(meetupSnapshot.data());
+        setMeetup({ ...meetupSnapshot.data(), uid: meetupSnapshot.id });
         setMeetupExists(true);
         setIsMeetupLoading(false);
       } else {

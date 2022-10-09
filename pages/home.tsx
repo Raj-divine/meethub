@@ -13,8 +13,8 @@ import {
   SectionMeetup,
   SectionRecommendation,
 } from "../components/HomePage";
-import { meetups } from "../fakeData";
 import { getMeetups } from "../utils";
+import dayjs from "dayjs";
 
 const Home: NextPage = () => {
   const { user, loading } = useUser();
@@ -23,7 +23,7 @@ const Home: NextPage = () => {
   const isDataFetched = useRef(false);
   const [techMeetups, setTechMeetups] = useState<DocumentData[]>([]);
   const [freeMeetups, setFreeMeetups] = useState<DocumentData[]>([]);
-
+  const [tomorrowMeetups, setTomorrowMeetups] = useState<DocumentData[]>([]);
   useEffect(() => {
     if (!user && !loading) {
       router.replace("/");
@@ -31,9 +31,12 @@ const Home: NextPage = () => {
   }, [user]);
 
   useEffect(() => {
+    const tomorrow = dayjs(new Date()).add(1, "day").format("DD-MM-YY");
+
     const fetchAllMeetups = async () => {
       await getMeetups("category", "==", "technology", 4, setTechMeetups);
       await getMeetups("price", "==", 0, 4, setFreeMeetups);
+      await getMeetups("dateInString", "==", tomorrow, 4, setTomorrowMeetups);
     };
     if (!isDataFetched.current) {
       fetchAllMeetups();
@@ -53,10 +56,12 @@ const Home: NextPage = () => {
           <SectionRecommendation />
           <SectionCategory />
           <SectionFilter />
-          <SectionMeetup
-            heading="Meetups starting tomorrow"
-            meetups={meetups}
-          />
+          {tomorrowMeetups.length !== 0 && (
+            <SectionMeetup
+              heading="Meetups starting tomorrow"
+              meetups={tomorrowMeetups}
+            />
+          )}
           <Divider />
           <SectionMeetup
             heading='Meetups for "techy" people'
