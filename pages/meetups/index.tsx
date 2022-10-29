@@ -64,7 +64,9 @@ const AllMeetups: NextPage = () => {
             />
           )}
           {meetupsLoading && <MeetupsLoader />}
-          {!meetupsLoading && meetups.length < 1 && <NoMeetups />}
+          {!meetupsLoading && meetups.length < 1 && (
+            <NoMeetups text="We looked everywhere but couldn't find anything" />
+          )}
         </>
       )}
     </>

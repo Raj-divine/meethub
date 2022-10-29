@@ -20,7 +20,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Meethub | Home</title>
+        <title>Meethub | Bookmarks</title>
       </Head>
       {loading && <AppLoader />}
       {user && !loading && (

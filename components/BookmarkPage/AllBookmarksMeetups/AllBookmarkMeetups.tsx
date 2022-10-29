@@ -4,7 +4,8 @@ import { doc, DocumentData, getDoc } from "firebase/firestore";
 import { getUser } from "../../../utils";
 import { db } from "../../../firebase/firebaseConfig";
 import MeetupCard from "../../MeetupCard/MeetupCard";
-import { SimpleGrid } from "@mantine/core";
+import { SimpleGrid, Space } from "@mantine/core";
+import { MeetupsLoader, NoMeetups } from "../../AllMeetupsPage";
 
 const AllBookmarkMeetups = () => {
   const [meetups, setMeetups] = useState<DocumentData[]>([]);
@@ -37,22 +38,37 @@ const AllBookmarkMeetups = () => {
   }, []);
 
   return (
-    <div className={styles["all-bookmarks"]}>
-      <div>
-        <h2>Bookmarks</h2>
+    <>
+      <div className={styles["all-bookmarks"]}>
+        {!isLoading && meetups.length > 0 && (
+          <div className={styles["heading-container"]}>
+            <h2 className={styles.heading}>Bookmarks</h2>
+            <p className={styles.text}>All meetups that you liked</p>
+          </div>
+        )}
+        {isLoading && <MeetupsLoader />}
+        {!isLoading && meetups.length > 0 && (
+          <div className={styles["meetups-container"]}>
+            <SimpleGrid
+              breakpoints={[
+                { maxWidth: 1100, cols: 2 },
+                { maxWidth: 768, cols: 1 },
+              ]}
+              cols={3}
+              spacing="lg"
+            >
+              {meetups.map((meetup) => {
+                return <MeetupCard key={meetup.uid} meetup={meetup} />;
+              })}
+            </SimpleGrid>
+          </div>
+        )}
+        {!isLoading && meetups.length < 1 && (
+          <NoMeetups text="No bookmarked Meetups found" />
+        )}
       </div>
-      {isLoading && <div>loading...</div>}
-      {!isLoading && meetups.length > 0 && (
-        <div className={styles["meetups-container"]}>
-          <SimpleGrid cols={3}>
-            {meetups.map((meetup) => {
-              return <MeetupCard key={meetup.uid} meetup={meetup} />;
-            })}
-          </SimpleGrid>
-        </div>
-      )}
-      {!isLoading && meetups.length < 1 && <div>no meetups found</div>}
-    </div>
+      <Space h="xl" />
+    </>
   );
 };
 
