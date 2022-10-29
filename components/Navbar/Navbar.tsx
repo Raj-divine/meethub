@@ -88,6 +88,11 @@ const Navbar = () => {
                     <a>Host meetup</a>
                   </Link>
                 </li>
+                <li className={styles["dropdown-item"]}>
+                  <Link href="/meetups/bookmarks">
+                    <a>Bookmarks</a>
+                  </Link>
+                </li>
               </ul>
             </li>
             <li className={styles["nav-link"]}>

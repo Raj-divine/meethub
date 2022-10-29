@@ -8,7 +8,7 @@ import Link from "next/link";
 const MeetupCard = ({ meetup }: DocumentData) => {
   const { title, description, date, price, image, category } = meetup;
   return (
-    <Link href={`meetups/${meetup.uid}`} passHref>
+    <Link href={`/meetups/${meetup.uid}`} passHref>
       <div className={styles["meetup-card"]}>
         <div className={styles["card-image"]}>
           <Image src={image} layout="fill" objectFit="cover" alt={title} />

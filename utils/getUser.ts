@@ -11,8 +11,9 @@ const getUser = async () => {
     const userData = userSnap.data();
     return {
       fullName: userData?.fullName,
-      profilePicture: userData?.profilePicture,
       email: userData?.email,
+      bookmarkedEvents: userData?.bookmarkedEvents,
+      profilePicture: userData?.profilePicture,
       upcomingEvents: userData?.upcomingEvents,
       uid: currentUser?.uid,
     };
