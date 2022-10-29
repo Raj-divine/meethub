@@ -10,8 +10,8 @@ import { Button } from "../Utilities";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useUser } from "../../hooks";
-import { getAuth, signOut } from "firebase/auth";
 import { AiFillCaretDown } from "react-icons/ai";
+import { getUser } from "../../utils";
 interface NavbarState {
   navbar: {
     isOpen: boolean;
@@ -19,29 +19,31 @@ interface NavbarState {
 }
 
 const Navbar = () => {
+  const [userData, setUserData] = useState<any>();
   const router = useRouter();
-
   const dispatch = useDispatch();
   const { isOpen } = useSelector((state: NavbarState) => state.navbar);
   const title = isOpen ? "Close navigation" : "Open navigation";
   const [addClass, setAddClass] = useState(false);
   const { user, loading } = useUser();
-  const auth = getAuth();
   useEffect(() => {
     const checkPosition = () => {
       if (window.scrollY > 60) setAddClass(true);
       else setAddClass(false);
     };
 
+    const getUserData = async () => {
+      const data = await getUser();
+      setUserData(data);
+    };
+
+    getUserData();
+
     document.addEventListener("scroll", checkPosition);
   }, []);
 
   const openModalHandler = (loggingIn: boolean) => {
     dispatch(openModal({ loggingIn }));
-  };
-
-  const signOutHandler = async () => {
-    await signOut(auth);
   };
 
   return (
@@ -100,13 +102,12 @@ const Navbar = () => {
                 <a>Home</a>
               </Link>
             </li>
-            <li>
-              <button
-                className={styles["sign-out-btn"]}
-                onClick={signOutHandler}
-              >
-                Sign Out
-              </button>
+            <li className={styles["profile-picture"]}>
+              <Image
+                src={userData?.profilePicture}
+                objectFit="contain"
+                layout="fill"
+              />
             </li>
           </ul>
         )}
@@ -132,12 +133,21 @@ const Navbar = () => {
 
         {/* will be shown when the user is logged in and the screen size is less than 450px */}
         {user && !loading && (
-          <Burger
-            className={styles.hamburger}
-            opened={isOpen}
-            onClick={() => dispatch(toggleNavbar())}
-            title={title}
-          />
+          <div className={styles["ham-profile"]}>
+            <div className={styles["profile-picture"]}>
+              <Image
+                src={userData?.profilePicture}
+                objectFit="contain"
+                layout="fill"
+              />
+            </div>
+            <Burger
+              className={styles.hamburger}
+              opened={isOpen}
+              onClick={() => dispatch(toggleNavbar())}
+              title={title}
+            />
+          </div>
         )}
       </div>
     </nav>

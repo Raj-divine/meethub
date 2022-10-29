@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleNavbar } from "../../context/navbarSlice";
 import { useEffect } from "react";
 import Backdrop from "./Backdrop/Backdrop";
-import { getAuth, signOut } from "firebase/auth";
 import { useRouter } from "next/router";
 interface NavbarState {
   navbar: {
@@ -19,7 +18,6 @@ const SideNavbar = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const title = isOpen ? "Close navigation" : "Open navigation";
-  const auth = getAuth();
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
@@ -29,11 +27,6 @@ const SideNavbar = () => {
       dispatch(toggleNavbar());
     }
   }, [router.pathname]);
-
-  const signOutHandler = async () => {
-    await signOut(auth);
-    router.replace("/");
-  };
 
   return (
     <>
@@ -95,14 +88,6 @@ const SideNavbar = () => {
               <Link href="/">
                 <a>home page</a>
               </Link>
-            </li>
-            <li>
-              <button
-                onClick={signOutHandler}
-                className={styles["sign-out-btn"]}
-              >
-                Sign Out
-              </button>
             </li>
           </ul>
         </div>

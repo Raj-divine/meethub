@@ -72,21 +72,6 @@
   }
 }
 
-.sign-out-btn {
-  background-color: $color-red;
-  border: none;
-  border-radius: 100px;
-  font-size: 1.3rem;
-  font-weight: 600;
-  padding: 0.4rem 1.2rem;
-  font-family: "Inter", sans-serif;
-  color: $color-white;
-  transition: all 0.2s;
-  &:hover {
-    background-color: darken($color: $color-red, $amount: 4%);
-  }
-}
-
 @keyframes showUp {
   from {
     opacity: 0;
@@ -129,11 +114,22 @@
   }
 }
 
-.hamburger {
+.ham-profile {
   display: none;
   @include xs {
-    display: block;
+    display: flex;
+    align-items: center;
   }
+  .hamburger {
+    margin-left: 1rem;
+  }
+}
+.profile-picture {
+  position: relative;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 100px;
+  overflow: hidden;
 }
 
 .add-background {
