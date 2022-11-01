@@ -1,6 +1,29 @@
+@import "../../../styles/variables";
+@import "../../../styles/breakpoints";
 .main-profile {
   margin-top: 12rem;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  height: 15rem;
+  align-items: center;
+  .profile-picture {
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid $color-primary;
+    position: relative;
+    width: 15rem;
+    height: 100%;
+  }
+  .info {
+    margin-left: 3rem;
+    .full-name {
+      font-size: 3rem;
+      font-weight: 500;
+    }
+    .email {
+      font-size: 1.4rem;
+    }
+  }
 }
