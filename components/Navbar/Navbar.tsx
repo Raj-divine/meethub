@@ -121,12 +121,14 @@ const Navbar = () => {
             {!isUserLoading && userData && (
               <li className={styles["profile-picture"]}>
                 <Link href="/dashboard/profile">
-                  <Image
-                    src={userData?.profilePicture}
-                    objectFit="contain"
-                    layout="fill"
-                    alt={userData?.fullName}
-                  />
+                  <a>
+                    <Image
+                      src={userData?.profilePicture}
+                      objectFit="contain"
+                      layout="fill"
+                      alt={userData?.fullName}
+                    />
+                  </a>
                 </Link>
               </li>
             )}
@@ -158,12 +160,14 @@ const Navbar = () => {
             {!isUserLoading && userData && (
               <div className={styles["profile-picture"]}>
                 <Link href="/dashboard/profile">
-                  <Image
-                    src={userData?.profilePicture}
-                    objectFit="contain"
-                    layout="fill"
-                    alt={userData?.fullName}
-                  />
+                  <a>
+                    <Image
+                      src={userData?.profilePicture}
+                      objectFit="contain"
+                      layout="fill"
+                      alt={userData?.fullName}
+                    />
+                  </a>
                 </Link>
               </div>
             )}

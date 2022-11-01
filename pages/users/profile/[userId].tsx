@@ -17,7 +17,6 @@ const Profile: NextPage = () => {
   const router = useRouter();
   const [userData, setUserData] = useState<DocumentData | null>(null);
   const [isUserLoading, setIsUserLoading] = useState(true);
-
   useEffect(() => {
     if (!user && !loading) {
       router.replace("/");
@@ -31,17 +30,22 @@ const Profile: NextPage = () => {
         doc(db, "users", `${router.query.userId}`)
       );
       if (userSnapshot.exists()) {
-        setUserData(userSnapshot.data());
+        setUserData({ ...userSnapshot.data(), uid: userSnapshot.id });
         setIsUserLoading(false);
       } else {
         setUserData(null);
         setIsUserLoading(false);
-        router.replace("/not-found");
       }
     };
 
     getUserData();
-  }, []);
+  }, [router.query.userId]);
+
+  useEffect(() => {
+    if (!isUserLoading && !userData) {
+      router.replace("/not-found");
+    }
+  }, [userData, isUserLoading]);
 
   return (
     <>
