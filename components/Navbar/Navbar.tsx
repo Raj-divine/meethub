@@ -49,7 +49,7 @@ const Navbar = () => {
         const userSnapshot = await getDoc(doc(db, "users", currentUser.uid));
 
         if (userSnapshot.exists()) {
-          setUserData(userSnapshot.data());
+          setUserData({ ...userSnapshot.data(), uid: currentUser.uid });
         }
         setIsUserLoading(false);
       }
@@ -120,11 +120,13 @@ const Navbar = () => {
             </li>
             {!isUserLoading && userData && (
               <li className={styles["profile-picture"]}>
-                <Image
-                  src={userData?.profilePicture}
-                  objectFit="contain"
-                  layout="fill"
-                />
+                <Link href="/dashboard/profile">
+                  <Image
+                    src={userData?.profilePicture}
+                    objectFit="contain"
+                    layout="fill"
+                  />
+                </Link>
               </li>
             )}
           </ul>
@@ -154,11 +156,13 @@ const Navbar = () => {
           <div className={styles["ham-profile"]}>
             {!isUserLoading && userData && (
               <div className={styles["profile-picture"]}>
-                <Image
-                  src={userData?.profilePicture}
-                  objectFit="contain"
-                  layout="fill"
-                />
+                <Link href="/dashboard/profile">
+                  <Image
+                    src={userData?.profilePicture}
+                    objectFit="contain"
+                    layout="fill"
+                  />
+                </Link>
               </div>
             )}
             <Burger
