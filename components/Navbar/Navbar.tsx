@@ -11,7 +11,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useUser } from "../../hooks";
 import { AiFillCaretDown } from "react-icons/ai";
-import { getUser } from "../../utils";
+import { doc, DocumentData, getDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { db } from "../../firebase/firebaseConfig";
 interface NavbarState {
   navbar: {
     isOpen: boolean;
@@ -19,28 +21,42 @@ interface NavbarState {
 }
 
 const Navbar = () => {
-  const [userData, setUserData] = useState<any>();
+  const [userData, setUserData] = useState<DocumentData>();
+  const [isUserLoading, setIsUserLoading] = useState(true);
   const router = useRouter();
   const dispatch = useDispatch();
   const { isOpen } = useSelector((state: NavbarState) => state.navbar);
   const title = isOpen ? "Close navigation" : "Open navigation";
   const [addClass, setAddClass] = useState(false);
   const { user, loading } = useUser();
+
+  const { currentUser } = getAuth();
+
   useEffect(() => {
     const checkPosition = () => {
       if (window.scrollY > 60) setAddClass(true);
       else setAddClass(false);
     };
 
+    document.addEventListener("scroll", checkPosition);
+  }, []);
+
+  useEffect(() => {
     const getUserData = async () => {
-      const data = await getUser();
-      setUserData(data);
+      if (currentUser) {
+        setIsUserLoading(true);
+
+        const userSnapshot = await getDoc(doc(db, "users", currentUser.uid));
+
+        if (userSnapshot.exists()) {
+          setUserData(userSnapshot.data());
+        }
+        setIsUserLoading(false);
+      }
     };
 
     getUserData();
-
-    document.addEventListener("scroll", checkPosition);
-  }, []);
+  }, [currentUser]);
 
   const openModalHandler = (loggingIn: boolean) => {
     dispatch(openModal({ loggingIn }));
@@ -102,13 +118,15 @@ const Navbar = () => {
                 <a>Home</a>
               </Link>
             </li>
-            <li className={styles["profile-picture"]}>
-              <Image
-                src={userData?.profilePicture}
-                objectFit="contain"
-                layout="fill"
-              />
-            </li>
+            {!isUserLoading && userData && (
+              <li className={styles["profile-picture"]}>
+                <Image
+                  src={userData?.profilePicture}
+                  objectFit="contain"
+                  layout="fill"
+                />
+              </li>
+            )}
           </ul>
         )}
 
@@ -134,13 +152,15 @@ const Navbar = () => {
         {/* will be shown when the user is logged in and the screen size is less than 450px */}
         {user && !loading && (
           <div className={styles["ham-profile"]}>
-            <div className={styles["profile-picture"]}>
-              <Image
-                src={userData?.profilePicture}
-                objectFit="contain"
-                layout="fill"
-              />
-            </div>
+            {!isUserLoading && userData && (
+              <div className={styles["profile-picture"]}>
+                <Image
+                  src={userData?.profilePicture}
+                  objectFit="contain"
+                  layout="fill"
+                />
+              </div>
+            )}
             <Burger
               className={styles.hamburger}
               opened={isOpen}
