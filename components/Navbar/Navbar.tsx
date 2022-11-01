@@ -125,6 +125,7 @@ const Navbar = () => {
                     src={userData?.profilePicture}
                     objectFit="contain"
                     layout="fill"
+                    alt={userData?.fullName}
                   />
                 </Link>
               </li>
@@ -161,6 +162,7 @@ const Navbar = () => {
                     src={userData?.profilePicture}
                     objectFit="contain"
                     layout="fill"
+                    alt={userData?.fullName}
                   />
                 </Link>
               </div>

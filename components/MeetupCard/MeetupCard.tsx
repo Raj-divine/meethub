@@ -6,7 +6,7 @@ import { DocumentData } from "firebase/firestore";
 import Link from "next/link";
 
 const MeetupCard = ({ meetup }: DocumentData) => {
-  const { title, description, date, price, image, category } = meetup;
+  const { title, description, dateInISO, price, image, category } = meetup;
   return (
     <Link href={`/meetups/${meetup.uid}`} passHref>
       <div className={styles["meetup-card"]}>
@@ -21,7 +21,9 @@ const MeetupCard = ({ meetup }: DocumentData) => {
             {description}
           </Text>
           <div className={styles["card-info"]}>
-            <div className={styles.date}>{dayjs(date).format("DD MMM")}</div>
+            <div className={styles.date}>
+              {dayjs(dateInISO).format("DD MMM")}
+            </div>
             <div className={styles.price}>
               {price < 1 ? "Free" : `₹${price}`}
             </div>

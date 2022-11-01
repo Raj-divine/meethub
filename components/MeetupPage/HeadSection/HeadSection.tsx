@@ -9,7 +9,7 @@ import { db } from "../../../firebase/firebaseConfig";
 import { Loader } from "@mantine/core";
 
 const HeadSection = ({ meetup }: DocumentData) => {
-  const { title, image, date, category } = meetup;
+  const { title, image, dateInISO, category } = meetup;
   const [user, setUser] = useState<DocumentData | null>(null);
   const [meetupBookmarked, setMeetupBookmarked] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -76,7 +76,9 @@ const HeadSection = ({ meetup }: DocumentData) => {
             <div className={styles.calendar}>
               <BsCalendarEvent color="#9333ea" size={25} />{" "}
             </div>
-            <div className={styles.date}>{dayjs(date).format("DD MMM")}</div>
+            <div className={styles.date}>
+              {dayjs(dateInISO).format("DD MMM")}
+            </div>
           </div>
           <div className={styles.category}>{category}</div>
         </div>

@@ -116,7 +116,8 @@ const submitHandler = async ({
       const meetupRef = await addDoc(collection(db, "meetups"), {
         ...formData,
         image: null,
-        date: dayjs(date).toISOString(),
+        dateInISO: dayjs(date).toISOString(),
+        date,
         dateInString: dayjs(date).format("DD-MM-YY"),
         host: {
           email: user?.email,

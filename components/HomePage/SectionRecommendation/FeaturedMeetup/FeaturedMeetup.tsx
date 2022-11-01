@@ -6,7 +6,7 @@ import Link from "next/link";
 import { DocumentData } from "firebase/firestore";
 
 const FeaturedMeetup = ({ meetup }: DocumentData) => {
-  const { uid, image, title, price, date } = meetup;
+  const { uid, image, title, price, dateInISO } = meetup;
   return (
     <Link href={`meetups/${uid}`} passHref>
       <div className={styles["featured-meetup"]}>
@@ -20,7 +20,9 @@ const FeaturedMeetup = ({ meetup }: DocumentData) => {
           </Text>
 
           <div className={styles["info-container"]}>
-            <div className={styles.date}>{dayjs(date).format("DD MMM")}</div>
+            <div className={styles.date}>
+              {dayjs(dateInISO).format("DD MMM")}
+            </div>
             <div className={styles.price}>{price ? `₹${price}` : "Free"}</div>
           </div>
         </div>
