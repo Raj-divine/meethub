@@ -4,19 +4,18 @@ import { useUser } from "../../../hooks";
 import AppLoader from "../../../components/AppLoader/AppLoader";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import {
-  MainProfile,
-  PastEvents,
-  UpcomingEvents,
-} from "../../../components/ProfilePage";
+import { MainProfile } from "../../../components/ProfilePage";
 import { doc, DocumentData, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
+import { getAuth } from "firebase/auth";
 
-const Profile: NextPage = () => {
+const DashBoardSettings: NextPage = () => {
   const { user, loading } = useUser();
-  const router = useRouter();
   const [userData, setUserData] = useState<DocumentData | null>(null);
   const [isUserLoading, setIsUserLoading] = useState(true);
+  const router = useRouter();
+  const { currentUser } = getAuth();
+
   useEffect(() => {
     if (!user && !loading) {
       router.replace("/");
@@ -25,43 +24,35 @@ const Profile: NextPage = () => {
 
   useEffect(() => {
     const getUserData = async () => {
-      setIsUserLoading(true);
-      const userSnapshot = await getDoc(
-        doc(db, "users", `${router.query.userId}`)
-      );
-      if (userSnapshot.exists()) {
-        setUserData({ ...userSnapshot.data(), uid: userSnapshot.id });
-        setIsUserLoading(false);
-      } else {
-        setUserData(null);
+      if (currentUser) {
+        setIsUserLoading(true);
+
+        const userSnapshot = await getDoc(doc(db, "users", currentUser.uid));
+        if (userSnapshot.exists()) {
+          setUserData(userSnapshot.data());
+        } else {
+          setUserData(null);
+        }
         setIsUserLoading(false);
       }
     };
 
     getUserData();
-  }, [router.query.userId]);
-
-  useEffect(() => {
-    if (!isUserLoading && !userData) {
-      router.replace("/not-found");
-    }
-  }, [userData, isUserLoading]);
+  }, [currentUser]);
 
   return (
     <>
       <Head>
-        <title>{userData?.fullName}</title>
+        <title>Your Profile</title>
       </Head>
       {(loading || isUserLoading || !userData) && <AppLoader />}
       {user && !loading && userData && !isUserLoading && (
         <>
           <MainProfile user={userData} />
-          <UpcomingEvents user={userData} />
-          <PastEvents user={userData} />
         </>
       )}
     </>
   );
 };
 
-export default Profile;
+export default DashBoardSettings;

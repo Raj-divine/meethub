@@ -10,26 +10,29 @@ import {
   query,
 } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
+import { getAuth } from "firebase/auth";
 const SectionRecommendation = () => {
   const [meetups, setMeetups] = useState<DocumentData[]>([]);
-
+  const { currentUser } = getAuth();
   const isDataFetched = useRef(false);
 
   useEffect(() => {
     const fetchMeetups = async () => {
-      const meetupQuery = query(collection(db, "meetups"), limit(6));
-      const meetupSnapshot = await getDocs(meetupQuery);
-      meetupSnapshot.forEach((meetup) => {
-        setMeetups((prevMeetups) => {
-          return [...prevMeetups, { ...meetup.data(), uid: meetup.id }];
+      if (currentUser) {
+        const meetupQuery = query(collection(db, "meetups"), limit(6));
+        const meetupSnapshot = await getDocs(meetupQuery);
+        meetupSnapshot.forEach((meetup) => {
+          setMeetups((prevMeetups) => {
+            return [...prevMeetups, { ...meetup.data(), uid: meetup.id }];
+          });
         });
-      });
+      }
     };
     if (!isDataFetched.current) {
       fetchMeetups();
       isDataFetched.current = true;
     }
-  }, []);
+  }, [currentUser]);
 
   return (
     <section className={styles["section-recommendation"]}>

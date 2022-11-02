@@ -139,7 +139,6 @@ const submitHandler = async ({
         fullName,
         email,
         profilePicture: profilePictureUrl,
-        upcomingEvents: [],
         bookmarkedEvents: [],
       });
 

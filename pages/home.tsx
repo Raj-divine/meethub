@@ -19,6 +19,7 @@ import dayjs from "dayjs";
 const Home: NextPage = () => {
   const { user, loading } = useUser();
   const router = useRouter();
+
   //this is a work around for the useEffect hook to not fetch data twice
   const isDataFetched = useRef(false);
   const [techMeetups, setTechMeetups] = useState<DocumentData[]>([]);
@@ -34,15 +35,17 @@ const Home: NextPage = () => {
     const tomorrow = dayjs(new Date()).add(1, "day").format("DD-MM-YY");
 
     const fetchAllMeetups = async () => {
-      await getMeetups("category", "==", "technology", 4, setTechMeetups);
-      await getMeetups("price", "==", 0, 4, setFreeMeetups);
-      await getMeetups("dateInString", "==", tomorrow, 4, setTomorrowMeetups);
+      if (user && !loading) {
+        await getMeetups("category", "==", "technology", 4, setTechMeetups);
+        await getMeetups("price", "==", 0, 4, setFreeMeetups);
+        await getMeetups("dateInString", "==", tomorrow, 4, setTomorrowMeetups);
+        isDataFetched.current = true;
+      }
     };
     if (!isDataFetched.current) {
       fetchAllMeetups();
-      isDataFetched.current = true;
     }
-  }, []);
+  }, [user, loading]);
 
   return (
     <>

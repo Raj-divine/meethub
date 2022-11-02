@@ -120,7 +120,7 @@ const Navbar = () => {
             </li>
             {!isUserLoading && userData && (
               <li className={styles["profile-picture"]}>
-                <Link href="/dashboard/profile">
+                <Link href="/dashboard/settings">
                   <a>
                     <Image
                       src={userData?.profilePicture}
@@ -159,7 +159,7 @@ const Navbar = () => {
           <div className={styles["ham-profile"]}>
             {!isUserLoading && userData && (
               <div className={styles["profile-picture"]}>
-                <Link href="/dashboard/profile">
+                <Link href="/dashboard/settings">
                   <a>
                     <Image
                       src={userData?.profilePicture}

@@ -12,6 +12,7 @@ import AppLoader from "../components/AppLoader/AppLoader";
 import { useUser } from "../hooks";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { getAuth, signOut } from "firebase/auth";
 interface ModalState {
   modal: {
     isOpen: boolean;
@@ -21,13 +22,16 @@ interface ModalState {
 
 const Landing: NextPage = () => {
   const { isOpen, loggingIn } = useSelector((state: ModalState) => state.modal);
-
+  const auth = getAuth();
   const { user, loading } = useUser("/home");
   const router = useRouter();
   useEffect(() => {
     if (user && !loading) {
       router.replace("/home");
     }
+  }, []);
+  useEffect(() => {
+    signOut(auth).then((res) => console.log("logged out"));
   }, []);
 
   return (
