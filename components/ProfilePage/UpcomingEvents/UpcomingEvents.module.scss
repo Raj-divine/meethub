@@ -7,10 +7,16 @@
   margin-right: auto;
   min-height: 30rem;
   position: relative;
+  @include sm {
+    width: 90%;
+  }
   .heading {
     font-size: 3rem;
     text-transform: uppercase;
     color: $color-grey-dark;
+    @include xs {
+      font-size: 2.4rem;
+    }
   }
   .meetup-container {
     margin-top: 2rem;
@@ -29,5 +35,8 @@
     justify-content: center;
     align-items: center;
     font-size: 5rem;
+    @include sm {
+      font-size: 3.5rem;
+    }
   }
 }

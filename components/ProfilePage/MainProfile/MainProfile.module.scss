@@ -6,18 +6,24 @@
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  height: 15rem;
   align-items: center;
+  @include sm {
+    flex-direction: column;
+    width: 90%;
+  }
   .profile-picture {
     overflow: hidden;
     border-radius: 50%;
     border: 2px solid $color-primary;
     position: relative;
     width: 15rem;
-    height: 100%;
+    height: 15rem;
   }
   .info {
     margin-left: 3rem;
+    @include sm {
+      text-align: center;
+    }
     .full-name {
       font-size: 3rem;
       font-weight: 500;
