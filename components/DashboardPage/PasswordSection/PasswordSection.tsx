@@ -1,9 +1,10 @@
-import { PasswordInput, Text } from "@mantine/core";
+import { LoadingOverlay, PasswordInput, Text } from "@mantine/core";
 import { useState } from "react";
 import { Button } from "../../Utilities";
 import styles from "./PasswordSection.module.scss";
-
+import submitHandler from "./utils/submitHandler";
 const PasswordSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
   const initialFormData = {
     oldPassword: "",
     newPassword: "",
@@ -20,7 +21,20 @@ const PasswordSection = () => {
   return (
     <div className={styles["password-section"]}>
       <Text className={styles.heading}>Change Password</Text>
-      <form className={styles.form}>
+      <form
+        noValidate
+        className={styles.form}
+        onSubmit={(event) => {
+          submitHandler({
+            event,
+            formData,
+            setErrors,
+            setFormData,
+            setIsVisible,
+          });
+        }}
+      >
+        <LoadingOverlay visible={isVisible} overlayBlur={2} />
         <div className={styles["form-inputs"]}>
           <div className={styles["input-container"]}>
             <PasswordInput
