@@ -8,6 +8,7 @@ import { MainProfile } from "../../../components/ProfilePage";
 import { doc, DocumentData, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { getAuth } from "firebase/auth";
+import { PasswordSection } from "../../../components/DashboardPage";
 
 const DashBoardSettings: NextPage = () => {
   const { user, loading } = useUser();
@@ -49,6 +50,7 @@ const DashBoardSettings: NextPage = () => {
       {user && !loading && userData && !isUserLoading && (
         <>
           <MainProfile user={userData} />
+          <PasswordSection />
         </>
       )}
     </>
