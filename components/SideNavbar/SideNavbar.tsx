@@ -84,11 +84,6 @@ const SideNavbar = () => {
                 </li>
               </ul>
             </li>
-            <li className={styles["nav-link"]}>
-              <Link href="/">
-                <a>home page</a>
-              </Link>
-            </li>
           </ul>
         </div>
       </nav>

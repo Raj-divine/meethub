@@ -113,11 +113,6 @@ const Navbar = () => {
                 </li>
               </ul>
             </li>
-            <li className={styles["nav-link"]}>
-              <Link href="/">
-                <a>Home</a>
-              </Link>
-            </li>
             {!isUserLoading && userData && (
               <li className={styles["profile-picture"]}>
                 <Link href="/dashboard/settings">
