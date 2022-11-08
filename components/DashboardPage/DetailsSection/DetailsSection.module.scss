@@ -1,0 +1,54 @@
+@import "../../../styles/breakpoints";
+@import "../../../styles/variables";
+@import "../PasswordSection/PasswordSection.module.scss";
+.details-section {
+  margin-top: 4rem;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 130rem;
+  @include sm {
+    width: 90%;
+  }
+  .heading {
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: $color-grey-dark;
+    @include xs {
+      font-size: 2.4rem;
+    }
+  }
+  .form {
+    position: relative;
+    margin-top: 3rem;
+    border-radius: 3px;
+    background-color: $color-white;
+    padding: 5rem 4rem;
+    @include sm {
+      padding: 3rem 2rem;
+    }
+    .form-inputs {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      @include md {
+        flex-direction: column;
+      }
+      .input-container {
+        width: 49%;
+        @include md {
+          width: 100%;
+          &:not(:last-child) {
+            margin-bottom: 2rem;
+          }
+        }
+      }
+    }
+    .btn {
+      margin-top: 2rem;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

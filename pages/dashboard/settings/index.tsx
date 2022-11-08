@@ -8,7 +8,10 @@ import { MainProfile } from "../../../components/ProfilePage";
 import { doc, DocumentData, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { getAuth } from "firebase/auth";
-import { PasswordSection } from "../../../components/DashboardPage";
+import {
+  DetailsSection,
+  PasswordSection,
+} from "../../../components/DashboardPage";
 
 const DashBoardSettings: NextPage = () => {
   const { user, loading } = useUser();
@@ -22,22 +25,20 @@ const DashBoardSettings: NextPage = () => {
       router.replace("/");
     }
   }, [user]);
+  const getUserData = async () => {
+    if (currentUser) {
+      setIsUserLoading(true);
 
-  useEffect(() => {
-    const getUserData = async () => {
-      if (currentUser) {
-        setIsUserLoading(true);
-
-        const userSnapshot = await getDoc(doc(db, "users", currentUser.uid));
-        if (userSnapshot.exists()) {
-          setUserData(userSnapshot.data());
-        } else {
-          setUserData(null);
-        }
-        setIsUserLoading(false);
+      const userSnapshot = await getDoc(doc(db, "users", currentUser.uid));
+      if (userSnapshot.exists()) {
+        setUserData(userSnapshot.data());
+      } else {
+        setUserData(null);
       }
-    };
-
+      setIsUserLoading(false);
+    }
+  };
+  useEffect(() => {
     getUserData();
   }, [currentUser]);
 
@@ -51,6 +52,7 @@ const DashBoardSettings: NextPage = () => {
         <>
           <MainProfile user={userData} />
           <PasswordSection />
+          <DetailsSection user={userData} getUserData={getUserData} />
         </>
       )}
     </>
