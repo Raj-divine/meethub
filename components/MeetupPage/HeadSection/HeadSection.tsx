@@ -14,8 +14,8 @@ const HeadSection = ({ meetup }: DocumentData) => {
   const [meetupBookmarked, setMeetupBookmarked] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const bookmarks = [
-    <BsBookmark color="#9333ea" size={25} />,
-    <BsBookmarkFill color="#9333ea" size={25} />,
+    <BsBookmark key="bsBookmark" color="#9333ea" size={25} />,
+    <BsBookmarkFill key="bsBookmarkFill" color="#9333ea" size={25} />,
   ];
 
   const { currentUser } = getAuth();

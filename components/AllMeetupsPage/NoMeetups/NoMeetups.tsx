@@ -11,7 +11,12 @@ const NoMeetups = ({ text }: NoMeetupsProps) => {
   return (
     <div className={styles["no-meetups"]}>
       <div className={styles["image-container"]}>
-        <Image src={noData} layout="intrinsic" objectFit="cover" />
+        <Image
+          alt="Not meetups found"
+          src={noData}
+          layout="intrinsic"
+          objectFit="cover"
+        />
         <Text className={styles.text}>{text}</Text>
       </div>
     </div>

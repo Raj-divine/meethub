@@ -70,7 +70,7 @@ const LogInComp = () => {
 
         <div className={styles.cta}>
           <p>
-            Don't have an account?
+            Don&apos;t have an account?
             <span onClick={loginChangeHandler}> Sign Up.</span>
           </p>
           <Button type="submit">Log In</Button>
