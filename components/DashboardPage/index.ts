@@ -1,3 +1,4 @@
 import PasswordSection from "./PasswordSection/PasswordSection";
 import DetailsSection from "./DetailsSection/DetailsSection";
-export { PasswordSection, DetailsSection };
+import LogoutSection from "./LogoutSection/LogoutSection";
+export { PasswordSection, DetailsSection, LogoutSection };

@@ -10,6 +10,7 @@ import { db } from "../../../firebase/firebaseConfig";
 import { getAuth } from "firebase/auth";
 import {
   DetailsSection,
+  LogoutSection,
   PasswordSection,
 } from "../../../components/DashboardPage";
 
@@ -53,6 +54,7 @@ const DashBoardSettings: NextPage = () => {
           <MainProfile user={userData} />
           <PasswordSection />
           <DetailsSection user={userData} getUserData={getUserData} />
+          <LogoutSection />
         </>
       )}
     </>

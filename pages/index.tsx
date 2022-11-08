@@ -30,9 +30,6 @@ const Landing: NextPage = () => {
       router.replace("/home");
     }
   }, []);
-  useEffect(() => {
-    signOut(auth).then((res) => console.log("logged out"));
-  }, []);
 
   return (
     <>
