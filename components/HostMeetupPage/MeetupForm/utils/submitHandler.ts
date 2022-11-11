@@ -110,10 +110,8 @@ const submitHandler = async ({
     try {
       setIsLoading(true);
       const storage = getStorage();
-      console.log("1");
 
       const user = await getUser();
-      console.log("2");
 
       const meetupRef = await addDoc(collection(db, "meetups"), {
         ...formData,
@@ -128,16 +126,12 @@ const submitHandler = async ({
         },
         hostId: user?.uid,
       });
-      console.log("3");
 
       const storageRef = ref(storage, `meetup-images/meetup-${meetupRef.id}`);
-      console.log("4");
 
       const snapshot = await uploadBytes(storageRef, image);
-      console.log("5");
 
       const imageUrl = await getDownloadURL(snapshot.ref);
-      console.log("6");
 
       await updateDoc(doc(db, "meetups", meetupRef.id), {
         image: imageUrl,

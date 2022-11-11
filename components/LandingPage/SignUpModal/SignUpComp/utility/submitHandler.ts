@@ -4,8 +4,8 @@ import { closeModal } from "../../../../../context/modalSlice";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../../../firebase/firebaseConfig";
-
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import { TbArrowWaveLeftDown } from "react-icons/tb";
 
 type UserDataType = {
   fullName: string;
@@ -99,17 +99,12 @@ const submitHandler = async ({
       ...initialErrorState,
       confirmPassword: "Passwords must match",
     });
-  else if (!profilePicture) {
-    setErrors({
-      ...initialErrorState,
-      profilePicture: "Profile picture is required",
-    });
-  } else if (!profilePicture?.type.match("image.*"))
+  else if (profilePicture && !profilePicture?.type.match("image.*"))
     setErrors({
       ...initialErrorState,
       profilePicture: "You can only upload Images",
     });
-  else if (profilePicture?.size > 3 * 1024 * 1024)
+  else if (profilePicture && profilePicture?.size > 3 * 1024 * 1024)
     setErrors({
       ...initialErrorState,
       profilePicture: "Profile picture must be less than 3 MB",
@@ -119,6 +114,8 @@ const submitHandler = async ({
 
     setIsVisible(true);
     try {
+      const defaultPicture =
+        "https://firebasestorage.googleapis.com/v0/b/meethub-995d3.appspot.com/o/profile-picture%2Fdefault-profile.png?alt=media&token=8bf02e84-3ff2-4501-ba62-e89796ba79a7";
       const storage = getStorage();
 
       const userCredential = await createUserWithEmailAndPassword(
@@ -126,21 +123,31 @@ const submitHandler = async ({
         email,
         password
       );
-      const storageRef = ref(
-        storage,
-        `profile-picture/user-${userCredential.user.uid}`
-      );
+      if (profilePicture) {
+        const storageRef = ref(
+          storage,
+          `profile-picture/user-${userCredential.user.uid}`
+        );
 
-      const snapshot = await uploadBytes(storageRef, profilePicture);
-      const profilePictureUrl = await getDownloadURL(snapshot.ref);
-      //accessing the user's uid to create a user in firestore
+        const snapshot = await uploadBytes(storageRef, profilePicture);
+        const profilePictureUrl = await getDownloadURL(snapshot.ref);
 
-      await setDoc(doc(db, "users", userCredential.user.uid), {
-        fullName,
-        email,
-        profilePicture: profilePictureUrl,
-        bookmarkedEvents: [],
-      });
+        //accessing the user's uid to create a user in firestore
+
+        await setDoc(doc(db, "users", userCredential.user.uid), {
+          fullName,
+          email,
+          profilePicture: profilePictureUrl || defaultPicture,
+          bookmarkedEvents: [],
+        });
+      } else {
+        await setDoc(doc(db, "users", userCredential.user.uid), {
+          fullName,
+          email,
+          profilePicture: defaultPicture,
+          bookmarkedEvents: [],
+        });
+      }
 
       setUserData(initialUserDataState);
       dispatch(closeModal());
